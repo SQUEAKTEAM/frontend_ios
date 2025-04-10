@@ -22,6 +22,8 @@
 		F844BF502DA70A40003FB214 /* LvL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF4F2DA70A40003FB214 /* LvL.swift */; };
 		F844BF532DA70E62003FB214 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF522DA70E62003FB214 /* TaskCell.swift */; };
 		F844BF582DA711FE003FB214 /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF572DA711FE003FB214 /* TasksView.swift */; };
+		F844BF5D2DA80768003FB214 /* SwiftfulUI in Frameworks */ = {isa = PBXBuildFile; productRef = F844BF5C2DA80768003FB214 /* SwiftfulUI */; };
+		F844BF5F2DA8076D003FB214 /* SwiftfulUI in Frameworks */ = {isa = PBXBuildFile; productRef = F844BF5E2DA8076D003FB214 /* SwiftfulUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +76,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F844BF5D2DA80768003FB214 /* SwiftfulUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F844BF5F2DA8076D003FB214 /* SwiftfulUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,6 +247,9 @@
 				F844BF272DA6FF29003FB214 /* PBXTargetDependency */,
 			);
 			name = "LvL-upTests";
+			packageProductDependencies = (
+				F844BF5C2DA80768003FB214 /* SwiftfulUI */,
+			);
 			productName = "LvL-upTests";
 			productReference = F844BF252DA6FF29003FB214 /* LvL-upTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -261,6 +268,9 @@
 				F844BF312DA6FF29003FB214 /* PBXTargetDependency */,
 			);
 			name = "LvL-upUITests";
+			packageProductDependencies = (
+				F844BF5E2DA8076D003FB214 /* SwiftfulUI */,
+			);
 			productName = "LvL-upUITests";
 			productReference = F844BF2F2DA6FF29003FB214 /* LvL-upUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -702,6 +712,16 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		F844BF4B2DA704AF003FB214 /* SwiftfulUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F844BF492DA70254003FB214 /* XCRemoteSwiftPackageReference "SwiftfulUI" */;
+			productName = SwiftfulUI;
+		};
+		F844BF5C2DA80768003FB214 /* SwiftfulUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F844BF492DA70254003FB214 /* XCRemoteSwiftPackageReference "SwiftfulUI" */;
+			productName = SwiftfulUI;
+		};
+		F844BF5E2DA8076D003FB214 /* SwiftfulUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F844BF492DA70254003FB214 /* XCRemoteSwiftPackageReference "SwiftfulUI" */;
 			productName = SwiftfulUI;
