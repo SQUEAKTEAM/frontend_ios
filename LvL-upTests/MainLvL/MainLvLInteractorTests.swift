@@ -28,7 +28,7 @@ class MainLvLInteractorTests: XCTestCase {
     
     func testLoadLvlReturnsCorrectLvL() {
         // Given
-        let entity = LvLEntity(context: TestCoreDataStack().persistentContainer.viewContext)
+        let entity = LvLEntity(context: TestCoreDataManagerStack().persistentContainer.viewContext)
         entity.currentLvl = 10
         entity.upperBounds = 100
         entity.currentXp = 50
@@ -49,7 +49,7 @@ class MainLvLInteractorTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Data service update called")
         
         // Создаем тестовую LvLEntity
-        let testEntity = LvLEntity(context: TestCoreDataStack().persistentContainer.viewContext)
+        let testEntity = LvLEntity(context: TestCoreDataManagerStack().persistentContainer.viewContext)
         testEntity.currentLvl = 5
         testEntity.upperBounds = 100
         testEntity.currentXp = 50
@@ -99,22 +99,4 @@ class MockLvLDataProvider: LvLDataProviderProtocol {
         }
         updateCalledHandler?(stubbedFetchLvlResult)
     }
-}
-
-// MARK: - Test CoreData Stack
-
-class TestCoreDataStack {
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "YourDataModelName")
-        let description = NSPersistentStoreDescription()
-        description.type = NSInMemoryStoreType
-        container.persistentStoreDescriptions = [description]
-        
-        container.loadPersistentStores { _, error in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        }
-        return container
-    }()
 }

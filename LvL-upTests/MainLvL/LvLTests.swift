@@ -6,13 +6,14 @@
 //
 
 import XCTest
+import CoreData
 @testable import LvL_up
 
 class LvLTests: XCTestCase {
     
     func testInitFromEntity() {
         // Given
-        let entity = LvLEntity(context: TestCoreDataStack().persistentContainer.viewContext)
+        let entity = LvLEntity(context: TestCoreDataManagerStack().persistentContainer.viewContext)
         entity.currentLvl = 7
         entity.upperBounds = 70
         entity.currentXp = 35
