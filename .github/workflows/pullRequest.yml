@@ -21,18 +21,13 @@ jobs:
           access_token: ${{ github.token }}
           all_but_latest: true
 
-      - name: Clean SPM artifacts
-        run: |
-          rm -rf ~/Library/Developer/Xcode/DerivedData
-          rm -rf .build
-          rm -f LvL-up.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved
-          rm -rf Build/
-
       - uses: maxim-lobanov/setup-xcode@v1
         with:
           xcode-version: '15.2'
 
       - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
 
       - name: Install Bundler
         run: gem install bundler
@@ -40,6 +35,28 @@ jobs:
       - name: Install gems
         run: bundle install
 
+      # 1. Оптимизированная очистка кеша
+      - name: Clean workspace
+        run: |
+          rm -rf ~/Library/Developer/Xcode/DerivedData
+          rm -rf .build
+          rm -rf Build/
+          # Не удаляем Package.resolved!
+
+      # 2. Кеширование с правильными путями
+      - name: Swift Packages Cache
+        uses: actions/cache@v3
+        id: spm-cache
+        with:
+          path: |
+            ~/Library/Developer/Xcode/DerivedData
+            .build
+            Build
+          key: ${{ runner.os }}-spm-${{ hashFiles('**/Package.resolved') }}
+          restore-keys: |
+            ${{ runner.os }}-spm-
+
+      # 3. Разрешение зависимостей с правильными параметрами
       - name: Resolve Packages
         run: |
           xcodebuild -resolvePackageDependencies \
@@ -47,20 +64,11 @@ jobs:
             -scheme "LvL-up" \
             -derivedDataPath Build \
             -scmProvider system \
-            -disableAutomaticPackageResolution
+            -clonedSourcePackagesDirPath .build
 
-      - name: Swift Packages Cache
-        uses: actions/cache@v3
-        id: cache
-        with:
-          path: |
-            Build/SourcePackages
-            Build/Build/Products
-          key: ${{ runner.os }}-deps-v1-${{ hashFiles('LvL-up.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved') }}
-          restore-keys: ${{ runner.os }}-deps-v1-
-
-      - name: Clear Cache
-        run: rm -rf ~/Library/Developer/Xcode/DerivedData
-
-      - name: Run Tests 
-        run: bundle exec fastlane unit_test
+      # 4. Запуск тестов с явными путями
+      - name: Run Tests
+        run: |
+          bundle exec fastlane unit_test \
+            derived_data_path:"$PWD/Build" \
+            cloned_source_packages_dir_path:"$PWD/.build"
