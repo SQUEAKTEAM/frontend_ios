@@ -52,4 +52,5 @@ class LvLTests: XCTestCase {
         XCTAssertEqual(lvl.currentExp, 8)
         XCTAssertEqual(lvl.upperBoundExp, 10)
     }
+    
 }
