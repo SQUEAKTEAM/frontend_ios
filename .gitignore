@@ -1,0 +1,60 @@
+# Xcode
+build/
+DerivedData/
+.idea/
+*.hmap
+*.ipa
+*.xcuserstate
+
+# User-specific files
+*.xcuserdata/
+*.moved-aside
+*.xcsettings
+
+# Other
+*.pbxuser
+*.mode1v3
+*.mode2v3
+*.perspectivev3
+
+# Shared schemes
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/xcshareddata/
+
+# Build generated files
+*.o
+*.linkfilelist
+*.lldb
+*.map
+*.dSYM.zip
+*.dSYM
+
+# Archive files
+*.xcarchive
+
+# App packaging
+*.ipa
+*.dSYM.zip
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Swift Package Manager
+.build/
+.swiftpm/
+
+# Ignore test results
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Temporary and log files
+*.tmp
+*.log
+*.lock
+
+# macOS-specific
+.DS_Store
+.Trashes

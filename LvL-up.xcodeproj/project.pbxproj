@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		F844BF142DA6FF25003FB214 /* LvL_upApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF132DA6FF25003FB214 /* LvL_upApp.swift */; };
-		F844BF162DA6FF25003FB214 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF152DA6FF25003FB214 /* ContentView.swift */; };
 		F844BF182DA6FF29003FB214 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F844BF172DA6FF29003FB214 /* Assets.xcassets */; };
 		F844BF1B2DA6FF29003FB214 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F844BF1A2DA6FF29003FB214 /* Preview Assets.xcassets */; };
 		F844BF1D2DA6FF29003FB214 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF1C2DA6FF29003FB214 /* Persistence.swift */; };
@@ -22,6 +21,15 @@
 		F844BF502DA70A40003FB214 /* LvL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF4F2DA70A40003FB214 /* LvL.swift */; };
 		F844BF532DA70E62003FB214 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF522DA70E62003FB214 /* TaskCell.swift */; };
 		F844BF582DA711FE003FB214 /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF572DA711FE003FB214 /* TasksView.swift */; };
+		F844BF5D2DA80768003FB214 /* SwiftfulUI in Frameworks */ = {isa = PBXBuildFile; productRef = F844BF5C2DA80768003FB214 /* SwiftfulUI */; };
+		F844BF5F2DA8076D003FB214 /* SwiftfulUI in Frameworks */ = {isa = PBXBuildFile; productRef = F844BF5E2DA8076D003FB214 /* SwiftfulUI */; };
+		F844BF612DA87D7D003FB214 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF602DA87D7D003FB214 /* CoreDataManager.swift */; };
+		F844BF642DA87F33003FB214 /* LvLDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF632DA87F33003FB214 /* LvLDataProvider.swift */; };
+		F844BF662DA95B60003FB214 /* MainLvLInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF652DA95B60003FB214 /* MainLvLInteractor.swift */; };
+		F844BF692DA9A1DC003FB214 /* MainLvLPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF682DA9A1DC003FB214 /* MainLvLPresenterTests.swift */; };
+		F844BF6B2DA9A2CE003FB214 /* MainLvLInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF6A2DA9A2CE003FB214 /* MainLvLInteractorTests.swift */; };
+		F844BF6D2DA9A50A003FB214 /* LvLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF6C2DA9A50A003FB214 /* LvLTests.swift */; };
+		F844BF702DA9A8D5003FB214 /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF6F2DA9A8D5003FB214 /* CoreDataManagerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,7 +52,6 @@
 /* Begin PBXFileReference section */
 		F844BF102DA6FF24003FB214 /* LvL-up.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LvL-up.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F844BF132DA6FF25003FB214 /* LvL_upApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LvL_upApp.swift; sourceTree = "<group>"; };
-		F844BF152DA6FF25003FB214 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F844BF172DA6FF29003FB214 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F844BF1A2DA6FF29003FB214 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F844BF1C2DA6FF29003FB214 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -59,6 +66,13 @@
 		F844BF4F2DA70A40003FB214 /* LvL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LvL.swift; sourceTree = "<group>"; };
 		F844BF522DA70E62003FB214 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		F844BF572DA711FE003FB214 /* TasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
+		F844BF602DA87D7D003FB214 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		F844BF632DA87F33003FB214 /* LvLDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LvLDataProvider.swift; sourceTree = "<group>"; };
+		F844BF652DA95B60003FB214 /* MainLvLInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLvLInteractor.swift; sourceTree = "<group>"; };
+		F844BF682DA9A1DC003FB214 /* MainLvLPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLvLPresenterTests.swift; sourceTree = "<group>"; };
+		F844BF6A2DA9A2CE003FB214 /* MainLvLInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLvLInteractorTests.swift; sourceTree = "<group>"; };
+		F844BF6C2DA9A50A003FB214 /* LvLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LvLTests.swift; sourceTree = "<group>"; };
+		F844BF6F2DA9A8D5003FB214 /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F844BF5D2DA80768003FB214 /* SwiftfulUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F844BF5F2DA8076D003FB214 /* SwiftfulUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,7 +131,6 @@
 				F844BF422DA6FF45003FB214 /* CoreData */,
 				F844BF432DA6FFDD003FB214 /* Modules */,
 				F844BF132DA6FF25003FB214 /* LvL_upApp.swift */,
-				F844BF152DA6FF25003FB214 /* ContentView.swift */,
 				F844BF172DA6FF29003FB214 /* Assets.xcassets */,
 				F844BF192DA6FF29003FB214 /* Preview Content */,
 			);
@@ -133,6 +148,8 @@
 		F844BF282DA6FF29003FB214 /* LvL-upTests */ = {
 			isa = PBXGroup;
 			children = (
+				F844BF6E2DA9A838003FB214 /* CoreData */,
+				F844BF672DA9A104003FB214 /* MainLvL */,
 				F844BF292DA6FF29003FB214 /* LvL_upTests.swift */,
 			);
 			path = "LvL-upTests";
@@ -150,8 +167,10 @@
 		F844BF422DA6FF45003FB214 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				F844BF622DA87EF8003FB214 /* DataProviders */,
 				F844BF1C2DA6FF29003FB214 /* Persistence.swift */,
 				F844BF1E2DA6FF29003FB214 /* LvL_up.xcdatamodeld */,
+				F844BF602DA87D7D003FB214 /* CoreDataManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -171,6 +190,7 @@
 			children = (
 				F844BF472DA70179003FB214 /* MainLvLView.swift */,
 				F844BF4D2DA709A4003FB214 /* MainLvLPresenter.swift */,
+				F844BF652DA95B60003FB214 /* MainLvLInteractor.swift */,
 				F844BF4F2DA70A40003FB214 /* LvL.swift */,
 			);
 			path = MainLvL;
@@ -204,6 +224,32 @@
 			children = (
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		F844BF622DA87EF8003FB214 /* DataProviders */ = {
+			isa = PBXGroup;
+			children = (
+				F844BF632DA87F33003FB214 /* LvLDataProvider.swift */,
+			);
+			path = DataProviders;
+			sourceTree = "<group>";
+		};
+		F844BF672DA9A104003FB214 /* MainLvL */ = {
+			isa = PBXGroup;
+			children = (
+				F844BF682DA9A1DC003FB214 /* MainLvLPresenterTests.swift */,
+				F844BF6A2DA9A2CE003FB214 /* MainLvLInteractorTests.swift */,
+				F844BF6C2DA9A50A003FB214 /* LvLTests.swift */,
+			);
+			path = MainLvL;
+			sourceTree = "<group>";
+		};
+		F844BF6E2DA9A838003FB214 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				F844BF6F2DA9A8D5003FB214 /* CoreDataManagerTests.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,6 +289,9 @@
 				F844BF272DA6FF29003FB214 /* PBXTargetDependency */,
 			);
 			name = "LvL-upTests";
+			packageProductDependencies = (
+				F844BF5C2DA80768003FB214 /* SwiftfulUI */,
+			);
 			productName = "LvL-upTests";
 			productReference = F844BF252DA6FF29003FB214 /* LvL-upTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -261,6 +310,9 @@
 				F844BF312DA6FF29003FB214 /* PBXTargetDependency */,
 			);
 			name = "LvL-upUITests";
+			packageProductDependencies = (
+				F844BF5E2DA8076D003FB214 /* SwiftfulUI */,
+			);
 			productName = "LvL-upUITests";
 			productReference = F844BF2F2DA6FF29003FB214 /* LvL-upUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
@@ -343,13 +395,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				F844BF1D2DA6FF29003FB214 /* Persistence.swift in Sources */,
+				F844BF642DA87F33003FB214 /* LvLDataProvider.swift in Sources */,
 				F844BF582DA711FE003FB214 /* TasksView.swift in Sources */,
 				F844BF482DA70179003FB214 /* MainLvLView.swift in Sources */,
 				F844BF202DA6FF29003FB214 /* LvL_up.xcdatamodeld in Sources */,
-				F844BF162DA6FF25003FB214 /* ContentView.swift in Sources */,
 				F844BF532DA70E62003FB214 /* TaskCell.swift in Sources */,
 				F844BF4E2DA709A4003FB214 /* MainLvLPresenter.swift in Sources */,
+				F844BF662DA95B60003FB214 /* MainLvLInteractor.swift in Sources */,
 				F844BF142DA6FF25003FB214 /* LvL_upApp.swift in Sources */,
+				F844BF612DA87D7D003FB214 /* CoreDataManager.swift in Sources */,
 				F844BF502DA70A40003FB214 /* LvL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,6 +412,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F844BF6B2DA9A2CE003FB214 /* MainLvLInteractorTests.swift in Sources */,
+				F844BF692DA9A1DC003FB214 /* MainLvLPresenterTests.swift in Sources */,
+				F844BF6D2DA9A50A003FB214 /* LvLTests.swift in Sources */,
+				F844BF702DA9A8D5003FB214 /* CoreDataManagerTests.swift in Sources */,
 				F844BF2A2DA6FF29003FB214 /* LvL_upTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -439,7 +497,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -496,7 +554,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -522,10 +580,12 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gregfields.LvL-up";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -551,10 +611,12 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 14.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gregfields.LvL-up";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -573,7 +635,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GLVZ4657KM;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gregfields.LvL-upTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -593,7 +656,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GLVZ4657KM;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gregfields.LvL-upTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -612,6 +676,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GLVZ4657KM;
 				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gregfields.LvL-upUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -630,6 +695,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GLVZ4657KM;
 				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.1;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.gregfields.LvL-upUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -694,6 +760,16 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		F844BF4B2DA704AF003FB214 /* SwiftfulUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F844BF492DA70254003FB214 /* XCRemoteSwiftPackageReference "SwiftfulUI" */;
+			productName = SwiftfulUI;
+		};
+		F844BF5C2DA80768003FB214 /* SwiftfulUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F844BF492DA70254003FB214 /* XCRemoteSwiftPackageReference "SwiftfulUI" */;
+			productName = SwiftfulUI;
+		};
+		F844BF5E2DA8076D003FB214 /* SwiftfulUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F844BF492DA70254003FB214 /* XCRemoteSwiftPackageReference "SwiftfulUI" */;
 			productName = SwiftfulUI;

@@ -7,14 +7,27 @@
 
 import Foundation
 
+
 final class MainLvLPresenter: ObservableObject {
-    @Published var lvl: LvL? = nil
     
-    func getData() async {
-        lvl = LvL(currentLvl: 3, current_exp: 55, upperBound_exp: 100)
+    private let interactor: MainLvLInteractorProtocol
+    
+    @Published var lvl: LvL? = nil {
+        didSet {
+            update()
+        }
     }
     
-    init() {
-        
+    init(interactor: MainLvLInteractorProtocol = MainLvLInteractor()) {
+        self.interactor = interactor
+    }
+    
+    @MainActor
+    func getData() async {
+        lvl = interactor.loadLvl()
+    }
+    
+    private func update() {
+        interactor.update(lvl)
     }
 }

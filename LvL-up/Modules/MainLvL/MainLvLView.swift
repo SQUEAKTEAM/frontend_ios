@@ -10,39 +10,62 @@ import SwiftfulUI
 
 struct MainLvLView: View {
     @StateObject var presenter = MainLvLPresenter()
-    
-    @State private var selection: Double = 55
-    @State private var range: ClosedRange<Double> = 0...100
 
     var body: some View {
-        if let lvl = presenter.lvl {
-            VStack {
-                Text("\(lvl.currentLvl) lvl")
-                    .font(.largeTitle)
-                    .bold()
-                ZStack {
-                    CustomProgressBar(
-                        selection: lvl.current_exp,
-                        range: 0...lvl.upperBound_exp,
-                        backgroundColor: .gray,
-                        foregroundColor: .green,
-                        cornerRadius: 10,
-                        height: 20)
-                    Text("\(Int(lvl.current_exp))/\(Int(lvl.upperBound_exp))")
-                        .bold()
-                        .padding(.top)
+        ZStack {
+            if let lvl = presenter.lvl {
+                VStack {
+                    lvlTitle(lvl: lvl.currentLvl)
+                    
+                    progressBar(currentExp: lvl.currentExp, upperBoundExp: lvl.upperBoundExp)
+                    
+                    testButton()
                 }
+            } else {
+                Text("Загружаем ваш уровень!")
             }
-            
-        } else {
-            Text("Загружаем ваш уровень!")
-                .task {
-                    await presenter.getData()
-                }
+        }
+        .task {
+            await presenter.getData()
         }
     }
 }
 
 #Preview {
     MainLvLView()
+}
+
+extension MainLvLView {
+    func lvlTitle(lvl: Int) -> some View {
+        Text("\(lvl) lvl")
+            .font(.largeTitle)
+            .bold()
+            .animation(nil, value: presenter.lvl?.currentExp)
+    }
+    
+    func progressBar(currentExp: Float, upperBoundExp: Float) -> some View {
+        ZStack {
+            CustomProgressBar(
+                selection: currentExp,
+                range: 0...upperBoundExp,
+                backgroundColor: .gray,
+                foregroundColor: .green,
+                cornerRadius: 10,
+                height: 20)
+            Text("\(Int(currentExp))/\(Int(upperBoundExp))")
+                .bold()
+                .padding(.top)
+                .animation(nil, value: presenter.lvl?.currentExp)
+        }
+    }
+    
+    func testButton() -> some View {
+        Button {
+            withAnimation(.smooth) {
+                presenter.lvl?.currentExp += 1
+            }
+        } label: {
+            Text("1 exp")
+        }
+    }
 }
