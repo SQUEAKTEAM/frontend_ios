@@ -126,15 +126,104 @@ class TestCoreDataManagerStack {
             
             let upperBounds = NSAttributeDescription()
             upperBounds.name = "upperBounds"
-            upperBounds.attributeType = .integer32AttributeType
+            upperBounds.attributeType = .floatAttributeType
             upperBounds.isOptional = false
             
             let currentXp = NSAttributeDescription()
             currentXp.name = "currentXp"
-            currentXp.attributeType = .integer32AttributeType
+            currentXp.attributeType = .floatAttributeType
             currentXp.isOptional = false
             
             entity.properties = [currentLvl, upperBounds, currentXp]
+            model.entities = [entity]
+            
+            return model
+        }()
+        
+        let container = NSPersistentContainer(name: "TestContainer", managedObjectModel: managedObjectModel)
+        let description = NSPersistentStoreDescription()
+        description.type = NSInMemoryStoreType
+        container.persistentStoreDescriptions = [description]
+        
+        container.loadPersistentStores { _, error in
+            if let error = error as NSError? {
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        }
+        return container
+    }()
+}
+
+class TestTaskCoreDataManagerStack {
+    lazy var persistentContainer: NSPersistentContainer = {
+        // Создаем описание сущности в памяти
+        let managedObjectModel: NSManagedObjectModel = {
+            let model = NSManagedObjectModel()
+            
+            // Создаем сущность DailyTaskEntity (или LvLEntity, если нужно сохранить старое имя)
+            let entity = NSEntityDescription()
+            entity.name = "DailyTaskEntity" // Или "LvLEntity", если нужно
+            entity.managedObjectClassName = "DailyTaskEntity"
+            
+            // Создаем атрибуты согласно скриншоту
+            let id = NSAttributeDescription()
+            id.name = "id"
+            id.attributeType = .UUIDAttributeType
+            id.isOptional = false
+            
+            let checkPoint = NSAttributeDescription()
+            checkPoint.name = "checkPoint"
+            checkPoint.attributeType = .integer16AttributeType
+            checkPoint.isOptional = false
+            
+            let checkPoints = NSAttributeDescription()
+            checkPoints.name = "checkPoints"
+            checkPoints.attributeType = .integer16AttributeType
+            checkPoints.isOptional = false
+            
+            let currentProgress = NSAttributeDescription()
+            currentProgress.name = "currentProgress"
+            currentProgress.attributeType = .floatAttributeType
+            currentProgress.isOptional = false
+            
+            let img = NSAttributeDescription()
+            img.name = "img"
+            img.attributeType = .stringAttributeType
+            img.isOptional = false
+            
+            let isCompleted = NSAttributeDescription()
+            isCompleted.name = "isCompleted"
+            isCompleted.attributeType = .booleanAttributeType
+            isCompleted.isOptional = false
+            
+            let reward = NSAttributeDescription()
+            reward.name = "reward"
+            reward.attributeType = .integer16AttributeType
+            reward.isOptional = false
+            
+            let title = NSAttributeDescription()
+            title.name = "title"
+            title.attributeType = .stringAttributeType
+            title.isOptional = false
+            
+            let upperBounds = NSAttributeDescription()
+            upperBounds.name = "upperBounds"
+            upperBounds.attributeType = .floatAttributeType
+            upperBounds.isOptional = false
+            
+            // Добавляем все атрибуты в сущность
+            entity.properties = [
+                id,
+                checkPoint,
+                checkPoints,
+                currentProgress,
+                img,
+                isCompleted,
+                reward,
+                title,
+                upperBounds
+            ]
+            
             model.entities = [entity]
             
             return model

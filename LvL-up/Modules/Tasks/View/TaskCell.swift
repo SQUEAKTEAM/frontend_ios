@@ -9,22 +9,26 @@ import SwiftUI
 import SwiftfulUI
 
 struct TaskCell: View {
+    
+    var task: DailyTask
+    
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 10)
+            
             HStack {
-                Image(systemName: "book.closed.fill")
+                Image(systemName: task.img)
                     .resizable()
                     .foregroundStyle(.black)
                     .frame(width: 40, height: 40)
                 Spacer()
                 VStack {
                     HStack {
-                        Text("Theme 1")
+                        Text(task.title)
                             .foregroundStyle(.black)
                             .bold()
                         Spacer()
-                        Text("20 xp")
+                        Text("\(task.calculateCurrentReward()) xp")
                             .foregroundStyle(.black)
                             .font(.title3)
                             .bold()
@@ -33,15 +37,15 @@ struct TaskCell: View {
                     
                     HStack {
                         CustomProgressBar(
-                            selection: 55,
-                            range: 0...100,
+                            selection: task.currentProgress,
+                            range: 0...task.upperBounds,
                             backgroundColor: .gray,
                             foregroundColor: .green,
                             cornerRadius: 10,
                             height: 10)
                         .mask {
                             HStack(spacing: 1) {
-                                ForEach(0..<7) { _ in
+                                ForEach(0..<task.checkPoints) { _ in
                                     Rectangle()
                                 }
                             }
@@ -57,5 +61,5 @@ struct TaskCell: View {
 }
 
 #Preview {
-    TaskCell()
+    TaskCell(task: DailyTask.mockTasks.first!)
 }

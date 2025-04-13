@@ -10,6 +10,7 @@ import SwiftfulUI
 
 struct MainLvLView: View {
     @StateObject var presenter = MainLvLPresenter()
+    @Binding var newCurrentExp: Float
 
     var body: some View {
         ZStack {
@@ -19,7 +20,6 @@ struct MainLvLView: View {
                     
                     progressBar(currentExp: lvl.currentExp, upperBoundExp: lvl.upperBoundExp)
                     
-                    testButton()
                 }
             } else {
                 Text("Загружаем ваш уровень!")
@@ -28,11 +28,18 @@ struct MainLvLView: View {
         .task {
             await presenter.getData()
         }
+        .onChange(of: newCurrentExp) { retCurrentExp in
+            if retCurrentExp == 0 { return }
+            withAnimation(.smooth) {
+                presenter.lvl?.currentExp += retCurrentExp
+                newCurrentExp = 0
+            }
+        }
     }
 }
 
 #Preview {
-    MainLvLView()
+    MainLvLView(newCurrentExp: .constant(1))
 }
 
 extension MainLvLView {

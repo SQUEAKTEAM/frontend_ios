@@ -12,7 +12,6 @@
 		F844BF1B2DA6FF29003FB214 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F844BF1A2DA6FF29003FB214 /* Preview Assets.xcassets */; };
 		F844BF1D2DA6FF29003FB214 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF1C2DA6FF29003FB214 /* Persistence.swift */; };
 		F844BF202DA6FF29003FB214 /* LvL_up.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F844BF1E2DA6FF29003FB214 /* LvL_up.xcdatamodeld */; };
-		F844BF2A2DA6FF29003FB214 /* LvL_upTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF292DA6FF29003FB214 /* LvL_upTests.swift */; };
 		F844BF342DA6FF29003FB214 /* LvL_upUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF332DA6FF29003FB214 /* LvL_upUITests.swift */; };
 		F844BF362DA6FF29003FB214 /* LvL_upUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF352DA6FF29003FB214 /* LvL_upUITestsLaunchTests.swift */; };
 		F844BF482DA70179003FB214 /* MainLvLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF472DA70179003FB214 /* MainLvLView.swift */; };
@@ -30,6 +29,13 @@
 		F844BF6B2DA9A2CE003FB214 /* MainLvLInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF6A2DA9A2CE003FB214 /* MainLvLInteractorTests.swift */; };
 		F844BF6D2DA9A50A003FB214 /* LvLTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF6C2DA9A50A003FB214 /* LvLTests.swift */; };
 		F844BF702DA9A8D5003FB214 /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF6F2DA9A8D5003FB214 /* CoreDataManagerTests.swift */; };
+		F844BF752DAA896B003FB214 /* TaskDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF742DAA896B003FB214 /* TaskDataProvider.swift */; };
+		F844BF772DAA8C76003FB214 /* DailyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF762DAA8C76003FB214 /* DailyTask.swift */; };
+		F844BF792DAA8D02003FB214 /* TaskInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF782DAA8D02003FB214 /* TaskInteractor.swift */; };
+		F844BF7B2DAA8F50003FB214 /* TaskPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF7A2DAA8F50003FB214 /* TaskPresenter.swift */; };
+		F844BF812DAC2C99003FB214 /* DailyTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF802DAC2C99003FB214 /* DailyTaskTests.swift */; };
+		F844BF832DAC2CB6003FB214 /* TaskInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF822DAC2CB6003FB214 /* TaskInteractorTests.swift */; };
+		F844BF852DAC2CD7003FB214 /* TaskPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF842DAC2CD7003FB214 /* TaskPresenterTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,7 +63,6 @@
 		F844BF1C2DA6FF29003FB214 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		F844BF1F2DA6FF29003FB214 /* LvL_up.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = LvL_up.xcdatamodel; sourceTree = "<group>"; };
 		F844BF252DA6FF29003FB214 /* LvL-upTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LvL-upTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F844BF292DA6FF29003FB214 /* LvL_upTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LvL_upTests.swift; sourceTree = "<group>"; };
 		F844BF2F2DA6FF29003FB214 /* LvL-upUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LvL-upUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F844BF332DA6FF29003FB214 /* LvL_upUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LvL_upUITests.swift; sourceTree = "<group>"; };
 		F844BF352DA6FF29003FB214 /* LvL_upUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LvL_upUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -73,6 +78,13 @@
 		F844BF6A2DA9A2CE003FB214 /* MainLvLInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLvLInteractorTests.swift; sourceTree = "<group>"; };
 		F844BF6C2DA9A50A003FB214 /* LvLTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LvLTests.swift; sourceTree = "<group>"; };
 		F844BF6F2DA9A8D5003FB214 /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
+		F844BF742DAA896B003FB214 /* TaskDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDataProvider.swift; sourceTree = "<group>"; };
+		F844BF762DAA8C76003FB214 /* DailyTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTask.swift; sourceTree = "<group>"; };
+		F844BF782DAA8D02003FB214 /* TaskInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInteractor.swift; sourceTree = "<group>"; };
+		F844BF7A2DAA8F50003FB214 /* TaskPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPresenter.swift; sourceTree = "<group>"; };
+		F844BF802DAC2C99003FB214 /* DailyTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTaskTests.swift; sourceTree = "<group>"; };
+		F844BF822DAC2CB6003FB214 /* TaskInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInteractorTests.swift; sourceTree = "<group>"; };
+		F844BF842DAC2CD7003FB214 /* TaskPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPresenterTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,9 +160,9 @@
 		F844BF282DA6FF29003FB214 /* LvL-upTests */ = {
 			isa = PBXGroup;
 			children = (
+				F844BF7F2DAC2C71003FB214 /* Tasks */,
 				F844BF6E2DA9A838003FB214 /* CoreData */,
 				F844BF672DA9A104003FB214 /* MainLvL */,
-				F844BF292DA6FF29003FB214 /* LvL_upTests.swift */,
 			);
 			path = "LvL-upTests";
 			sourceTree = "<group>";
@@ -179,7 +191,6 @@
 			isa = PBXGroup;
 			children = (
 				F844BF562DA711DC003FB214 /* Tasks */,
-				F844BF512DA70E2C003FB214 /* TaskCell */,
 				F844BF442DA70001003FB214 /* MainLvL */,
 			);
 			path = Modules;
@@ -203,18 +214,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F844BF512DA70E2C003FB214 /* TaskCell */ = {
-			isa = PBXGroup;
-			children = (
-				F844BF522DA70E62003FB214 /* TaskCell.swift */,
-			);
-			path = TaskCell;
-			sourceTree = "<group>";
-		};
 		F844BF562DA711DC003FB214 /* Tasks */ = {
 			isa = PBXGroup;
 			children = (
-				F844BF572DA711FE003FB214 /* TasksView.swift */,
+				F844BF7E2DAC2939003FB214 /* View */,
+				F844BF7A2DAA8F50003FB214 /* TaskPresenter.swift */,
+				F844BF782DAA8D02003FB214 /* TaskInteractor.swift */,
+				F844BF762DAA8C76003FB214 /* DailyTask.swift */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -230,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				F844BF632DA87F33003FB214 /* LvLDataProvider.swift */,
+				F844BF742DAA896B003FB214 /* TaskDataProvider.swift */,
 			);
 			path = DataProviders;
 			sourceTree = "<group>";
@@ -250,6 +257,25 @@
 				F844BF6F2DA9A8D5003FB214 /* CoreDataManagerTests.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		F844BF7E2DAC2939003FB214 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F844BF572DA711FE003FB214 /* TasksView.swift */,
+				F844BF522DA70E62003FB214 /* TaskCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F844BF7F2DAC2C71003FB214 /* Tasks */ = {
+			isa = PBXGroup;
+			children = (
+				F844BF802DAC2C99003FB214 /* DailyTaskTests.swift */,
+				F844BF822DAC2CB6003FB214 /* TaskInteractorTests.swift */,
+				F844BF842DAC2CD7003FB214 /* TaskPresenterTests.swift */,
+			);
+			path = Tasks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -395,16 +421,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				F844BF1D2DA6FF29003FB214 /* Persistence.swift in Sources */,
+				F844BF752DAA896B003FB214 /* TaskDataProvider.swift in Sources */,
 				F844BF642DA87F33003FB214 /* LvLDataProvider.swift in Sources */,
+				F844BF7B2DAA8F50003FB214 /* TaskPresenter.swift in Sources */,
 				F844BF582DA711FE003FB214 /* TasksView.swift in Sources */,
 				F844BF482DA70179003FB214 /* MainLvLView.swift in Sources */,
 				F844BF202DA6FF29003FB214 /* LvL_up.xcdatamodeld in Sources */,
+				F844BF772DAA8C76003FB214 /* DailyTask.swift in Sources */,
 				F844BF532DA70E62003FB214 /* TaskCell.swift in Sources */,
 				F844BF4E2DA709A4003FB214 /* MainLvLPresenter.swift in Sources */,
 				F844BF662DA95B60003FB214 /* MainLvLInteractor.swift in Sources */,
 				F844BF142DA6FF25003FB214 /* LvL_upApp.swift in Sources */,
 				F844BF612DA87D7D003FB214 /* CoreDataManager.swift in Sources */,
 				F844BF502DA70A40003FB214 /* LvL.swift in Sources */,
+				F844BF792DAA8D02003FB214 /* TaskInteractor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,10 +443,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F844BF6B2DA9A2CE003FB214 /* MainLvLInteractorTests.swift in Sources */,
+				F844BF852DAC2CD7003FB214 /* TaskPresenterTests.swift in Sources */,
 				F844BF692DA9A1DC003FB214 /* MainLvLPresenterTests.swift in Sources */,
+				F844BF812DAC2C99003FB214 /* DailyTaskTests.swift in Sources */,
 				F844BF6D2DA9A50A003FB214 /* LvLTests.swift in Sources */,
 				F844BF702DA9A8D5003FB214 /* CoreDataManagerTests.swift in Sources */,
-				F844BF2A2DA6FF29003FB214 /* LvL_upTests.swift in Sources */,
+				F844BF832DAC2CB6003FB214 /* TaskInteractorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -574,6 +606,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"LvL-up/Preview Content\"";
 				DEVELOPMENT_TEAM = GLVZ4657KM;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -605,6 +638,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"LvL-up/Preview Content\"";
 				DEVELOPMENT_TEAM = GLVZ4657KM;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
