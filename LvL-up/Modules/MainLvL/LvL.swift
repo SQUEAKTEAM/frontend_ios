@@ -8,12 +8,14 @@
 import Foundation
 import CoreData
 
-struct LvL {
+struct LvL: Equatable {
     var currentLvl: Int
     var currentExp: Float {
         didSet {
             if currentExp >= upperBoundExp {
                 calculateCurrentData()
+            } else if currentExp < 0 {
+                calculateReverseData()
             }
         }
     }
@@ -21,8 +23,8 @@ struct LvL {
     
     init(entity: LvLEntity) {
         currentLvl = Int(entity.currentLvl)
-        upperBoundExp = Float(entity.upperBounds)
-        currentExp = Float(entity.currentXp)
+        upperBoundExp = entity.upperBounds
+        currentExp = entity.currentXp
     }
     
     init(currentLvl: Int, currentExp: Float, upperBoundExp: Float) {
@@ -35,5 +37,11 @@ struct LvL {
         currentLvl += 1
         currentExp = currentExp - upperBoundExp
         upperBoundExp = Float(currentLvl * 10)
+    }
+    
+    private mutating func calculateReverseData() {
+        currentLvl -= 1
+        upperBoundExp = Float(currentLvl * 10)
+        currentExp = currentExp + upperBoundExp
     }
 }

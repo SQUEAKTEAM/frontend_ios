@@ -18,7 +18,6 @@ final class CoreDataManager<T: NSManagedObject> {
     // CREATE
     func create() -> T {
         let entity = T(context: context)
-        save()
         return entity
     }
     

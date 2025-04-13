@@ -35,8 +35,8 @@ final class MainLvLInteractor: MainLvLInteractorProtocol {
             guard let mainLvl = mainLvl else { return }
             
             level.currentLvl = Int32(mainLvl.currentLvl)
-            level.upperBounds = Int32(mainLvl.upperBoundExp)
-            level.currentXp = Int32(mainLvl.currentExp)
+            level.upperBounds = mainLvl.upperBoundExp
+            level.currentXp = mainLvl.currentExp
         }
     }
 }
