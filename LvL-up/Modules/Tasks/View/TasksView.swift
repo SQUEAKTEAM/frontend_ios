@@ -29,6 +29,7 @@ struct TasksView: View {
         .task {
             await presenter.getData()
         }
+        .ignoresSafeArea(edges: .bottom)
     }
 }
 

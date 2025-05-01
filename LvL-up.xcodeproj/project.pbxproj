@@ -36,6 +36,20 @@
 		F844BF812DAC2C99003FB214 /* DailyTaskTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF802DAC2C99003FB214 /* DailyTaskTests.swift */; };
 		F844BF832DAC2CB6003FB214 /* TaskInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF822DAC2CB6003FB214 /* TaskInteractorTests.swift */; };
 		F844BF852DAC2CD7003FB214 /* TaskPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF842DAC2CD7003FB214 /* TaskPresenterTests.swift */; };
+		F844BF882DAC6148003FB214 /* CustomTabBarContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF872DAC6148003FB214 /* CustomTabBarContainerView.swift */; };
+		F844BF8A2DAC616E003FB214 /* CustomTabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF892DAC616E003FB214 /* CustomTabBarView.swift */; };
+		F844BF8C2DAC6190003FB214 /* TabBarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF8B2DAC6190003FB214 /* TabBarItem.swift */; };
+		F844BF8E2DAC61C3003FB214 /* TabBarItemsPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF8D2DAC61C3003FB214 /* TabBarItemsPreferenceKey.swift */; };
+		F844BF902DAC647D003FB214 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF8F2DAC647D003FB214 /* HomeView.swift */; };
+		F844BF932DAC68AA003FB214 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF922DAC68AA003FB214 /* Color.swift */; };
+		F844BF962DAF0FBA003FB214 /* AllTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF952DAF0FBA003FB214 /* AllTaskView.swift */; };
+		F844BF982DAF0FF7003FB214 /* AllTaskPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF972DAF0FF7003FB214 /* AllTaskPresenter.swift */; };
+		F844BF9B2DAF1562003FB214 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF9A2DAF1562003FB214 /* TestView.swift */; };
+		F844BF9E2DAF1F0C003FB214 /* AllTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF9D2DAF1F0C003FB214 /* AllTaskCell.swift */; };
+		F844BFA02DAF1FFA003FB214 /* AllDailyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF9F2DAF1FF9003FB214 /* AllDailyTask.swift */; };
+		F844BFA42DC2DB43003FB214 /* ChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BFA32DC2DB43003FB214 /* ChartCell.swift */; };
+		F844BFAB2DC2E5E8003FB214 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BFAA2DC2E5E8003FB214 /* PieChartView.swift */; };
+		F844BFAD2DC2E608003FB214 /* PieSliceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BFAC2DC2E608003FB214 /* PieSliceView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +99,21 @@
 		F844BF802DAC2C99003FB214 /* DailyTaskTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyTaskTests.swift; sourceTree = "<group>"; };
 		F844BF822DAC2CB6003FB214 /* TaskInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskInteractorTests.swift; sourceTree = "<group>"; };
 		F844BF842DAC2CD7003FB214 /* TaskPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskPresenterTests.swift; sourceTree = "<group>"; };
+		F844BF872DAC6148003FB214 /* CustomTabBarContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarContainerView.swift; sourceTree = "<group>"; };
+		F844BF892DAC616E003FB214 /* CustomTabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarView.swift; sourceTree = "<group>"; };
+		F844BF8B2DAC6190003FB214 /* TabBarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItem.swift; sourceTree = "<group>"; };
+		F844BF8D2DAC61C3003FB214 /* TabBarItemsPreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemsPreferenceKey.swift; sourceTree = "<group>"; };
+		F844BF8F2DAC647D003FB214 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		F844BF922DAC68AA003FB214 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		F844BF952DAF0FBA003FB214 /* AllTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTaskView.swift; sourceTree = "<group>"; };
+		F844BF972DAF0FF7003FB214 /* AllTaskPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTaskPresenter.swift; sourceTree = "<group>"; };
+		F844BF992DAF1480003FB214 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F844BF9A2DAF1562003FB214 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		F844BF9D2DAF1F0C003FB214 /* AllTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTaskCell.swift; sourceTree = "<group>"; };
+		F844BF9F2DAF1FF9003FB214 /* AllDailyTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDailyTask.swift; sourceTree = "<group>"; };
+		F844BFA32DC2DB43003FB214 /* ChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCell.swift; sourceTree = "<group>"; };
+		F844BFAA2DC2E5E8003FB214 /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
+		F844BFAC2DC2E608003FB214 /* PieSliceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +168,8 @@
 		F844BF122DA6FF25003FB214 /* LvL-up */ = {
 			isa = PBXGroup;
 			children = (
+				F844BF992DAF1480003FB214 /* Info.plist */,
+				F844BF912DAC6898003FB214 /* Extensions */,
 				F844BF592DA712BA003FB214 /* Components */,
 				F844BF422DA6FF45003FB214 /* CoreData */,
 				F844BF432DA6FFDD003FB214 /* Modules */,
@@ -181,8 +212,8 @@
 			children = (
 				F844BF622DA87EF8003FB214 /* DataProviders */,
 				F844BF1C2DA6FF29003FB214 /* Persistence.swift */,
-				F844BF1E2DA6FF29003FB214 /* LvL_up.xcdatamodeld */,
 				F844BF602DA87D7D003FB214 /* CoreDataManager.swift */,
+				F844BF1E2DA6FF29003FB214 /* LvL_up.xcdatamodeld */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -190,8 +221,13 @@
 		F844BF432DA6FFDD003FB214 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				F844BF8F2DAC647D003FB214 /* HomeView.swift */,
+				F844BF942DAF0F85003FB214 /* AllTasks */,
+				F844BF862DAC6108003FB214 /* CustomTabBar */,
 				F844BF562DA711DC003FB214 /* Tasks */,
 				F844BF442DA70001003FB214 /* MainLvL */,
+				F844BFA22DC2DB03003FB214 /* Charts */,
+				F844BF9A2DAF1562003FB214 /* TestView.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -276,6 +312,54 @@
 				F844BF842DAC2CD7003FB214 /* TaskPresenterTests.swift */,
 			);
 			path = Tasks;
+			sourceTree = "<group>";
+		};
+		F844BF862DAC6108003FB214 /* CustomTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				F844BF872DAC6148003FB214 /* CustomTabBarContainerView.swift */,
+				F844BF892DAC616E003FB214 /* CustomTabBarView.swift */,
+				F844BF8B2DAC6190003FB214 /* TabBarItem.swift */,
+				F844BF8D2DAC61C3003FB214 /* TabBarItemsPreferenceKey.swift */,
+			);
+			path = CustomTabBar;
+			sourceTree = "<group>";
+		};
+		F844BF912DAC6898003FB214 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F844BF922DAC68AA003FB214 /* Color.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F844BF942DAF0F85003FB214 /* AllTasks */ = {
+			isa = PBXGroup;
+			children = (
+				F844BF9C2DAF1EF5003FB214 /* View */,
+				F844BF972DAF0FF7003FB214 /* AllTaskPresenter.swift */,
+				F844BF9F2DAF1FF9003FB214 /* AllDailyTask.swift */,
+			);
+			path = AllTasks;
+			sourceTree = "<group>";
+		};
+		F844BF9C2DAF1EF5003FB214 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F844BF952DAF0FBA003FB214 /* AllTaskView.swift */,
+				F844BF9D2DAF1F0C003FB214 /* AllTaskCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F844BFA22DC2DB03003FB214 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				F844BFA32DC2DB43003FB214 /* ChartCell.swift */,
+				F844BFAA2DC2E5E8003FB214 /* PieChartView.swift */,
+				F844BFAC2DC2E608003FB214 /* PieSliceView.swift */,
+			);
+			path = Charts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -420,21 +504,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F844BFAB2DC2E5E8003FB214 /* PieChartView.swift in Sources */,
 				F844BF1D2DA6FF29003FB214 /* Persistence.swift in Sources */,
 				F844BF752DAA896B003FB214 /* TaskDataProvider.swift in Sources */,
+				F844BF932DAC68AA003FB214 /* Color.swift in Sources */,
 				F844BF642DA87F33003FB214 /* LvLDataProvider.swift in Sources */,
 				F844BF7B2DAA8F50003FB214 /* TaskPresenter.swift in Sources */,
+				F844BF8A2DAC616E003FB214 /* CustomTabBarView.swift in Sources */,
 				F844BF582DA711FE003FB214 /* TasksView.swift in Sources */,
+				F844BF962DAF0FBA003FB214 /* AllTaskView.swift in Sources */,
+				F844BF982DAF0FF7003FB214 /* AllTaskPresenter.swift in Sources */,
 				F844BF482DA70179003FB214 /* MainLvLView.swift in Sources */,
 				F844BF202DA6FF29003FB214 /* LvL_up.xcdatamodeld in Sources */,
 				F844BF772DAA8C76003FB214 /* DailyTask.swift in Sources */,
+				F844BFA42DC2DB43003FB214 /* ChartCell.swift in Sources */,
+				F844BF9B2DAF1562003FB214 /* TestView.swift in Sources */,
 				F844BF532DA70E62003FB214 /* TaskCell.swift in Sources */,
+				F844BFA02DAF1FFA003FB214 /* AllDailyTask.swift in Sources */,
 				F844BF4E2DA709A4003FB214 /* MainLvLPresenter.swift in Sources */,
+				F844BFAD2DC2E608003FB214 /* PieSliceView.swift in Sources */,
 				F844BF662DA95B60003FB214 /* MainLvLInteractor.swift in Sources */,
+				F844BF8C2DAC6190003FB214 /* TabBarItem.swift in Sources */,
+				F844BF902DAC647D003FB214 /* HomeView.swift in Sources */,
 				F844BF142DA6FF25003FB214 /* LvL_upApp.swift in Sources */,
 				F844BF612DA87D7D003FB214 /* CoreDataManager.swift in Sources */,
 				F844BF502DA70A40003FB214 /* LvL.swift in Sources */,
+				F844BF8E2DAC61C3003FB214 /* TabBarItemsPreferenceKey.swift in Sources */,
+				F844BF9E2DAF1F0C003FB214 /* AllTaskCell.swift in Sources */,
 				F844BF792DAA8D02003FB214 /* TaskInteractor.swift in Sources */,
+				F844BF882DAC6148003FB214 /* CustomTabBarContainerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,6 +706,7 @@
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "LvL-up/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -640,6 +739,7 @@
 				ENABLE_PREVIEWS = YES;
 				EXCLUDED_ARCHS = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "LvL-up/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
