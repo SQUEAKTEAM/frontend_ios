@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Statistics: Identifiable {
+struct Statistics: Identifiable, Codable {
     var id: Int
     var countSuccess: Int
     var countMiddle: Int

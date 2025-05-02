@@ -206,6 +206,7 @@
 		F844BF282DA6FF29003FB214 /* LvL-upTests */ = {
 			isa = PBXGroup;
 			children = (
+				F8D031242DC4F21800FE44E8 /* Charts */,
 				F844BF7F2DAC2C71003FB214 /* Tasks */,
 				F844BF6E2DA9A838003FB214 /* CoreData */,
 				F844BF672DA9A104003FB214 /* MainLvL */,
@@ -405,6 +406,13 @@
 				F844BFBB2DC422FA003FB214 /* ChartsDataProvider.swift */,
 			);
 			path = DataProviders;
+			sourceTree = "<group>";
+		};
+		F8D031242DC4F21800FE44E8 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Charts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

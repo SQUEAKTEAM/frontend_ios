@@ -8,7 +8,7 @@
 import Foundation
 
 protocol ChartsProviderProtocol {
-    func fetchData() async -> [Statistics]
+    func fetchData() async throws -> [Statistics]
 }
 
 protocol ChartsInteractorProtocol {
@@ -24,6 +24,6 @@ final class ChartsInteractor: ChartsInteractorProtocol {
     }
     
     func loadStatistics() async -> [Statistics] {
-        return await dataService.fetchData()
+        return (try? await dataService.fetchData()) ?? []
     }
 }
