@@ -50,6 +50,15 @@
 		F844BFA42DC2DB43003FB214 /* ChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BFA32DC2DB43003FB214 /* ChartCell.swift */; };
 		F844BFAB2DC2E5E8003FB214 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BFAA2DC2E5E8003FB214 /* PieChartView.swift */; };
 		F844BFAD2DC2E608003FB214 /* PieSliceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BFAC2DC2E608003FB214 /* PieSliceView.swift */; };
+		F844BFAF2DC3A791003FB214 /* ChartsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BFAE2DC3A791003FB214 /* ChartsView.swift */; };
+		F844BFB12DC3AD56003FB214 /* LegendView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BFB02DC3AD56003FB214 /* LegendView.swift */; };
+		F844BFB32DC3B411003FB214 /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BFB22DC3B411003FB214 /* Statistics.swift */; };
+		F844BFB62DC42266003FB214 /* ChartsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BFB52DC42266003FB214 /* ChartsPresenter.swift */; };
+		F844BFB82DC42279003FB214 /* ChartsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BFB72DC42279003FB214 /* ChartsInteractor.swift */; };
+		F844BFBC2DC422FA003FB214 /* ChartsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BFBB2DC422FA003FB214 /* ChartsDataProvider.swift */; };
+		F844BFBE2DC42329003FB214 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BFBD2DC42329003FB214 /* APIManager.swift */; };
+		F8D031282DC4F29200FE44E8 /* ChartsPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031272DC4F29200FE44E8 /* ChartsPresenterTest.swift */; };
+		F8D0312A2DC4F2A600FE44E8 /* ChartsInteractorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031292DC4F2A600FE44E8 /* ChartsInteractorTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +123,15 @@
 		F844BFA32DC2DB43003FB214 /* ChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCell.swift; sourceTree = "<group>"; };
 		F844BFAA2DC2E5E8003FB214 /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		F844BFAC2DC2E608003FB214 /* PieSliceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
+		F844BFAE2DC3A791003FB214 /* ChartsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsView.swift; sourceTree = "<group>"; };
+		F844BFB02DC3AD56003FB214 /* LegendView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendView.swift; sourceTree = "<group>"; };
+		F844BFB22DC3B411003FB214 /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
+		F844BFB52DC42266003FB214 /* ChartsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsPresenter.swift; sourceTree = "<group>"; };
+		F844BFB72DC42279003FB214 /* ChartsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsInteractor.swift; sourceTree = "<group>"; };
+		F844BFBB2DC422FA003FB214 /* ChartsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsDataProvider.swift; sourceTree = "<group>"; };
+		F844BFBD2DC42329003FB214 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		F8D031272DC4F29200FE44E8 /* ChartsPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsPresenterTest.swift; sourceTree = "<group>"; };
+		F8D031292DC4F2A600FE44E8 /* ChartsInteractorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsInteractorTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +189,7 @@
 				F844BF992DAF1480003FB214 /* Info.plist */,
 				F844BF912DAC6898003FB214 /* Extensions */,
 				F844BF592DA712BA003FB214 /* Components */,
+				F844BFB92DC422C7003FB214 /* API */,
 				F844BF422DA6FF45003FB214 /* CoreData */,
 				F844BF432DA6FFDD003FB214 /* Modules */,
 				F844BF132DA6FF25003FB214 /* LvL_upApp.swift */,
@@ -191,6 +210,7 @@
 		F844BF282DA6FF29003FB214 /* LvL-upTests */ = {
 			isa = PBXGroup;
 			children = (
+				F8D031242DC4F21800FE44E8 /* Charts */,
 				F844BF7F2DAC2C71003FB214 /* Tasks */,
 				F844BF6E2DA9A838003FB214 /* CoreData */,
 				F844BF672DA9A104003FB214 /* MainLvL */,
@@ -355,9 +375,48 @@
 		F844BFA22DC2DB03003FB214 /* Charts */ = {
 			isa = PBXGroup;
 			children = (
+				F844BFB42DC4222B003FB214 /* View */,
+				F844BFB52DC42266003FB214 /* ChartsPresenter.swift */,
+				F844BFB72DC42279003FB214 /* ChartsInteractor.swift */,
+				F844BFB22DC3B411003FB214 /* Statistics.swift */,
+			);
+			path = Charts;
+			sourceTree = "<group>";
+		};
+		F844BFB42DC4222B003FB214 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F844BFAE2DC3A791003FB214 /* ChartsView.swift */,
 				F844BFA32DC2DB43003FB214 /* ChartCell.swift */,
+				F844BFB02DC3AD56003FB214 /* LegendView.swift */,
 				F844BFAA2DC2E5E8003FB214 /* PieChartView.swift */,
 				F844BFAC2DC2E608003FB214 /* PieSliceView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F844BFB92DC422C7003FB214 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				F844BFBA2DC422D5003FB214 /* DataProviders */,
+				F844BFBD2DC42329003FB214 /* APIManager.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		F844BFBA2DC422D5003FB214 /* DataProviders */ = {
+			isa = PBXGroup;
+			children = (
+				F844BFBB2DC422FA003FB214 /* ChartsDataProvider.swift */,
+			);
+			path = DataProviders;
+			sourceTree = "<group>";
+		};
+		F8D031242DC4F21800FE44E8 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				F8D031272DC4F29200FE44E8 /* ChartsPresenterTest.swift */,
+				F8D031292DC4F2A600FE44E8 /* ChartsInteractorTest.swift */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -508,6 +567,7 @@
 				F844BF1D2DA6FF29003FB214 /* Persistence.swift in Sources */,
 				F844BF752DAA896B003FB214 /* TaskDataProvider.swift in Sources */,
 				F844BF932DAC68AA003FB214 /* Color.swift in Sources */,
+				F844BFBC2DC422FA003FB214 /* ChartsDataProvider.swift in Sources */,
 				F844BF642DA87F33003FB214 /* LvLDataProvider.swift in Sources */,
 				F844BF7B2DAA8F50003FB214 /* TaskPresenter.swift in Sources */,
 				F844BF8A2DAC616E003FB214 /* CustomTabBarView.swift in Sources */,
@@ -515,15 +575,20 @@
 				F844BF962DAF0FBA003FB214 /* AllTaskView.swift in Sources */,
 				F844BF982DAF0FF7003FB214 /* AllTaskPresenter.swift in Sources */,
 				F844BF482DA70179003FB214 /* MainLvLView.swift in Sources */,
+				F844BFBE2DC42329003FB214 /* APIManager.swift in Sources */,
 				F844BF202DA6FF29003FB214 /* LvL_up.xcdatamodeld in Sources */,
 				F844BF772DAA8C76003FB214 /* DailyTask.swift in Sources */,
 				F844BFA42DC2DB43003FB214 /* ChartCell.swift in Sources */,
 				F844BF9B2DAF1562003FB214 /* TestView.swift in Sources */,
 				F844BF532DA70E62003FB214 /* TaskCell.swift in Sources */,
+				F844BFB12DC3AD56003FB214 /* LegendView.swift in Sources */,
 				F844BFA02DAF1FFA003FB214 /* AllDailyTask.swift in Sources */,
+				F844BFAF2DC3A791003FB214 /* ChartsView.swift in Sources */,
 				F844BF4E2DA709A4003FB214 /* MainLvLPresenter.swift in Sources */,
 				F844BFAD2DC2E608003FB214 /* PieSliceView.swift in Sources */,
 				F844BF662DA95B60003FB214 /* MainLvLInteractor.swift in Sources */,
+				F844BFB32DC3B411003FB214 /* Statistics.swift in Sources */,
+				F844BFB82DC42279003FB214 /* ChartsInteractor.swift in Sources */,
 				F844BF8C2DAC6190003FB214 /* TabBarItem.swift in Sources */,
 				F844BF902DAC647D003FB214 /* HomeView.swift in Sources */,
 				F844BF142DA6FF25003FB214 /* LvL_upApp.swift in Sources */,
@@ -533,6 +598,7 @@
 				F844BF9E2DAF1F0C003FB214 /* AllTaskCell.swift in Sources */,
 				F844BF792DAA8D02003FB214 /* TaskInteractor.swift in Sources */,
 				F844BF882DAC6148003FB214 /* CustomTabBarContainerView.swift in Sources */,
+				F844BFB62DC42266003FB214 /* ChartsPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -541,8 +607,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F844BF6B2DA9A2CE003FB214 /* MainLvLInteractorTests.swift in Sources */,
+				F8D031282DC4F29200FE44E8 /* ChartsPresenterTest.swift in Sources */,
 				F844BF852DAC2CD7003FB214 /* TaskPresenterTests.swift in Sources */,
 				F844BF692DA9A1DC003FB214 /* MainLvLPresenterTests.swift in Sources */,
+				F8D0312A2DC4F2A600FE44E8 /* ChartsInteractorTest.swift in Sources */,
 				F844BF812DAC2C99003FB214 /* DailyTaskTests.swift in Sources */,
 				F844BF6D2DA9A50A003FB214 /* LvLTests.swift in Sources */,
 				F844BF702DA9A8D5003FB214 /* CoreDataManagerTests.swift in Sources */,
