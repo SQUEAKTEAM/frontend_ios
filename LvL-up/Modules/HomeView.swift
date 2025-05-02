@@ -23,7 +23,7 @@ struct HomeView: View {
                 AllTaskView()
                     .tabBarItem(tab: .tasks, selection: $tabSelection)
                 
-                ChartsView()
+                StatisticsView()
                     .tabBarItem(tab: .statistics, selection: $tabSelection)
             }
             .ignoresSafeArea(.keyboard, edges: .bottom)

@@ -44,7 +44,6 @@
 		F844BF932DAC68AA003FB214 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF922DAC68AA003FB214 /* Color.swift */; };
 		F844BF962DAF0FBA003FB214 /* AllTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF952DAF0FBA003FB214 /* AllTaskView.swift */; };
 		F844BF982DAF0FF7003FB214 /* AllTaskPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF972DAF0FF7003FB214 /* AllTaskPresenter.swift */; };
-		F844BF9B2DAF1562003FB214 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF9A2DAF1562003FB214 /* TestView.swift */; };
 		F844BF9E2DAF1F0C003FB214 /* AllTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF9D2DAF1F0C003FB214 /* AllTaskCell.swift */; };
 		F844BFA02DAF1FFA003FB214 /* AllDailyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF9F2DAF1FF9003FB214 /* AllDailyTask.swift */; };
 		F844BFA42DC2DB43003FB214 /* ChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BFA32DC2DB43003FB214 /* ChartCell.swift */; };
@@ -59,6 +58,16 @@
 		F844BFBE2DC42329003FB214 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BFBD2DC42329003FB214 /* APIManager.swift */; };
 		F8D031282DC4F29200FE44E8 /* ChartsPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031272DC4F29200FE44E8 /* ChartsPresenterTest.swift */; };
 		F8D0312A2DC4F2A600FE44E8 /* ChartsInteractorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031292DC4F2A600FE44E8 /* ChartsInteractorTest.swift */; };
+		F8D0312D2DC4F74100FE44E8 /* AchievementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D0312C2DC4F74100FE44E8 /* AchievementCell.swift */; };
+		F8D0312F2DC4FA0300FE44E8 /* AchievementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D0312E2DC4FA0300FE44E8 /* AchievementsView.swift */; };
+		F8D031312DC4FAA600FE44E8 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031302DC4FAA600FE44E8 /* StatisticsView.swift */; };
+		F8D031332DC4FDDE00FE44E8 /* Achievement.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031322DC4FDDE00FE44E8 /* Achievement.swift */; };
+		F8D031362DC500C600FE44E8 /* AchievementPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031352DC500C600FE44E8 /* AchievementPresenter.swift */; };
+		F8D031382DC500D900FE44E8 /* AchievementInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031372DC500D900FE44E8 /* AchievementInteractor.swift */; };
+		F8D0313A2DC500EE00FE44E8 /* AchievementDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031392DC500EE00FE44E8 /* AchievementDataProvider.swift */; };
+		F8D0313D2DC50A3A00FE44E8 /* AchievementPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D0313C2DC50A3A00FE44E8 /* AchievementPresenterTest.swift */; };
+		F8D0313F2DC50A5000FE44E8 /* AchievementInteractorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D0313E2DC50A5000FE44E8 /* AchievementInteractorTest.swift */; };
+		F8D031412DC50A6100FE44E8 /* AchievementTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031402DC50A6100FE44E8 /* AchievementTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,7 +126,6 @@
 		F844BF952DAF0FBA003FB214 /* AllTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTaskView.swift; sourceTree = "<group>"; };
 		F844BF972DAF0FF7003FB214 /* AllTaskPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTaskPresenter.swift; sourceTree = "<group>"; };
 		F844BF992DAF1480003FB214 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		F844BF9A2DAF1562003FB214 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
 		F844BF9D2DAF1F0C003FB214 /* AllTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTaskCell.swift; sourceTree = "<group>"; };
 		F844BF9F2DAF1FF9003FB214 /* AllDailyTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDailyTask.swift; sourceTree = "<group>"; };
 		F844BFA32DC2DB43003FB214 /* ChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCell.swift; sourceTree = "<group>"; };
@@ -132,6 +140,16 @@
 		F844BFBD2DC42329003FB214 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		F8D031272DC4F29200FE44E8 /* ChartsPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsPresenterTest.swift; sourceTree = "<group>"; };
 		F8D031292DC4F2A600FE44E8 /* ChartsInteractorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsInteractorTest.swift; sourceTree = "<group>"; };
+		F8D0312C2DC4F74100FE44E8 /* AchievementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementCell.swift; sourceTree = "<group>"; };
+		F8D0312E2DC4FA0300FE44E8 /* AchievementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementsView.swift; sourceTree = "<group>"; };
+		F8D031302DC4FAA600FE44E8 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
+		F8D031322DC4FDDE00FE44E8 /* Achievement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Achievement.swift; sourceTree = "<group>"; };
+		F8D031352DC500C600FE44E8 /* AchievementPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementPresenter.swift; sourceTree = "<group>"; };
+		F8D031372DC500D900FE44E8 /* AchievementInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementInteractor.swift; sourceTree = "<group>"; };
+		F8D031392DC500EE00FE44E8 /* AchievementDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementDataProvider.swift; sourceTree = "<group>"; };
+		F8D0313C2DC50A3A00FE44E8 /* AchievementPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementPresenterTest.swift; sourceTree = "<group>"; };
+		F8D0313E2DC50A5000FE44E8 /* AchievementInteractorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementInteractorTest.swift; sourceTree = "<group>"; };
+		F8D031402DC50A6100FE44E8 /* AchievementTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +228,7 @@
 		F844BF282DA6FF29003FB214 /* LvL-upTests */ = {
 			isa = PBXGroup;
 			children = (
+				F8D0313B2DC50A1400FE44E8 /* Achievements */,
 				F8D031242DC4F21800FE44E8 /* Charts */,
 				F844BF7F2DAC2C71003FB214 /* Tasks */,
 				F844BF6E2DA9A838003FB214 /* CoreData */,
@@ -242,12 +261,13 @@
 			isa = PBXGroup;
 			children = (
 				F844BF8F2DAC647D003FB214 /* HomeView.swift */,
+				F8D031302DC4FAA600FE44E8 /* StatisticsView.swift */,
 				F844BF942DAF0F85003FB214 /* AllTasks */,
 				F844BF862DAC6108003FB214 /* CustomTabBar */,
 				F844BF562DA711DC003FB214 /* Tasks */,
 				F844BF442DA70001003FB214 /* MainLvL */,
 				F844BFA22DC2DB03003FB214 /* Charts */,
-				F844BF9A2DAF1562003FB214 /* TestView.swift */,
+				F8D0312B2DC4F72600FE44E8 /* Achievements */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -408,6 +428,7 @@
 			isa = PBXGroup;
 			children = (
 				F844BFBB2DC422FA003FB214 /* ChartsDataProvider.swift */,
+				F8D031392DC500EE00FE44E8 /* AchievementDataProvider.swift */,
 			);
 			path = DataProviders;
 			sourceTree = "<group>";
@@ -419,6 +440,36 @@
 				F8D031292DC4F2A600FE44E8 /* ChartsInteractorTest.swift */,
 			);
 			path = Charts;
+			sourceTree = "<group>";
+		};
+		F8D0312B2DC4F72600FE44E8 /* Achievements */ = {
+			isa = PBXGroup;
+			children = (
+				F8D031342DC500AC00FE44E8 /* View */,
+				F8D031352DC500C600FE44E8 /* AchievementPresenter.swift */,
+				F8D031372DC500D900FE44E8 /* AchievementInteractor.swift */,
+				F8D031322DC4FDDE00FE44E8 /* Achievement.swift */,
+			);
+			path = Achievements;
+			sourceTree = "<group>";
+		};
+		F8D031342DC500AC00FE44E8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F8D0312E2DC4FA0300FE44E8 /* AchievementsView.swift */,
+				F8D0312C2DC4F74100FE44E8 /* AchievementCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F8D0313B2DC50A1400FE44E8 /* Achievements */ = {
+			isa = PBXGroup;
+			children = (
+				F8D0313C2DC50A3A00FE44E8 /* AchievementPresenterTest.swift */,
+				F8D0313E2DC50A5000FE44E8 /* AchievementInteractorTest.swift */,
+				F8D031402DC50A6100FE44E8 /* AchievementTest.swift */,
+			);
+			path = Achievements;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -574,17 +625,20 @@
 				F844BF582DA711FE003FB214 /* TasksView.swift in Sources */,
 				F844BF962DAF0FBA003FB214 /* AllTaskView.swift in Sources */,
 				F844BF982DAF0FF7003FB214 /* AllTaskPresenter.swift in Sources */,
+				F8D0312D2DC4F74100FE44E8 /* AchievementCell.swift in Sources */,
 				F844BF482DA70179003FB214 /* MainLvLView.swift in Sources */,
 				F844BFBE2DC42329003FB214 /* APIManager.swift in Sources */,
 				F844BF202DA6FF29003FB214 /* LvL_up.xcdatamodeld in Sources */,
 				F844BF772DAA8C76003FB214 /* DailyTask.swift in Sources */,
 				F844BFA42DC2DB43003FB214 /* ChartCell.swift in Sources */,
-				F844BF9B2DAF1562003FB214 /* TestView.swift in Sources */,
 				F844BF532DA70E62003FB214 /* TaskCell.swift in Sources */,
 				F844BFB12DC3AD56003FB214 /* LegendView.swift in Sources */,
+				F8D0312F2DC4FA0300FE44E8 /* AchievementsView.swift in Sources */,
+				F8D031332DC4FDDE00FE44E8 /* Achievement.swift in Sources */,
 				F844BFA02DAF1FFA003FB214 /* AllDailyTask.swift in Sources */,
 				F844BFAF2DC3A791003FB214 /* ChartsView.swift in Sources */,
 				F844BF4E2DA709A4003FB214 /* MainLvLPresenter.swift in Sources */,
+				F8D0313A2DC500EE00FE44E8 /* AchievementDataProvider.swift in Sources */,
 				F844BFAD2DC2E608003FB214 /* PieSliceView.swift in Sources */,
 				F844BF662DA95B60003FB214 /* MainLvLInteractor.swift in Sources */,
 				F844BFB32DC3B411003FB214 /* Statistics.swift in Sources */,
@@ -594,10 +648,13 @@
 				F844BF142DA6FF25003FB214 /* LvL_upApp.swift in Sources */,
 				F844BF612DA87D7D003FB214 /* CoreDataManager.swift in Sources */,
 				F844BF502DA70A40003FB214 /* LvL.swift in Sources */,
+				F8D031382DC500D900FE44E8 /* AchievementInteractor.swift in Sources */,
 				F844BF8E2DAC61C3003FB214 /* TabBarItemsPreferenceKey.swift in Sources */,
 				F844BF9E2DAF1F0C003FB214 /* AllTaskCell.swift in Sources */,
 				F844BF792DAA8D02003FB214 /* TaskInteractor.swift in Sources */,
+				F8D031312DC4FAA600FE44E8 /* StatisticsView.swift in Sources */,
 				F844BF882DAC6148003FB214 /* CustomTabBarContainerView.swift in Sources */,
+				F8D031362DC500C600FE44E8 /* AchievementPresenter.swift in Sources */,
 				F844BFB62DC42266003FB214 /* ChartsPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -606,12 +663,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8D0313D2DC50A3A00FE44E8 /* AchievementPresenterTest.swift in Sources */,
 				F844BF6B2DA9A2CE003FB214 /* MainLvLInteractorTests.swift in Sources */,
 				F8D031282DC4F29200FE44E8 /* ChartsPresenterTest.swift in Sources */,
 				F844BF852DAC2CD7003FB214 /* TaskPresenterTests.swift in Sources */,
 				F844BF692DA9A1DC003FB214 /* MainLvLPresenterTests.swift in Sources */,
+				F8D031412DC50A6100FE44E8 /* AchievementTest.swift in Sources */,
 				F8D0312A2DC4F2A600FE44E8 /* ChartsInteractorTest.swift in Sources */,
 				F844BF812DAC2C99003FB214 /* DailyTaskTests.swift in Sources */,
+				F8D0313F2DC50A5000FE44E8 /* AchievementInteractorTest.swift in Sources */,
 				F844BF6D2DA9A50A003FB214 /* LvLTests.swift in Sources */,
 				F844BF702DA9A8D5003FB214 /* CoreDataManagerTests.swift in Sources */,
 				F844BF832DAC2CB6003FB214 /* TaskInteractorTests.swift in Sources */,

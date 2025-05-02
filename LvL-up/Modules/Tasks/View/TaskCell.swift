@@ -8,7 +8,7 @@
 import SwiftUI
 import SwiftfulUI
 
-struct TaskCell: View {
+struct TaskCell: View, TaskCellProtocol {
     
     var task: DailyTask
     
@@ -27,6 +27,8 @@ struct TaskCell: View {
                         Text(task.title)
                             .foregroundStyle(.black)
                             .bold()
+                            .fixedSize(horizontal: false, vertical: true)
+                            .lineLimit(nil)
                         Spacer()
                         Text("\(task.calculateCurrentReward()) xp")
                             .foregroundStyle(.black)
@@ -39,7 +41,7 @@ struct TaskCell: View {
                         CustomProgressBar(
                             selection: task.currentProgress,
                             range: 0...task.upperBounds,
-                            backgroundColor: .gray,
+                            backgroundColor: .secondary,
                             foregroundColor: .green,
                             cornerRadius: 10,
                             height: 10)
@@ -55,7 +57,6 @@ struct TaskCell: View {
             }
             .padding()
         }
-        .frame(height: 80)
         .foregroundStyle(.primary)
     }
 }
