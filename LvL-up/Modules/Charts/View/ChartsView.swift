@@ -18,8 +18,6 @@ struct ChartsView: View {
                         [LegendItem(name: "Выполнено", color: .green),
                          LegendItem(name: "Почти выполнено", color: .yellow),
                          LegendItem(name: "Провалено", color: .red)])
-            
-            Spacer()
         }
         .task {
             await presenter.getData()

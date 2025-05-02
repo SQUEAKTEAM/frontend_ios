@@ -8,11 +8,11 @@
 import Foundation
 
 struct Statistics: Identifiable, Codable {
-    var id: Int
-    var countSuccess: Int
-    var countMiddle: Int
-    var countFailure: Int
-    var title: String
+    let id: Int
+    let countSuccess: Int
+    let countMiddle: Int
+    let countFailure: Int
+    let title: String
     
     func createChartContent() -> [PieChartContent] {
         [PieChartContent(value: Double(countSuccess), color: .green),
