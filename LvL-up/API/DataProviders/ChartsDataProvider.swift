@@ -10,7 +10,7 @@ import Foundation
 final class ChartsDataProvider: ChartsProviderProtocol {
     private let apiManager: APIManager
     
-    init(apiManager: APIManager = APIManager()) {
+    init(apiManager: APIManager = APIManager.shared) {
         self.apiManager = apiManager
     }
     

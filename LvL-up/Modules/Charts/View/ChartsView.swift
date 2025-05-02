@@ -12,15 +12,12 @@ struct ChartsView: View {
     
     var body: some View {
         VStack {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach(presenter.statistics) { stat in
-                        ChartCell(title: stat.title, contents: stat.createChartContent())
-                    }
-                }
-                .padding()
-            }
-            LegendView(slices: [LegendItem(name: "Выполнено", color: .green), LegendItem(name: "Почти выполнено", color: .yellow), LegendItem(name: "Провалено", color: .red)])
+            charts
+            
+            LegendView(slices:
+                        [LegendItem(name: "Выполнено", color: .green),
+                         LegendItem(name: "Почти выполнено", color: .yellow),
+                         LegendItem(name: "Провалено", color: .red)])
             
             Spacer()
         }
@@ -32,4 +29,18 @@ struct ChartsView: View {
 
 #Preview {
     ChartsView()
+}
+
+extension ChartsView {
+    var charts: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            LazyHStack {
+                ForEach(presenter.statistics) { stat in
+                    ChartCell(title: stat.title, contents: stat.createChartContent())
+                }
+            }
+            .frame(height: 220)
+            .padding()
+        }
+    }
 }

@@ -22,7 +22,11 @@ extension [PieChartContent] {
 
 struct PieChartView: View {
     @State private var slices: [PieSlice]
+    @State private var scale: CGFloat = 0
+    @State private var degrees: CGFloat = -360
+    
     @Binding var value: Int?
+    
     private let contents: [PieChartContent]
     
     init(contents: [PieChartContent], value: Binding<Int?>) {
@@ -60,31 +64,34 @@ struct PieChartView: View {
                     PieSliceView(slice: slice, center: center, radius: radius, gapSize: slices.count == 1 ? 0 : 3)
                         .onTapGesture {
                             guard let index = slices.firstIndex(where: { $0.id == slice.id }) else { return }
-                            slices[index] = slices[index].changeSelected()
-                            if slices.selectedColors().isEmpty {
-                                value = nil
-                                return
-                            }
                             
-                            var total = 0
-                            for content in contents {
-                                if slices.selectedColors().contains(content.color) {
-                                    total += Int(content.value)
-                                }
-                            }
-                            value = total
+                            slices[index] = slices[index].changeSelected()
+                            calculateValue()
                         }
                 }
             }
             .gesture(
                 DragGesture(minimumDistance: 0)
+                    .onEnded { _ in
+                        calculateValue()
+                    }
                     .onChanged { value in
                         let touchLocation = value.location
                         selectSlice(at: touchLocation, in: geometry.size, center: center, radius: radius)
                     }
             )
         }
+        .scaleEffect(scale)
+        .rotationEffect(.degrees(degrees))
         .aspectRatio(1, contentMode: .fit)
+        .onAppear {
+            scale = 0
+            degrees = -300
+            withAnimation(.spring) {
+                scale = 1
+                degrees = 0
+            }
+        }
     }
     
     private func selectSlice(at location: CGPoint, in size: CGSize, center: CGPoint, radius: CGFloat) {
@@ -110,10 +117,26 @@ struct PieChartView: View {
             if angle >= start && angle < end {
                 slices.indices.forEach { i in
                     slices[i].isSelected = (i == index)
+                    calculateValue()
                 }
                 return
             }
         }
+    }
+    
+    private func calculateValue() {
+        if slices.selectedColors().isEmpty {
+            value = nil
+            return
+        }
+        
+        var total = 0
+        for content in contents {
+            if slices.selectedColors().contains(content.color) {
+                total += Int(content.value)
+            }
+        }
+        value = total
     }
 }
 
