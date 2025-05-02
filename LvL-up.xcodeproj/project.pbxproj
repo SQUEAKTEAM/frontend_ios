@@ -57,6 +57,8 @@
 		F844BFB82DC42279003FB214 /* ChartsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BFB72DC42279003FB214 /* ChartsInteractor.swift */; };
 		F844BFBC2DC422FA003FB214 /* ChartsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BFBB2DC422FA003FB214 /* ChartsDataProvider.swift */; };
 		F844BFBE2DC42329003FB214 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BFBD2DC42329003FB214 /* APIManager.swift */; };
+		F8D031282DC4F29200FE44E8 /* ChartsPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031272DC4F29200FE44E8 /* ChartsPresenterTest.swift */; };
+		F8D0312A2DC4F2A600FE44E8 /* ChartsInteractorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031292DC4F2A600FE44E8 /* ChartsInteractorTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +130,8 @@
 		F844BFB72DC42279003FB214 /* ChartsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsInteractor.swift; sourceTree = "<group>"; };
 		F844BFBB2DC422FA003FB214 /* ChartsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsDataProvider.swift; sourceTree = "<group>"; };
 		F844BFBD2DC42329003FB214 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		F8D031272DC4F29200FE44E8 /* ChartsPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsPresenterTest.swift; sourceTree = "<group>"; };
+		F8D031292DC4F2A600FE44E8 /* ChartsInteractorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartsInteractorTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -411,6 +415,8 @@
 		F8D031242DC4F21800FE44E8 /* Charts */ = {
 			isa = PBXGroup;
 			children = (
+				F8D031272DC4F29200FE44E8 /* ChartsPresenterTest.swift */,
+				F8D031292DC4F2A600FE44E8 /* ChartsInteractorTest.swift */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -601,8 +607,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F844BF6B2DA9A2CE003FB214 /* MainLvLInteractorTests.swift in Sources */,
+				F8D031282DC4F29200FE44E8 /* ChartsPresenterTest.swift in Sources */,
 				F844BF852DAC2CD7003FB214 /* TaskPresenterTests.swift in Sources */,
 				F844BF692DA9A1DC003FB214 /* MainLvLPresenterTests.swift in Sources */,
+				F8D0312A2DC4F2A600FE44E8 /* ChartsInteractorTest.swift in Sources */,
 				F844BF812DAC2C99003FB214 /* DailyTaskTests.swift in Sources */,
 				F844BF6D2DA9A50A003FB214 /* LvLTests.swift in Sources */,
 				F844BF702DA9A8D5003FB214 /* CoreDataManagerTests.swift in Sources */,
