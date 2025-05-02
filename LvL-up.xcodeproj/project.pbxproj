@@ -65,6 +65,9 @@
 		F8D031362DC500C600FE44E8 /* AchievementPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031352DC500C600FE44E8 /* AchievementPresenter.swift */; };
 		F8D031382DC500D900FE44E8 /* AchievementInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031372DC500D900FE44E8 /* AchievementInteractor.swift */; };
 		F8D0313A2DC500EE00FE44E8 /* AchievementDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031392DC500EE00FE44E8 /* AchievementDataProvider.swift */; };
+		F8D0313D2DC50A3A00FE44E8 /* AchievementPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D0313C2DC50A3A00FE44E8 /* AchievementPresenterTest.swift */; };
+		F8D0313F2DC50A5000FE44E8 /* AchievementInteractorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D0313E2DC50A5000FE44E8 /* AchievementInteractorTest.swift */; };
+		F8D031412DC50A6100FE44E8 /* AchievementTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031402DC50A6100FE44E8 /* AchievementTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +147,9 @@
 		F8D031352DC500C600FE44E8 /* AchievementPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementPresenter.swift; sourceTree = "<group>"; };
 		F8D031372DC500D900FE44E8 /* AchievementInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementInteractor.swift; sourceTree = "<group>"; };
 		F8D031392DC500EE00FE44E8 /* AchievementDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementDataProvider.swift; sourceTree = "<group>"; };
+		F8D0313C2DC50A3A00FE44E8 /* AchievementPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementPresenterTest.swift; sourceTree = "<group>"; };
+		F8D0313E2DC50A5000FE44E8 /* AchievementInteractorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementInteractorTest.swift; sourceTree = "<group>"; };
+		F8D031402DC50A6100FE44E8 /* AchievementTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +228,7 @@
 		F844BF282DA6FF29003FB214 /* LvL-upTests */ = {
 			isa = PBXGroup;
 			children = (
+				F8D0313B2DC50A1400FE44E8 /* Achievements */,
 				F8D031242DC4F21800FE44E8 /* Charts */,
 				F844BF7F2DAC2C71003FB214 /* Tasks */,
 				F844BF6E2DA9A838003FB214 /* CoreData */,
@@ -455,6 +462,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		F8D0313B2DC50A1400FE44E8 /* Achievements */ = {
+			isa = PBXGroup;
+			children = (
+				F8D0313C2DC50A3A00FE44E8 /* AchievementPresenterTest.swift */,
+				F8D0313E2DC50A5000FE44E8 /* AchievementInteractorTest.swift */,
+				F8D031402DC50A6100FE44E8 /* AchievementTest.swift */,
+			);
+			path = Achievements;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -646,12 +663,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8D0313D2DC50A3A00FE44E8 /* AchievementPresenterTest.swift in Sources */,
 				F844BF6B2DA9A2CE003FB214 /* MainLvLInteractorTests.swift in Sources */,
 				F8D031282DC4F29200FE44E8 /* ChartsPresenterTest.swift in Sources */,
 				F844BF852DAC2CD7003FB214 /* TaskPresenterTests.swift in Sources */,
 				F844BF692DA9A1DC003FB214 /* MainLvLPresenterTests.swift in Sources */,
+				F8D031412DC50A6100FE44E8 /* AchievementTest.swift in Sources */,
 				F8D0312A2DC4F2A600FE44E8 /* ChartsInteractorTest.swift in Sources */,
 				F844BF812DAC2C99003FB214 /* DailyTaskTests.swift in Sources */,
+				F8D0313F2DC50A5000FE44E8 /* AchievementInteractorTest.swift in Sources */,
 				F844BF6D2DA9A50A003FB214 /* LvLTests.swift in Sources */,
 				F844BF702DA9A8D5003FB214 /* CoreDataManagerTests.swift in Sources */,
 				F844BF832DAC2CB6003FB214 /* TaskInteractorTests.swift in Sources */,

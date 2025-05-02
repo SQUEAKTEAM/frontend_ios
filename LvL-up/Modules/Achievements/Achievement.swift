@@ -20,7 +20,7 @@ struct Achievement: Identifiable {
     }
     
     func updateCurrentXp(_ currentXp: Int) -> Achievement {
-        Achievement(id: id, title: title, currentXp: currentXp, upperBounds: upperBounds, reward: reward, isCompleted: isCompleted)
+        Achievement(id: id, title: title, currentXp: currentXp, upperBounds: upperBounds, reward: reward, isCompleted: currentXp >= upperBounds)
     }
     
     static let mockAchievements: [Achievement] = [
