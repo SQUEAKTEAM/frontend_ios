@@ -13,7 +13,7 @@ final class AllTaskPresenter: ObservableObject {
     private let interactor: TaskInteractorProtocol
     private let router: AllTaskRouterProtocol
     
-    @Published var tasks: [AllDailyTask] = []
+    @Published var tasks: [DailyTask] = []
     
     init(interactor: TaskInteractorProtocol = TaskInteractor(), router: AllTaskRouterProtocol = AllTaskRouter()) {
         self.interactor = interactor
@@ -22,7 +22,7 @@ final class AllTaskPresenter: ObservableObject {
     
     @MainActor
     func getData() async {
-        tasks = AllDailyTask.mockTasks
+        tasks = DailyTask.mockTasks
     }
     
     func addNewTask() -> AnyView {

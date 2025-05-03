@@ -68,6 +68,9 @@
 		F8D031412DC50A6100FE44E8 /* AchievementTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031402DC50A6100FE44E8 /* AchievementTest.swift */; };
 		F8D031442DC527C300FE44E8 /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031432DC527C300FE44E8 /* EditTaskView.swift */; };
 		F8D031462DC52CB500FE44E8 /* AllTaskRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031452DC52CB500FE44E8 /* AllTaskRouter.swift */; };
+		F8D031492DC6A37E00FE44E8 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031482DC6A37E00FE44E8 /* CalendarView.swift */; };
+		F8D0314B2DC6A39100FE44E8 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D0314A2DC6A39100FE44E8 /* CalendarCell.swift */; };
+		F8D0314D2DC6A5C000FE44E8 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D0314C2DC6A5C000FE44E8 /* ScheduleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,6 +155,9 @@
 		F8D031402DC50A6100FE44E8 /* AchievementTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTest.swift; sourceTree = "<group>"; };
 		F8D031432DC527C300FE44E8 /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
 		F8D031452DC52CB500FE44E8 /* AllTaskRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTaskRouter.swift; sourceTree = "<group>"; };
+		F8D031482DC6A37E00FE44E8 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		F8D0314A2DC6A39100FE44E8 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
+		F8D0314C2DC6A5C000FE44E8 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +268,8 @@
 			children = (
 				F844BF8F2DAC647D003FB214 /* HomeView.swift */,
 				F8D031302DC4FAA600FE44E8 /* StatisticsView.swift */,
+				F8D0314C2DC6A5C000FE44E8 /* ScheduleView.swift */,
+				F8D031472DC6A32900FE44E8 /* Сalendar */,
 				F844BF942DAF0F85003FB214 /* AllTasks */,
 				F844BF862DAC6108003FB214 /* CustomTabBar */,
 				F844BF562DA711DC003FB214 /* Tasks */,
@@ -482,6 +490,23 @@
 			path = EditTask;
 			sourceTree = "<group>";
 		};
+		F8D031472DC6A32900FE44E8 /* Сalendar */ = {
+			isa = PBXGroup;
+			children = (
+				F8D0314E2DC6C15600FE44E8 /* View */,
+			);
+			path = "Сalendar";
+			sourceTree = "<group>";
+		};
+		F8D0314E2DC6C15600FE44E8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F8D031482DC6A37E00FE44E8 /* CalendarView.swift */,
+				F8D0314A2DC6A39100FE44E8 /* CalendarCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -623,10 +648,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F844BFAB2DC2E5E8003FB214 /* PieChartView.swift in Sources */,
+				F8D0314B2DC6A39100FE44E8 /* CalendarCell.swift in Sources */,
 				F844BF1D2DA6FF29003FB214 /* Persistence.swift in Sources */,
 				F844BF752DAA896B003FB214 /* TaskDataProvider.swift in Sources */,
 				F844BF932DAC68AA003FB214 /* Color.swift in Sources */,
 				F844BFBC2DC422FA003FB214 /* ChartsDataProvider.swift in Sources */,
+				F8D031492DC6A37E00FE44E8 /* CalendarView.swift in Sources */,
 				F844BF642DA87F33003FB214 /* LvLDataProvider.swift in Sources */,
 				F844BF7B2DAA8F50003FB214 /* TaskPresenter.swift in Sources */,
 				F844BF8A2DAC616E003FB214 /* CustomTabBarView.swift in Sources */,
@@ -655,6 +682,7 @@
 				F844BFB82DC42279003FB214 /* ChartsInteractor.swift in Sources */,
 				F844BF8C2DAC6190003FB214 /* TabBarItem.swift in Sources */,
 				F844BF902DAC647D003FB214 /* HomeView.swift in Sources */,
+				F8D0314D2DC6A5C000FE44E8 /* ScheduleView.swift in Sources */,
 				F844BF142DA6FF25003FB214 /* LvL_upApp.swift in Sources */,
 				F844BF612DA87D7D003FB214 /* CoreDataManager.swift in Sources */,
 				F844BF502DA70A40003FB214 /* LvL.swift in Sources */,

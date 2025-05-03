@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AllTaskCell: View {
     
-    var task: AllDailyTask
+    var task: DailyTask
     
     var body: some View {
         ZStack {
@@ -32,24 +32,13 @@ struct AllTaskCell: View {
                             .italic()
                     }
                     HStack(alignment: .bottom) {
-                        Text("Способ получения:")
+                        Text("Категория:")
                             .font(.caption)
                             .italic()
-                        Group {
-                            switch task.typeProgress {
-                            case .manually:
-                                Text("Вручную ✋")
-                                    .foregroundStyle(.cyan)
-                            case .timer:
-                                Text("Таймер ⏱️")
-                                    .foregroundStyle(.purple)
-                            case .appActivity:
-                                Text("Приложения 📱")
-                                    .foregroundStyle(.blue)
-                            }
-                        }
-                        .bold()
-                        .italic()
+                        Text(task.category)
+                            .foregroundStyle(task.getColor())
+                            .bold()
+                            .italic()
                         Spacer()
                     }
                     .padding(.leading, 5)
@@ -64,5 +53,5 @@ struct AllTaskCell: View {
 }
 
 #Preview {
-    AllTaskCell(task: AllDailyTask.mockTasks.first!)
+    AllTaskCell(task: DailyTask.mockTasks.first!)
 }

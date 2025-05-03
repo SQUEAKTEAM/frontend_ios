@@ -24,9 +24,6 @@ struct AllTaskView: View {
                         }
                         .tint(.yellow)
                     }
-                    .onDrag {
-                        return NSItemProvider(object: task.id.uuidString as NSString)
-                    }
             }
         }
         .listStyle(.plain)

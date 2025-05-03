@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct DailyTaskSerializer: Codable {
     var task: DailyTask
@@ -56,6 +57,21 @@ struct DailyTask: Identifiable, Codable {
     
     func calculateRewardForCheckPoint() -> Float {
         Float(self.reward) / Float(self.checkPoints)
+    }
+    
+    func getColor() -> Color {
+        var hashValue = title.utf8.reduce(5381) { ($0 << 5) &+ $0 &+ Int($1) }
+        
+        let r = (hashValue >> 16) & 0xFF
+        let g = (hashValue >> 8) & 0xFF
+        let b = hashValue & 0xFF
+        
+        // Делаем цвета более насыщенными
+        let red = CGFloat(max(100, r)) / 255.0
+        let green = CGFloat(max(100, g)) / 255.0
+        let blue = CGFloat(max(100, b)) / 255.0
+        
+        return Color(UIColor(red: red, green: green, blue: blue, alpha: 1.0))
     }
 }
 
