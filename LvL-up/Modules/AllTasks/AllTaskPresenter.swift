@@ -13,11 +13,12 @@ final class AllTaskPresenter: ObservableObject {
     private let interactor: TaskInteractorProtocol
     private let router: AllTaskRouterProtocol
     
-    @Published var tasks: [DailyTask] = []
+    @Binding var tasks: [DailyTask]
     
-    init(interactor: TaskInteractorProtocol = TaskInteractor(), router: AllTaskRouterProtocol = AllTaskRouter()) {
+    init(interactor: TaskInteractorProtocol = TaskInteractor(), router: AllTaskRouterProtocol = AllTaskRouter(), tasks: Binding<[DailyTask]>) {
         self.interactor = interactor
         self.router = router
+        self._tasks = tasks
     }
     
     @MainActor

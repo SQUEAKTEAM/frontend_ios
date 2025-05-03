@@ -9,7 +9,8 @@ import SwiftUI
 
 struct CalendarView: View {
     @State private var showDatePicker = false
-    @State private var selectedDate = Date()
+    @Binding var selectedDate: Date?
+    @StateObject var presenter = CalendarPresenter()
     
     var body: some View {
         VStack(spacing: 5) {
@@ -18,17 +19,17 @@ struct CalendarView: View {
                 GridItem(.flexible()),
                 GridItem(.fixed(50))
             ], spacing: 0) {
-                CalendarCell(title: "Задачи", subTitle: "Без срока") {
-                    //presenter.getData()
+                CalendarCell(title: "Задачи", subTitle: "Без срока", isSelected: presenter.selectedType == .unscheduled) {
+                    selectedDate = nil
                 }
                 .foregroundStyle(.yellow)
                 
-                CalendarCell(title: "Расписание", subTitle: "Май") {
+                CalendarCell(title: "Расписание", subTitle: presenter.currentMonth, isSelected: false) {
                     showDatePicker.toggle()
                 }
                 .foregroundStyle(.yellow)
                 
-                CalendarCell(title: "+", subTitle: "") {
+                CalendarCell(title: "+", subTitle: "", isSelected: false) {
                     //presenter.addTask()
                 }
                 .foregroundStyle(.yellow)
@@ -36,9 +37,10 @@ struct CalendarView: View {
             .padding(.horizontal)
             
             HStack {
-                ForEach(10..<17) { i in
-                    CalendarCell(title: "\(i)", subTitle: "Пн") {
-                        //presenter.getData()
+                ForEach(presenter.days, id: \.weekDay) { day in
+                    CalendarCell(title: String(day.number), subTitle: day.weekDay.rawValue, isSelected: presenter.selectedType == .day(day.date)) {
+                        presenter.internalDate = day.date
+                        selectedDate = presenter.internalDate
                     }
                     .frame(width: 40, height: 40)
                 }
@@ -49,7 +51,7 @@ struct CalendarView: View {
             VStack {
                 DatePicker(
                     "Выберите дату",
-                    selection: $selectedDate,
+                    selection: $presenter.internalDate,
                     displayedComponents: [.date]
                 )
                 .datePickerStyle(.graphical)
@@ -63,7 +65,8 @@ struct CalendarView: View {
                     Spacer()
                     
                     Button("Готово") {
-                        print("Выбрана дата:", selectedDate)
+                        selectedDate = presenter.internalDate
+                        presenter.getDays()
                         showDatePicker = false
                     }
                 }
@@ -71,9 +74,12 @@ struct CalendarView: View {
             }
             .presentationDetents([.medium])
         }
+        .onChange(of: selectedDate) { date in
+            presenter.updateSelectedType(date: date)
+        }
     }
 }
 
 #Preview {
-    CalendarView()
+    CalendarView(selectedDate: .constant(Date()))
 }

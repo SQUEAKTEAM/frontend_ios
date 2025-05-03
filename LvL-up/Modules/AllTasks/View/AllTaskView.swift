@@ -8,9 +8,12 @@
 import SwiftUI
 
 struct AllTaskView: View {
-    
-    @StateObject var presenter = AllTaskPresenter()
+    @ObservedObject var presenter: AllTaskPresenter
     @State private var isEditing = false
+    
+    init(tasks: Binding<[DailyTask]>) {
+        self._presenter = ObservedObject(initialValue: AllTaskPresenter(tasks: tasks))
+    }
     
     var body: some View {
         List {
@@ -25,12 +28,13 @@ struct AllTaskView: View {
                         .tint(.yellow)
                     }
             }
+            Rectangle()
+                .frame(height: 80)
+                .foregroundStyle(.clear)
+                .listRowSeparator(.hidden)
         }
         .listStyle(.plain)
         .scrollIndicators(.hidden)
-        .task {
-            await presenter.getData()
-        }
         .fullScreenCover(isPresented: $isEditing, content: {
             presenter.addNewTask()
         })
@@ -39,5 +43,5 @@ struct AllTaskView: View {
 }
 
 #Preview {
-    AllTaskView()
+    AllTaskView(tasks: .constant(DailyTask.mockTasks))
 }

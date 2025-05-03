@@ -22,10 +22,14 @@ final class TaskDataProvider: TaskProviderProtocol {
 //        let user_id = 1
 //        let date = date
 //        return try await apiManager.fetch("tasks/\(user_id)\(date)/")
-        if date == nil {
-            return DailyTask.mockTasks.filter({ $0.date == nil })
-        } else {
-            return DailyTask.mockTasks.filter({ $0.date != nil })
+        guard let date = date else {
+            return DailyTask.mockTasks.filter { $0.date == nil }
+        }
+        
+        let calendar = Calendar.current
+        return DailyTask.mockTasks.filter { task in
+            guard let taskDate = task.date else { return false }
+            return calendar.isDate(taskDate, inSameDayAs: date)
         }
     }
     

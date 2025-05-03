@@ -15,18 +15,26 @@ struct TasksView: View {
             MainLvLView(newCurrentExp: $presenter.updateCurrentLvlEx)
             
             List {
-                Section("Задания") {
-                    noComplitedContent(isDaily: false)
+                if !presenter.getNoCompletedTasks(false).isEmpty {
+                    Section("Задания") {
+                        noComplitedContent(isDaily: false)
+                    }
                 }
-                Section("Дневные задания") {
-                    noComplitedContent(isDaily: true)
+                
+                if !presenter.getNoCompletedTasks(true).isEmpty {
+                    Section("Дневные задания") {
+                        noComplitedContent(isDaily: true)
+                    }
                 }
-                Section("Выполнено") {
-                    complitedContent
-                    Rectangle()
-                        .frame(height: 80)
-                        .foregroundStyle(.clear)
+                if !presenter.completedTask.isEmpty {
+                    Section("Выполнено") {
+                        complitedContent
+                    }
                 }
+                Rectangle()
+                    .frame(height: 80)
+                    .foregroundStyle(.clear)
+                    .listRowSeparator(.hidden)
             }
             .listStyle(.plain)
             .scrollIndicators(.hidden)

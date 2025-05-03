@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct CalendarCell: View {
-    var title: String
-    var subTitle: String
+    let title: String
+    let subTitle: String
+    let isSelected: Bool
+    let action: ()->Void
     
-    @State var isSelected: Bool = false
-    var action: ()->Void
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 14)
@@ -33,14 +33,13 @@ struct CalendarCell: View {
             .padding(.vertical, 5)
         }
         .onTapGesture {
-            isSelected.toggle()
             action()
         }
     }
 }
 
 #Preview {
-    CalendarCell(title: "23", subTitle: "Август") {
+    CalendarCell(title: "23", subTitle: "Август", isSelected: false) {
         
     }
 }
