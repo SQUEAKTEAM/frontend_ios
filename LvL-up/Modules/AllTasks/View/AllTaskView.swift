@@ -10,16 +10,15 @@ import SwiftUI
 struct AllTaskView: View {
     
     @StateObject var presenter = AllTaskPresenter()
+    @State private var isEditing = false
     
     var body: some View {
         List {
             ForEach(presenter.tasks) { task in
                 AllTaskCell(task: task)
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                        Button(role: .none) {
-                            withAnimation(.spring) {
-                                //presenter.updateCurrentProgress(to: task, checkPoint: task.checkPoint + 1)
-                            }
+                        Button {
+                            isEditing = true
                         } label: {
                             Label("Редактировать", systemImage: "square.and.pencil")
                         }
@@ -35,6 +34,9 @@ struct AllTaskView: View {
         .task {
             await presenter.getData()
         }
+        .fullScreenCover(isPresented: $isEditing, content: {
+            presenter.addNewTask()
+        })
         .ignoresSafeArea(edges: .bottom)
     }
 }

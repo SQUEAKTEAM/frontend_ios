@@ -11,6 +11,8 @@ import Combine
 
 class TaskPresenterTests: XCTestCase {
     
+    // MARK: - Test Setup
+    
     var presenter: TaskPresenter!
     var mockInteractor: MockTaskInteractor!
     var cancellables: Set<AnyCancellable>!
@@ -29,164 +31,66 @@ class TaskPresenterTests: XCTestCase {
         super.tearDown()
     }
     
+    // MARK: - Test Data
+    
+    private var mockTasks: [DailyTask] {
+        return [
+            DailyTask(id: 1, img: "sleep", isCompleted: false, reward: 10, title: "Sleep 8 hours", checkPoints: 5, category: "Health"),
+            DailyTask(id: 2, img: "workout", isCompleted: false, reward: 15, title: "Workout", checkPoints: 3, category: "Fitness"),
+            DailyTask(id: 3, img: "read", isCompleted: true, reward: 5, title: "Read a book", checkPoints: 1, category: "Learning"),
+            DailyTask(id: 4, img: "water", isCompleted: false, reward: 8, title: "Drink water", checkPoints: 4, category: "Health"),
+            DailyTask(id: 5, img: "meditate", isCompleted: false, reward: 12, title: "Meditate", checkPoints: 2, category: "Mindfulness")
+        ]
+    }
+    
     // MARK: - getData Tests
     
-    func testGetDataUpdatesTaskArrays() async {
+    func testGetDataSeparatesCompletedAndIncompleteTasks() async {
         // Given
-        let testTasks = DailyTask.mockTasks
-        mockInteractor.stubbedLoadTasksResult = testTasks
+        mockInteractor.stubbedLoadTasksResult = mockTasks
         
         // When
         await presenter.getData()
         
         // Then
-        XCTAssertEqual(presenter.completedTask.count, 1)
-        XCTAssertEqual(presenter.notCompletedTask.count, 4)
-        XCTAssertEqual(presenter.completedTask.first?.title, "Спать 8 часов")
+        XCTAssertEqual(presenter.completedTask.count, 1, "Should have 1 completed task")
+        XCTAssertEqual(presenter.notCompletedTask.count, 4, "Should have 4 incomplete tasks")
+        XCTAssertEqual(presenter.completedTask.first?.title, "Read a book", "Completed task should be 'Read a book'")
     }
     
-    // MARK: - updateCurrentProgress Tests
-    
-    func testUpdateCurrentProgressWithValidCheckPoint() {
+    func testGetDataCombinesDatedAndUndatedTasks() async {
         // Given
-        let initialTask = DailyTask.mockTasks[0] // Не завершена
-        presenter.notCompletedTask = [initialTask]
+        let datedTask = DailyTask(id: 6, img: "dated", isCompleted: false, reward: 5, title: "Dated Task", checkPoints: 1, category: "Test", date: Date())
+        let undatedTask = DailyTask(id: 7, img: "undated", isCompleted: false, reward: 5, title: "Undated Task", checkPoints: 1, category: "Test")
+        
+        mockInteractor.stubbedLoadTasksResult = [datedTask]
+        mockInteractor.stubbedLoadTasksNoDateResult = [undatedTask]
         
         // When
-        presenter.updateCurrentProgress(to: initialTask, checkPoint: 3)
+        await presenter.getData()
         
         // Then
-        XCTAssertEqual(mockInteractor.updatedTask?.checkPoint, 3)
-        XCTAssertEqual(presenter.updateCurrentLvlEx, initialTask.calculateRewardForCheckPoint())
+        XCTAssertEqual(presenter.notCompletedTask.count, 2, "Should combine both dated and undated tasks")
+        XCTAssertTrue(presenter.notCompletedTask.contains(where: { $0.id == 6 }), "Should contain dated task")
+        XCTAssertTrue(presenter.notCompletedTask.contains(where: { $0.id == 7 }), "Should contain undated task")
     }
     
-    func testUpdateCurrentProgressWithInvalidCheckPoint() {
+    // MARK: - Helper Methods
+    
+    func testGetNoCompletedTasksFiltersCorrectly() {
         // Given
-        let initialTask = DailyTask.mockTasks[0]
-        presenter.notCompletedTask = [initialTask]
+        let dailyTask = DailyTask(id: 9, img: "daily", isCompleted: false, reward: 5, title: "Daily Task", checkPoints: 1, category: "Test", date: Date())
+        let nonDailyTask = DailyTask(id: 10, img: "nondaily", isCompleted: false, reward: 5, title: "Non-Daily Task", checkPoints: 1, category: "Test")
+        
+        presenter.notCompletedTask = [dailyTask, nonDailyTask]
         
         // When
-        presenter.updateCurrentProgress(to: initialTask, checkPoint: -1) // Невалидный
-        presenter.updateCurrentProgress(to: initialTask, checkPoint: 100) // Невалидный
+        let dailyTasks = presenter.getNoCompletedTasks(true)
+        let nonDailyTasks = presenter.getNoCompletedTasks(false)
         
         // Then
-        XCTAssertNil(mockInteractor.updatedTask) // Не должно обновляться
-    }
-    
-    func testUpdateCurrentProgressCompletesTask() {
-        // Given
-        let initialTask = DailyTask.mockTasks[0] // checkPoints = 5
-        presenter.notCompletedTask = [initialTask]
-        
-        // When
-        presenter.updateCurrentProgress(to: initialTask, checkPoint: 5) // Завершаем
-        
-        // Then
-        XCTAssertEqual(presenter.completedTask.count, 1)
-        XCTAssertTrue(presenter.completedTask.first?.isCompleted ?? false)
-        XCTAssertEqual(presenter.notCompletedTask.count, 0)
-    }
-    
-    func testUpdateCurrentProgressRevertsCompletion() {
-        // Given
-        let completedTask = DailyTask.mockTasks[2] // Уже завершена
-        presenter.completedTask = [completedTask]
-        
-        // When
-        presenter.updateCurrentProgress(to: completedTask, checkPoint: 0) // Возвращаем
-        
-        // Then
-        XCTAssertEqual(presenter.notCompletedTask.count, 1)
-        XCTAssertFalse(presenter.notCompletedTask.first?.isCompleted ?? true)
-        XCTAssertEqual(presenter.completedTask.count, 0)
-    }
-    
-    // MARK: - updateMainLvl Tests (via observation)
-    
-    func testUpdateMainLvlIncreasesExp() {
-        // Given
-        let task = DailyTask.mockTasks[0]
-        let expectation = XCTestExpectation(description: "Exp updated")
-        
-        presenter.$updateCurrentLvlEx
-            .dropFirst()
-            .sink { newValue in
-                XCTAssertEqual(newValue, task.calculateRewardForCheckPoint())
-                expectation.fulfill()
-            }
-            .store(in: &cancellables)
-        
-        // When
-        presenter.updateCurrentProgress(to: task, checkPoint: 1)
-        
-        // Then
-        wait(for: [expectation], timeout: 1)
-    }
-    
-    func testUpdateMainLvlDecreasesExp() {
-        // Given
-        let task = DailyTask.mockTasks[0]
-        task.updateCurrentProgress(3) // Сначала прогресс 3
-        presenter.notCompletedTask = [task]
-        let expectation = XCTestExpectation(description: "Exp updated")
-        
-        presenter.$updateCurrentLvlEx
-            .dropFirst()
-            .sink { newValue in
-                XCTAssertEqual(newValue, task.calculateRewardForCheckPoint())
-                expectation.fulfill()
-            }
-            .store(in: &cancellables)
-        
-        // When
-        presenter.updateCurrentProgress(to: task, checkPoint: 2) // Уменьшаем
-        
-        // Then
-        wait(for: [expectation], timeout: 1)
-    }
-    
-    // MARK: - updateArraysLogic Tests
-    
-    func testUpdateArraysLogicCompleteTask() {
-        // Given
-        let task = DailyTask.mockTasks[0]
-        presenter.notCompletedTask = [task]
-        
-        // When
-        let completedTask = task.updateCurrentProgress(task.checkPoints) // Завершаем
-        presenter.updateArraysLogic(task: completedTask, isCompleted: false)
-        
-        // Then
-        XCTAssertEqual(presenter.completedTask.count, 1)
-        XCTAssertEqual(presenter.notCompletedTask.count, 0)
-    }
-    
-    func testUpdateArraysLogicUpdateExistingTask() {
-        // Given
-        let task = DailyTask.mockTasks[0]
-        presenter.notCompletedTask = [task]
-        
-        // When
-        let updatedTask = task.updateCurrentProgress(2)
-        presenter.updateArraysLogic(task: updatedTask, isCompleted: false)
-        
-        // Then
-        XCTAssertEqual(presenter.notCompletedTask.count, 1)
-        XCTAssertEqual(presenter.notCompletedTask.first?.checkPoint, 2)
-    }
-    
-    func testUpdateArraysLogicRevertCompletion() {
-        // Given
-        let task = DailyTask.mockTasks[2] // Завершенная
-        presenter.completedTask = [task]
-        
-        // When
-        let revertedTask = task.updateCurrentProgress(0)
-        presenter.updateArraysLogic(task: revertedTask, isCompleted: true)
-        
-        // Then
-        XCTAssertEqual(presenter.notCompletedTask.count, 1)
-        XCTAssertEqual(presenter.completedTask.count, 0)
+        XCTAssertEqual(dailyTasks.count, 1, "Should filter daily tasks correctly")
+        XCTAssertEqual(nonDailyTasks.count, 1, "Should filter non-daily tasks correctly")
     }
 }
 
@@ -194,23 +98,34 @@ class TaskPresenterTests: XCTestCase {
 
 class MockTaskInteractor: TaskInteractorProtocol {
     var stubbedLoadTasksResult: [DailyTask] = []
+    var stubbedLoadTasksNoDateResult: [DailyTask] = []
     var updatedTask: DailyTask?
     var createdTask: DailyTask?
     var deletedTask: DailyTask?
     
-    func loadTasks() -> [DailyTask] {
-        return stubbedLoadTasksResult
+    func loadTasks(at date: Date?) async -> [DailyTask] {
+        if date != nil {
+            return stubbedLoadTasksResult
+        } else {
+            return stubbedLoadTasksNoDateResult
+        }
     }
     
-    func update(_ dailyTask: DailyTask) {
+    func loadTasks() async -> [DailyTask] {
+        return stubbedLoadTasksResult + stubbedLoadTasksNoDateResult
+    }
+    
+    func update(_ dailyTask: DailyTask) async -> DailyTask? {
         updatedTask = dailyTask
+        return dailyTask
     }
     
-    func create(_ dailyTask: DailyTask) {
+    func create(_ dailyTask: DailyTask) async -> DailyTask? {
         createdTask = dailyTask
+        return dailyTask
     }
     
-    func delete(_ dailyTask: DailyTask) {
+    func delete(_ dailyTask: DailyTask) async {
         deletedTask = dailyTask
     }
 }

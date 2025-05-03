@@ -9,17 +9,19 @@ import Foundation
 import CoreData
 
 protocol TaskProviderProtocol {
-    func fetchTasks() -> [DailyTaskEntity]
-    func update(dailyTask: DailyTask, _ block: @escaping (DailyTaskEntity) -> Void)
-    func create(dailyTask: DailyTask, _ block: @escaping (DailyTaskEntity) -> Void)
-    func delete(_ dailyTask: DailyTask)
+    func fetchTasks(at date: Date?) async throws -> [DailyTask]
+    func fetchTasks() async throws -> [DailyTask]
+    func create(dailyTask: DailyTask) async throws -> DailyTask
+    func update(dailyTask: DailyTask) async throws -> DailyTask
+    func delete(_ id: Int) async throws
 }
 
 protocol TaskInteractorProtocol {
-    func loadTasks() -> [DailyTask]
-    func update(_ dailyTask: DailyTask)
-    func create(_ dailyTask: DailyTask)
-    func delete(_ dailyTask: DailyTask)
+    func loadTasks() async -> [DailyTask]
+    func loadTasks(at date: Date?) async -> [DailyTask]
+    func update(_ dailyTask: DailyTask) async -> DailyTask?
+    func create(_ dailyTask: DailyTask) async -> DailyTask?
+    func delete(_ dailyTask: DailyTask) async
 }
 
 final class TaskInteractor: TaskInteractorProtocol {
@@ -29,35 +31,23 @@ final class TaskInteractor: TaskInteractorProtocol {
         self.dataService = dataService
     }
     
-    func loadTasks() -> [DailyTask] {
-        return dataService.fetchTasks().map({ DailyTask(entity: $0) })
+    func loadTasks() async -> [DailyTask] {
+        return (try? await dataService.fetchTasks()) ?? []
     }
     
-    func update(_ dailyTask: DailyTask) {
-        dataService.update(dailyTask: dailyTask) { dailyTaskEntity in
-            self.fillEntity(dailyTaskEntity, dailyTask: dailyTask)
-        }
+    func loadTasks(at date: Date?) async -> [DailyTask] {
+        return (try? await dataService.fetchTasks(at: date)) ?? []
     }
     
-    func create(_ dailyTask: DailyTask) {
-        dataService.create(dailyTask: dailyTask) { dailyTaskEntity in
-            self.fillEntity(dailyTaskEntity, dailyTask: dailyTask)
-        }
+    func update(_ dailyTask: DailyTask) async -> DailyTask? {
+        return try? await dataService.update(dailyTask: dailyTask)
     }
     
-    func delete(_ dailyTask: DailyTask) {
-        dataService.delete(dailyTask)
+    func create(_ dailyTask: DailyTask) async -> DailyTask? {
+        return try? await dataService.create(dailyTask: dailyTask)
     }
     
-    private func fillEntity(_ dailyTaskEntity: DailyTaskEntity, dailyTask: DailyTask) {
-        dailyTaskEntity.id = dailyTask.id
-        dailyTaskEntity.currentProgress = dailyTask.currentProgress
-        dailyTaskEntity.img = dailyTask.img
-        dailyTaskEntity.isCompleted = dailyTask.isCompleted
-        dailyTaskEntity.reward = Int16(dailyTask.reward)
-        dailyTaskEntity.title = dailyTask.title
-        dailyTaskEntity.upperBounds = dailyTask.upperBounds
-        dailyTaskEntity.checkPoint = Int16(dailyTask.checkPoint)
-        dailyTaskEntity.checkPoints = Int16(dailyTask.checkPoints)
+    func delete(_ dailyTask: DailyTask) async {
+        try? await dataService.delete(dailyTask.id)
     }
 }

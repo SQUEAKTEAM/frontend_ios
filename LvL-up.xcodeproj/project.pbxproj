@@ -20,8 +20,6 @@
 		F844BF502DA70A40003FB214 /* LvL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF4F2DA70A40003FB214 /* LvL.swift */; };
 		F844BF532DA70E62003FB214 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF522DA70E62003FB214 /* TaskCell.swift */; };
 		F844BF582DA711FE003FB214 /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF572DA711FE003FB214 /* TasksView.swift */; };
-		F844BF5D2DA80768003FB214 /* SwiftfulUI in Frameworks */ = {isa = PBXBuildFile; productRef = F844BF5C2DA80768003FB214 /* SwiftfulUI */; };
-		F844BF5F2DA8076D003FB214 /* SwiftfulUI in Frameworks */ = {isa = PBXBuildFile; productRef = F844BF5E2DA8076D003FB214 /* SwiftfulUI */; };
 		F844BF612DA87D7D003FB214 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF602DA87D7D003FB214 /* CoreDataManager.swift */; };
 		F844BF642DA87F33003FB214 /* LvLDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF632DA87F33003FB214 /* LvLDataProvider.swift */; };
 		F844BF662DA95B60003FB214 /* MainLvLInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF652DA95B60003FB214 /* MainLvLInteractor.swift */; };
@@ -68,6 +66,8 @@
 		F8D0313D2DC50A3A00FE44E8 /* AchievementPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D0313C2DC50A3A00FE44E8 /* AchievementPresenterTest.swift */; };
 		F8D0313F2DC50A5000FE44E8 /* AchievementInteractorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D0313E2DC50A5000FE44E8 /* AchievementInteractorTest.swift */; };
 		F8D031412DC50A6100FE44E8 /* AchievementTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031402DC50A6100FE44E8 /* AchievementTest.swift */; };
+		F8D031442DC527C300FE44E8 /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031432DC527C300FE44E8 /* EditTaskView.swift */; };
+		F8D031462DC52CB500FE44E8 /* AllTaskRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031452DC52CB500FE44E8 /* AllTaskRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +150,8 @@
 		F8D0313C2DC50A3A00FE44E8 /* AchievementPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementPresenterTest.swift; sourceTree = "<group>"; };
 		F8D0313E2DC50A5000FE44E8 /* AchievementInteractorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementInteractorTest.swift; sourceTree = "<group>"; };
 		F8D031402DC50A6100FE44E8 /* AchievementTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTest.swift; sourceTree = "<group>"; };
+		F8D031432DC527C300FE44E8 /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
+		F8D031452DC52CB500FE44E8 /* AllTaskRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTaskRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,7 +167,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F844BF5D2DA80768003FB214 /* SwiftfulUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,7 +174,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F844BF5F2DA8076D003FB214 /* SwiftfulUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -268,6 +268,7 @@
 				F844BF442DA70001003FB214 /* MainLvL */,
 				F844BFA22DC2DB03003FB214 /* Charts */,
 				F8D0312B2DC4F72600FE44E8 /* Achievements */,
+				F8D031422DC527A200FE44E8 /* EditTask */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -312,7 +313,6 @@
 			isa = PBXGroup;
 			children = (
 				F844BF632DA87F33003FB214 /* LvLDataProvider.swift */,
-				F844BF742DAA896B003FB214 /* TaskDataProvider.swift */,
 			);
 			path = DataProviders;
 			sourceTree = "<group>";
@@ -378,6 +378,7 @@
 			children = (
 				F844BF9C2DAF1EF5003FB214 /* View */,
 				F844BF972DAF0FF7003FB214 /* AllTaskPresenter.swift */,
+				F8D031452DC52CB500FE44E8 /* AllTaskRouter.swift */,
 				F844BF9F2DAF1FF9003FB214 /* AllDailyTask.swift */,
 			);
 			path = AllTasks;
@@ -429,6 +430,7 @@
 			children = (
 				F844BFBB2DC422FA003FB214 /* ChartsDataProvider.swift */,
 				F8D031392DC500EE00FE44E8 /* AchievementDataProvider.swift */,
+				F844BF742DAA896B003FB214 /* TaskDataProvider.swift */,
 			);
 			path = DataProviders;
 			sourceTree = "<group>";
@@ -472,6 +474,14 @@
 			path = Achievements;
 			sourceTree = "<group>";
 		};
+		F8D031422DC527A200FE44E8 /* EditTask */ = {
+			isa = PBXGroup;
+			children = (
+				F8D031432DC527C300FE44E8 /* EditTaskView.swift */,
+			);
+			path = EditTask;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -510,7 +520,6 @@
 			);
 			name = "LvL-upTests";
 			packageProductDependencies = (
-				F844BF5C2DA80768003FB214 /* SwiftfulUI */,
 			);
 			productName = "LvL-upTests";
 			productReference = F844BF252DA6FF29003FB214 /* LvL-upTests.xctest */;
@@ -531,7 +540,6 @@
 			);
 			name = "LvL-upUITests";
 			packageProductDependencies = (
-				F844BF5E2DA8076D003FB214 /* SwiftfulUI */,
 			);
 			productName = "LvL-upUITests";
 			productReference = F844BF2F2DA6FF29003FB214 /* LvL-upUITests.xctest */;
@@ -629,6 +637,7 @@
 				F844BF482DA70179003FB214 /* MainLvLView.swift in Sources */,
 				F844BFBE2DC42329003FB214 /* APIManager.swift in Sources */,
 				F844BF202DA6FF29003FB214 /* LvL_up.xcdatamodeld in Sources */,
+				F8D031462DC52CB500FE44E8 /* AllTaskRouter.swift in Sources */,
 				F844BF772DAA8C76003FB214 /* DailyTask.swift in Sources */,
 				F844BFA42DC2DB43003FB214 /* ChartCell.swift in Sources */,
 				F844BF532DA70E62003FB214 /* TaskCell.swift in Sources */,
@@ -636,6 +645,7 @@
 				F8D0312F2DC4FA0300FE44E8 /* AchievementsView.swift in Sources */,
 				F8D031332DC4FDDE00FE44E8 /* Achievement.swift in Sources */,
 				F844BFA02DAF1FFA003FB214 /* AllDailyTask.swift in Sources */,
+				F8D031442DC527C300FE44E8 /* EditTaskView.swift in Sources */,
 				F844BFAF2DC3A791003FB214 /* ChartsView.swift in Sources */,
 				F844BF4E2DA709A4003FB214 /* MainLvLPresenter.swift in Sources */,
 				F8D0313A2DC500EE00FE44E8 /* AchievementDataProvider.swift in Sources */,
@@ -1022,16 +1032,6 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		F844BF4B2DA704AF003FB214 /* SwiftfulUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F844BF492DA70254003FB214 /* XCRemoteSwiftPackageReference "SwiftfulUI" */;
-			productName = SwiftfulUI;
-		};
-		F844BF5C2DA80768003FB214 /* SwiftfulUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F844BF492DA70254003FB214 /* XCRemoteSwiftPackageReference "SwiftfulUI" */;
-			productName = SwiftfulUI;
-		};
-		F844BF5E2DA8076D003FB214 /* SwiftfulUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F844BF492DA70254003FB214 /* XCRemoteSwiftPackageReference "SwiftfulUI" */;
 			productName = SwiftfulUI;

@@ -21,9 +21,12 @@ final class TaskPresenter: ObservableObject {
     
     @MainActor
     func getData() async {
-        let tasks = interactor.loadTasks()
-        completedTask = tasks.filter { $0.isCompleted }
-        notCompletedTask = tasks.filter { !$0.isCompleted }
+        let dailyTasks = await interactor.loadTasks(at: Date())
+        completedTask = dailyTasks.filter { $0.isCompleted }
+        notCompletedTask = dailyTasks.filter { !$0.isCompleted }
+        
+        let tasks = await interactor.loadTasks(at: nil)
+        notCompletedTask = notCompletedTask + tasks
     }
     
     func updateCurrentProgress(to dailyTask: DailyTask, checkPoint: Int) {
@@ -37,12 +40,22 @@ final class TaskPresenter: ObservableObject {
         let task = dailyTask.updateCurrentProgress(checkPoint)
         
         updateArraysLogic(task: task, isCompleted: isCompleted)
-
-        update(task)
+        
+        Task {
+            await update(task)
+        }
     }
     
-    private func update(_ dailyTask: DailyTask) {
-        interactor.update(dailyTask)
+    func getNoCompletedTasks(_ isDaily: Bool) -> [DailyTask] {
+        if isDaily {
+            return notCompletedTask.filter({ $0.date != nil })
+        } else {
+            return notCompletedTask.filter({ $0.date == nil })
+        }
+    }
+    
+    private func update(_ dailyTask: DailyTask) async -> DailyTask? {
+        await interactor.update(dailyTask)
     }
     
     private func updateMainLvl(dailyTask: DailyTask, checkPoint: Int) {
