@@ -21,7 +21,7 @@ final class TaskPresenter: ObservableObject {
     
     @MainActor
     func getData() async {
-        let dailyTasks = await interactor.loadTasks(at: Date())
+        let dailyTasks = await interactor.loadTasks(at: Date()).filter({ !$0.isArchived })
         completedTask = dailyTasks.filter { $0.isCompleted }
         notCompletedTask = dailyTasks.filter { !$0.isCompleted }
         

@@ -37,220 +37,222 @@ struct EditTaskView: View {
         "pawprint.fill", "airplane", "car.fill"
     ]
     
-    // Категории
-    let categories = ["Работа", "Дом", "Спорт", "Учеба", "Другое"]
-    
     var body: some View {
-            NavigationView {
-                Form {
-                    titleSection
-                    iconSection
-                    rewardSection
-                    dateSection
-                    checkpointsSection
-                    categorySection
-                    optionsSection
-                }
-                .navigationTitle("Редактировать задачу")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar { toolbarContent }
-                .alert("Новая категория", isPresented: $showingNewCategoryAlert) { newCategoryAlert }
-                .onAppear { setupInitialState() }
+        NavigationView {
+            Form {
+                titleSection
+                iconSection
+                rewardSection
+                dateSection
+                checkpointsSection
+                categorySection
+                optionsSection
             }
+            .navigationTitle("Редактировать задачу")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar { toolbarContent }
+            .alert("Новая категория", isPresented: $showingNewCategoryAlert) { newCategoryAlert }
+            .onAppear { setupInitialState() }
         }
-        
-        // MARK: - Subviews
-        
-        private var titleSection: some View {
-            Section(header: Text("Название")) {
-                TextField("Введите название", text: $presenter.task.title)
-            }
+        .task {
+            await presenter.getCategories()
         }
-        
-        private var iconSection: some View {
-            Section(header: Text("Иконка")) {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
-                        ForEach(systemIcons, id: \.self) { iconName in
-                            iconButton(for: iconName)
-                        }
-                    }
-                    .padding(.vertical, 8)
-                }
-            }
+    }
+    
+    // MARK: - Subviews
+    
+    private var titleSection: some View {
+        Section(header: Text("Название")) {
+            TextField("Введите название", text: $presenter.task.title)
         }
-        
-        private func iconButton(for iconName: String) -> some View {
-            Image(systemName: iconName)
-                .font(.system(size: 24))
-                .frame(width: 50, height: 50)
-                .background(presenter.task.img == iconName ? Color.blue.opacity(0.2) : Color.gray.opacity(0.1))
-                .cornerRadius(10)
-                .onTapGesture { presenter.task.img = iconName }
-        }
-        
-        private var rewardSection: some View {
-            Section(header: Text("Награда")) {
-                standardRewardsView
-                customRewardButton
-                if showCustomRewardField {
-                    customRewardField
-                }
-            }
-        }
-        
-        private var standardRewardsView: some View {
-            HStack {
-                ForEach(standardRewards, id: \.self) { reward in
-                    rewardButton(for: reward)
-                }
-            }
-        }
-        
-        private func rewardButton(for reward: Int) -> some View {
-            Button(action: {
-                presenter.task.reward = reward
-                showCustomRewardField = false
-            }) {
-                Text("\(reward)")
-                    .padding(8)
-                    .background(presenter.task.reward == reward ? Color.blue : Color.gray.opacity(0.2))
-                    .foregroundColor(presenter.task.reward == reward ? .white : .primary)
-                    .cornerRadius(8)
-            }
-            .buttonStyle(PlainButtonStyle())
-        }
-        
-        private var customRewardButton: some View {
-            Button(action: toggleCustomRewardField) {
+    }
+    
+    private var iconSection: some View {
+        Section(header: Text("Иконка")) {
+            ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    Text("Своя награда")
-                    Spacer()
-                    Image(systemName: showCustomRewardField ? "chevron.up" : "chevron.down")
-                }
-            }
-        }
-        
-        private var customRewardField: some View {
-            TextField("Введите сумму", text: $customReward)
-                .keyboardType(.numberPad)
-                .onChange(of: customReward) { newValue in
-                    if let value = Int(newValue) {
-                        presenter.task.reward = value
+                    ForEach(systemIcons, id: \.self) { iconName in
+                        iconButton(for: iconName)
                     }
                 }
+                .padding(.vertical, 8)
+            }
         }
-        
-        private var dateSection: some View {
-            Section(header: Text("Дата выполнения")) {
-                dateToggle
-                if hasDate, let binding = Binding($presenter.task.date) {
-                    datePicker(binding: binding)
+    }
+    
+    private func iconButton(for iconName: String) -> some View {
+        Image(systemName: iconName)
+            .font(.system(size: 24))
+            .frame(width: 50, height: 50)
+            .background(presenter.task.img == iconName ? Color.blue.opacity(0.2) : Color.gray.opacity(0.1))
+            .cornerRadius(10)
+            .onTapGesture { presenter.task.img = iconName }
+    }
+    
+    private var rewardSection: some View {
+        Section(header: Text("Награда")) {
+            standardRewardsView
+            customRewardButton
+            if showCustomRewardField {
+                customRewardField
+            }
+        }
+    }
+    
+    private var standardRewardsView: some View {
+        HStack {
+            ForEach(standardRewards, id: \.self) { reward in
+                rewardButton(for: reward)
+            }
+        }
+    }
+    
+    private func rewardButton(for reward: Int) -> some View {
+        Button(action: {
+            presenter.task.reward = reward
+            showCustomRewardField = false
+        }) {
+            Text("\(reward)")
+                .padding(8)
+                .background(presenter.task.reward == reward ? Color.blue : Color.gray.opacity(0.2))
+                .foregroundColor(presenter.task.reward == reward ? .white : .primary)
+                .cornerRadius(8)
+        }
+        .buttonStyle(PlainButtonStyle())
+    }
+    
+    private var customRewardButton: some View {
+        Button(action: toggleCustomRewardField) {
+            HStack {
+                Text("Своя награда")
+                Spacer()
+                Image(systemName: showCustomRewardField ? "chevron.up" : "chevron.down")
+            }
+        }
+    }
+    
+    private var customRewardField: some View {
+        TextField("Введите сумму", text: $customReward)
+            .keyboardType(.numberPad)
+            .onChange(of: customReward) { newValue in
+                if let value = Int(newValue) {
+                    presenter.task.reward = value
                 }
             }
-            .animation(.easeInOut, value: hasDate)
-        }
-        
-        private var dateToggle: some View {
-            Toggle("Установить дату", isOn: $hasDate)
-                .onChange(of: hasDate) { newValue in
-                    presenter.task.date = newValue ? (presenter.task.date ?? Date()) : nil
-                }
-        }
-        
-        private func datePicker(binding: Binding<Date>) -> some View {
-            DatePicker(
-                "Выберите дату",
-                selection: binding,
-                displayedComponents: [.date]
-            )
-            .transition(.opacity)
-        }
-        
-        private var checkpointsSection: some View {
-            Section(header: Text("Промежуточные точки")) {
-                Stepper(value: $presenter.task.checkPoints, in: 0...10) {
-                    Text("Чекпоинтов: \(presenter.task.checkPoints)")
-                }
+    }
+    
+    private var dateSection: some View {
+        Section(header: Text("Дата выполнения")) {
+            dateToggle
+            if hasDate, let binding = Binding($presenter.task.date) {
+                datePicker(binding: binding)
             }
         }
-        
-        private var categorySection: some View {
-            Section(header: Text("Категория")) {
-                categoryPicker
-                newCategoryButton
+        .animation(.easeInOut, value: hasDate)
+    }
+    
+    private var dateToggle: some View {
+        Toggle("Установить дату", isOn: $hasDate)
+            .onChange(of: hasDate) { newValue in
+                presenter.task.date = newValue ? (presenter.task.date ?? Date()) : nil
+            }
+    }
+    
+    private func datePicker(binding: Binding<Date>) -> some View {
+        DatePicker(
+            "Выберите дату",
+            selection: binding,
+            displayedComponents: [.date]
+        )
+        .transition(.opacity)
+    }
+    
+    private var checkpointsSection: some View {
+        Section(header: Text("Промежуточные точки")) {
+            Stepper(value: $presenter.task.checkPoints, in: 0...10) {
+                Text("Чекпоинтов: \(presenter.task.checkPoints)")
             }
         }
-        
-        private var categoryPicker: some View {
-            Picker("Выберите категорию", selection: $presenter.task.category) {
-                ForEach(categories, id: \.self) { category in
-                    Text(category).tag(category)
-                }
-            }
-            .pickerStyle(.menu)
+    }
+    
+    private var categorySection: some View {
+        Section(header: Text("Категория")) {
+            categoryPicker
+            newCategoryButton
         }
-        
-        private var newCategoryButton: some View {
-            Button("Создать новую категорию") {
-                showingNewCategoryAlert = true
+    }
+    
+    private var categoryPicker: some View {
+        Picker("Выберите категорию", selection: $presenter.task.category) {
+            ForEach(presenter.categories, id: \.self) { category in
+                Text(category).tag(category)
             }
         }
-        
-        private var optionsSection: some View {
-            Section {
+        .pickerStyle(.menu)
+    }
+    
+    private var newCategoryButton: some View {
+        Button("Создать новую категорию") {
+            showingNewCategoryAlert = true
+        }
+    }
+    
+    private var optionsSection: some View {
+        Section {
+            if presenter.task.date != nil {
                 repeatToggle
-                archiveToggle
+            }
+            archiveToggle
+        }
+    }
+    
+    private var repeatToggle: some View {
+        Toggle("Повторять каждую неделю", isOn: $presenter.task.isRepeat)
+            .disabled(presenter.task.date == nil)
+    }
+    
+    private var archiveToggle: some View {
+        Toggle("В архиве", isOn: $presenter.task.isArchived)
+    }
+    
+    private var toolbarContent: some ToolbarContent {
+        ToolbarItem(placement: .navigationBarTrailing) {
+            Button("Готово") {
+                returnNewTask(presenter.task)
+                presentationMode.wrappedValue.dismiss()
             }
         }
-        
-        private var repeatToggle: some View {
-            Toggle("Повторять каждую неделю", isOn: $presenter.task.isRepeat)
-                .disabled(presenter.task.date == nil)
-        }
-        
-        private var archiveToggle: some View {
-            Toggle("В архиве", isOn: $presenter.task.isArchived)
-        }
-        
-        private var toolbarContent: some ToolbarContent {
-            ToolbarItem(placement: .navigationBarTrailing) {
-                Button("Готово") {
-                    returnNewTask(presenter.task)
-                    presentationMode.wrappedValue.dismiss()
+    }
+    
+    private var newCategoryAlert: some View {
+        Group {
+            TextField("Название категории", text: $newCategoryName)
+            Button("Добавить") {
+                if !newCategoryName.isEmpty {
+                    presenter.task.category = newCategoryName
+                    newCategoryName = ""
                 }
             }
+            Button("Отмена", role: .cancel) {}
         }
-        
-        private var newCategoryAlert: some View {
-            Group {
-                TextField("Название категории", text: $newCategoryName)
-                Button("Добавить") {
-                    if !newCategoryName.isEmpty {
-                        presenter.task.category = newCategoryName
-                        newCategoryName = ""
-                    }
-                }
-                Button("Отмена", role: .cancel) {}
-            }
+    }
+    
+    // MARK: - Private Methods
+    
+    private func setupInitialState() {
+        hasDate = presenter.task.date != nil
+        if !standardRewards.contains(presenter.task.reward) {
+            customReward = "\(presenter.task.reward)"
+            showCustomRewardField = true
         }
-        
-        // MARK: - Private Methods
-        
-        private func setupInitialState() {
-            hasDate = presenter.task.date != nil
-            if !standardRewards.contains(presenter.task.reward) {
-                customReward = "\(presenter.task.reward)"
-                showCustomRewardField = true
-            }
+    }
+    
+    private func toggleCustomRewardField() {
+        showCustomRewardField.toggle()
+        if !showCustomRewardField {
+            presenter.task.reward = 0
         }
-        
-        private func toggleCustomRewardField() {
-            showCustomRewardField.toggle()
-            if !showCustomRewardField {
-                presenter.task.reward = 0
-            }
-        }
+    }
 }
 
 struct EditTaskView_Previews: PreviewProvider {

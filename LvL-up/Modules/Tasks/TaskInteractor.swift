@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CoreData
 
 protocol TaskProviderProtocol {
     func fetchTasks(at date: Date?) async throws -> [DailyTask]

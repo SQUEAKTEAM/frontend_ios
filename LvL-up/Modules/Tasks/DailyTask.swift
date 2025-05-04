@@ -60,7 +60,7 @@ struct DailyTask: Identifiable, Codable {
     }
     
     func getColor() -> Color {
-        var hashValue = title.utf8.reduce(5381) { ($0 << 5) &+ $0 &+ Int($1) }
+        let hashValue = title.utf8.reduce(5381) { ($0 << 5) &+ $0 &+ Int($1) }
         
         let r = (hashValue >> 16) & 0xFF
         let g = (hashValue >> 8) & 0xFF
@@ -103,7 +103,7 @@ extension DailyTask {
                 title: "Прочитать 30 страниц",
                 checkPoints: 3,
                 checkPoint: 2,
-                isRepeat: true,
+                isRepeat: false,
                 isArchived: false,
                 category: "Образование",
                 date: nil // Без конкретной даты
@@ -129,7 +129,7 @@ extension DailyTask {
                 title: "Выпить 2 литра воды",
                 checkPoints: 5,
                 checkPoint: 0,
-                isRepeat: true,
+                isRepeat: false,
                 isArchived: false,
                 category: "Здоровье",
                 date: nil
@@ -181,7 +181,7 @@ extension DailyTask {
                 title: "Медитация 15 минут",
                 checkPoints: 1,
                 checkPoint: 0,
-                isRepeat: true,
+                isRepeat: false,
                 isArchived: false,
                 category: "Ментальное здоровье",
                 date: nil

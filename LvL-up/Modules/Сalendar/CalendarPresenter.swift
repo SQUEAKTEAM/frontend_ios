@@ -53,7 +53,7 @@ final class CalendarPresenter: ObservableObject {
         router.navigateToAddTask { [weak self] dailyTask in
             guard let self = self else { return }
             
-            Task {
+            Task { @MainActor in
                 guard let newTask = await self.interactor.create(dailyTask) else { return }
                 DispatchQueue.main.async {
                     returnedDate(newTask.date)

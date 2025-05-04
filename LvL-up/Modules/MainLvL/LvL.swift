@@ -21,6 +21,14 @@ struct LvL: Equatable {
     }
     var upperBoundExp: Float
     
+    static var new: LvL {
+        LvL(currentLvl: 1, currentExp: 0, upperBoundExp: 10)
+    }
+    
+    static var mock: LvL {
+        LvL(currentLvl: 6, currentExp: 56, upperBoundExp: 70)
+    }
+    
     init(entity: LvLEntity) {
         currentLvl = Int(entity.currentLvl)
         upperBoundExp = entity.upperBounds

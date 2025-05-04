@@ -6,14 +6,12 @@
 //
 
 import XCTest
-import Combine
 @testable import LvL_up
 
 class MainLvLPresenterTests: XCTestCase {
     
     var presenter: MainLvLPresenter!
     var mockInteractor: MockMainLvLInteractor!
-    var cancellables: Set<AnyCancellable> = []
     
     override func setUp() {
         super.setUp()
@@ -24,11 +22,18 @@ class MainLvLPresenterTests: XCTestCase {
     override func tearDown() {
         presenter = nil
         mockInteractor = nil
-        cancellables = []
         super.tearDown()
     }
     
-    func testGetDataUpdatesLvl() async {
+    // MARK: - Initial State Tests
+    
+    func testInitialState() {
+        XCTAssertNil(presenter.lvl)
+    }
+    
+    // MARK: - Get Data Tests
+    
+    func testGetDataUpdatesLvlProperty() async {
         // Given
         let expectedLvl = LvL(currentLvl: 5, currentExp: 50, upperBoundExp: 100)
         mockInteractor.stubbedLoadLvlResult = expectedLvl
@@ -37,26 +42,28 @@ class MainLvLPresenterTests: XCTestCase {
         await presenter.getData()
         
         // Then
-        XCTAssertEqual(presenter.lvl?.currentLvl, expectedLvl.currentLvl)
-        XCTAssertEqual(presenter.lvl?.currentExp, expectedLvl.currentExp)
-        XCTAssertEqual(presenter.lvl?.upperBoundExp, expectedLvl.upperBoundExp)
+        XCTAssertEqual(presenter.lvl, expectedLvl)
         XCTAssertTrue(mockInteractor.loadLvlCalled)
     }
     
-    func testLvlUpdateCallsInteractorUpdate() {
+    // MARK: - Lvl Property Observer Tests
+    
+    func testLvlDidSetCallsUpdate() async {
         // Given
-        let expectation = XCTestExpectation(description: "Interactor update called")
-        mockInteractor.updateCalledHandler = { _ in
+        let expectation = XCTestExpectation(description: "Update called")
+        mockInteractor.updateHandler = { _ in
             expectation.fulfill()
         }
         
         // When
-        let testLvl = LvL(currentLvl: 3, currentExp: 30, upperBoundExp: 60)
-        presenter.lvl = testLvl
+        let newLvl = LvL(currentLvl: 2, currentExp: 20, upperBoundExp: 40)
+        await MainActor.run {
+            presenter.lvl = newLvl
+        }
         
         // Then
-        wait(for: [expectation], timeout: 1.0)
-        XCTAssertNotNil(mockInteractor.updatedLvl)
+        await fulfillment(of: [expectation], timeout: 1)
+        XCTAssertEqual(mockInteractor.updatedLvl, newLvl)
     }
 }
 
@@ -64,17 +71,24 @@ class MainLvLPresenterTests: XCTestCase {
 
 class MockMainLvLInteractor: MainLvLInteractorProtocol {
     var loadLvlCalled = false
-    var stubbedLoadLvlResult: LvL!
-    var updatedLvl: LvL?
-    var updateCalledHandler: ((LvL?) -> Void)?
+    var loadLvlCallCount = 0
+    var stubbedLoadLvlResult: LvL = LvL.new
     
-    func loadLvl() -> LvL {
+    var updateCalled = false
+    var updateCallCount = 0
+    var updatedLvl: LvL?
+    var updateHandler: ((LvL?) -> Void)?
+    
+    func loadLvl() async -> LvL {
         loadLvlCalled = true
+        loadLvlCallCount += 1
         return stubbedLoadLvlResult
     }
     
-    func update(_ mainLvl: LvL?) {
+    func update(_ mainLvl: LvL?) async {
+        updateCalled = true
+        updateCallCount += 1
         updatedLvl = mainLvl
-        updateCalledHandler?(mainLvl)
+        updateHandler?(mainLvl)
     }
 }

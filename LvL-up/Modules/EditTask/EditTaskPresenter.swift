@@ -9,8 +9,17 @@ import Foundation
 
 final class EditTaskPresenter: ObservableObject {
     @Published var task: DailyTask
+    @Published var categories: [String] = []
     
-    init(task: DailyTask) {
+    private let interactor: EditInteractorProtocol
+    
+    init(task: DailyTask, interactor: EditInteractorProtocol = EditInteractor()) {
+        self.interactor = interactor
         self.task = task
+    }
+    
+    @MainActor
+    func getCategories() async {
+        categories = await interactor.loadCategory()
     }
 }

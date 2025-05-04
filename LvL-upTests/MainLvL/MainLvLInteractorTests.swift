@@ -6,17 +6,16 @@
 //
 
 import XCTest
-import CoreData
 @testable import LvL_up
 
 class MainLvLInteractorTests: XCTestCase {
     
     var interactor: MainLvLInteractor!
-    var mockDataService: MockLvLDataProvider!
+    var mockDataService: MockLvLProvider!
     
     override func setUp() {
         super.setUp()
-        mockDataService = MockLvLDataProvider()
+        mockDataService = MockLvLProvider()
         interactor = MainLvLInteractor(dataService: mockDataService)
     }
     
@@ -26,77 +25,92 @@ class MainLvLInteractorTests: XCTestCase {
         super.tearDown()
     }
     
-    func testLoadLvlReturnsCorrectLvL() {
+    // MARK: - Load Level Tests
+    
+    func testLoadLvlReturnsDataFromService() async {
         // Given
-        let entity = LvLEntity(context: TestCoreDataManagerStack().persistentContainer.viewContext)
-        entity.currentLvl = 10
-        entity.upperBounds = 100
-        entity.currentXp = 50
-        mockDataService.stubbedFetchLvlResult = entity
+        let expectedLvl = LvL(currentLvl: 5, currentExp: 50, upperBoundExp: 100)
+        mockDataService.stubbedFetchDataResult = expectedLvl
         
         // When
-        let result = interactor.loadLvl()
+        let result = await interactor.loadLvl()
         
         // Then
-        XCTAssertEqual(result.currentLvl, 10)
-        XCTAssertEqual(result.currentExp, 50)
-        XCTAssertEqual(result.upperBoundExp, 100)
-        XCTAssertTrue(mockDataService.fetchLvlCalled)
+        XCTAssertEqual(result, expectedLvl)
+        XCTAssertTrue(mockDataService.fetchDataCalled)
     }
     
-    func testUpdateCallsDataServiceUpdate() {
+    func testLoadLvlReturnsNewLvlWhenServiceFails() async {
         // Given
-        let expectation = XCTestExpectation(description: "Data service update called")
-        
-        // Создаем тестовую LvLEntity
-        let testEntity = LvLEntity(context: TestCoreDataManagerStack().persistentContainer.viewContext)
-        testEntity.currentLvl = 5
-        testEntity.upperBounds = 100
-        testEntity.currentXp = 50
-        
-        // Настраиваем мок
-        mockDataService.stubbedFetchLvlResult = testEntity
-        mockDataService.updateCalledHandler = { entity in
-            // Проверяем, что entity передается корректно
-            XCTAssertEqual(entity.currentLvl, 5)
-            XCTAssertEqual(entity.upperBounds, 100)
-            XCTAssertEqual(entity.currentXp, 50)
-            expectation.fulfill()
-        }
+        mockDataService.stubbedFetchDataError = NSError(domain: "TestError", code: 1)
         
         // When
-        let testLvl = LvL(currentLvl: 5, currentExp: 50, upperBoundExp: 100)
-        interactor.update(testLvl)
+        let result = await interactor.loadLvl()
         
         // Then
-        wait(for: [expectation], timeout: 1.0)
-        XCTAssertTrue(mockDataService.updateCalled)
+        XCTAssertEqual(result, LvL.new)
+        XCTAssertTrue(mockDataService.fetchDataCalled)
+    }
+    
+    // MARK: - Update Level Tests
+    
+    func testUpdateCallsServiceWithCorrectData() async {
+        // Given
+        let lvlToUpdate = LvL(currentLvl: 3, currentExp: 30, upperBoundExp: 60)
         
-        // Дополнительная проверка, что данные были обновлены
-        XCTAssertEqual(testEntity.currentLvl, 5)
-        XCTAssertEqual(testEntity.upperBounds, 100)
-        XCTAssertEqual(testEntity.currentXp, 50)
+        // When
+        await interactor.update(lvlToUpdate)
+        
+        // Then
+        XCTAssertTrue(mockDataService.updateCalled)
+        XCTAssertEqual(mockDataService.updatedLvl, lvlToUpdate)
+    }
+    
+    func testUpdateDoesNothingWhenNilPassed() async {
+        // When
+        await interactor.update(nil)
+        
+        // Then
+        XCTAssertFalse(mockDataService.updateCalled)
+    }
+    
+    func testUpdateDoesNotThrowWhenServiceFails() async {
+        // Given
+        mockDataService.stubbedUpdateError = NSError(domain: "TestError", code: 1)
+        let lvlToUpdate = LvL(currentLvl: 2, currentExp: 20, upperBoundExp: 40)
+        
+        // When
+        await interactor.update(lvlToUpdate)
+        
+        // Then
+        XCTAssertTrue(mockDataService.updateCalled)
     }
 }
 
-// MARK: - Mock LvLDataProvider
+// MARK: - Mock LvLProvider
 
-class MockLvLDataProvider: LvLDataProviderProtocol {
-    var fetchLvlCalled = false
-    var stubbedFetchLvlResult: LvLEntity!
-    var updateCalled = false
-    var updateCalledHandler: ((LvLEntity) -> Void)?
+class MockLvLProvider: LvLProviderProtocol {
+    var fetchDataCalled = false
+    var stubbedFetchDataResult: LvL = LvL.new
+    var stubbedFetchDataError: Error?
     
-    func fetchLvl() -> LvLEntity {
-        fetchLvlCalled = true
-        return stubbedFetchLvlResult
+    var updateCalled = false
+    var updatedLvl: LvL?
+    var stubbedUpdateError: Error?
+    
+    func fetchData() async throws -> LvL {
+        fetchDataCalled = true
+        if let error = stubbedFetchDataError {
+            throw error
+        }
+        return stubbedFetchDataResult
     }
     
-    func update(_ block: @escaping (LvLEntity) -> Void) {
+    func update(lvl: LvL) async throws {
         updateCalled = true
-        if let entity = stubbedFetchLvlResult {
-            block(entity)
+        updatedLvl = lvl
+        if let error = stubbedUpdateError {
+            throw error
         }
-        updateCalledHandler?(stubbedFetchLvlResult)
     }
 }
