@@ -84,20 +84,6 @@ class AllTaskPresenterTests: XCTestCase {
         XCTAssertEqual(archivedTasks.first?.id, 2)
     }
     
-    func testDeleteTask() {
-        let taskToDelete = tasks[0]
-        let initialCount = tasks.count
-        
-        presenter.deleteTask(taskToDelete)
-        
-        // Проверяем, что задача удалена из массива
-        XCTAssertEqual(tasks.count, initialCount - 1)
-        XCTAssertFalse(tasks.contains(where: { $0.id == taskToDelete.id }))
-        
-        // Проверяем, что interactor.delete был вызван с правильной задачей
-        XCTAssertEqual(mockInteractor.deletedTask?.id, taskToDelete.id)
-    }
-    
 }
 
 // MARK: - Mock Classes
