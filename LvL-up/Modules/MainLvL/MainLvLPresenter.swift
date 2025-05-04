@@ -14,7 +14,9 @@ final class MainLvLPresenter: ObservableObject {
     
     @Published var lvl: LvL? = nil {
         didSet {
-            update()
+            Task {
+                await update()
+            }
         }
     }
     
@@ -24,10 +26,10 @@ final class MainLvLPresenter: ObservableObject {
     
     @MainActor
     func getData() async {
-        lvl = interactor.loadLvl()
+        lvl = await interactor.loadLvl()
     }
     
-    private func update() {
-        interactor.update(lvl)
+    private func update() async {
+        await interactor.update(lvl)
     }
 }

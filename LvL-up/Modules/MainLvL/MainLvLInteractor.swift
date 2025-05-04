@@ -6,37 +6,30 @@
 //
 
 import Foundation
-import CoreData
 
-protocol LvLDataProviderProtocol {
-    func fetchLvl() -> LvLEntity
-    func update(_ block: @escaping (LvLEntity) -> Void)
+protocol LvLProviderProtocol {
+    func fetchData() async throws -> LvL
+    func update(lvl: LvL) async throws
 }
 
 protocol MainLvLInteractorProtocol {
-    func loadLvl() -> LvL
-    func update(_ mainLvl: LvL?)
+    func loadLvl() async -> LvL
+    func update(_ mainLvl: LvL?) async
 }
 
 final class MainLvLInteractor: MainLvLInteractorProtocol {
+    private let dataService: LvLProviderProtocol
     
-    private let dataService: LvLDataProviderProtocol
-    
-    init(dataService: LvLDataProviderProtocol = LvLCoreDataProvider()) {
+    init(dataService: LvLProviderProtocol = LvLDataProvider()) {
         self.dataService = dataService
     }
     
-    func loadLvl() -> LvL {
-        return LvL(entity: dataService.fetchLvl())
+    func loadLvl() async -> LvL {
+        (try? await dataService.fetchData()) ?? LvL.new
     }
     
-    func update(_ mainLvl: LvL?) {
-        dataService.update { level in
-            guard let mainLvl = mainLvl else { return }
-            
-            level.currentLvl = Int32(mainLvl.currentLvl)
-            level.upperBounds = mainLvl.upperBoundExp
-            level.currentXp = mainLvl.currentExp
-        }
+    func update(_ mainLvl: LvL?) async {
+        guard let lvl = mainLvl else { return }
+        try? await dataService.update(lvl: lvl)
     }
 }

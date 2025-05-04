@@ -27,6 +27,9 @@ struct AchievementsView: View {
                             AnyShapeStyle(.primary)
                         )
                 }
+                Rectangle()
+                    .frame(height: 80)
+                    .foregroundStyle(.clear)
             }
         }
         .task {

@@ -6,137 +6,193 @@
 //
 
 import XCTest
-import CoreData
 @testable import LvL_up
 
 class TaskInteractorTests: XCTestCase {
     
     var interactor: TaskInteractor!
-    var mockDataService: MockTaskProvider!
+    var mockTaskService: MockTaskService!
     
     override func setUp() {
         super.setUp()
-        mockDataService = MockTaskProvider()
-        interactor = TaskInteractor(dataService: mockDataService)
+        mockTaskService = MockTaskService()
+        interactor = TaskInteractor(dataService: mockTaskService)
     }
     
     override func tearDown() {
         interactor = nil
-        mockDataService = nil
+        mockTaskService = nil
         super.tearDown()
     }
     
     // MARK: - Load Tasks Tests
     
-    func testLoadTasks() {
+    func testLoadTasksReturnsTasksFromService() async {
         // Given
-        let testEntity = DailyTaskEntity(context: TestTaskCoreDataManagerStack().persistentContainer.viewContext)
-        testEntity.id = UUID()
-        testEntity.title = "Test Task"
-        mockDataService.stubbedFetchTasksResult = [testEntity]
+        let expectedTasks = [
+            DailyTask(id: 1, img: "test", isCompleted: false, reward: 10, title: "Task 1", checkPoints: 3, category: "Test"),
+            DailyTask(id: 2, img: "test", isCompleted: true, reward: 5, title: "Task 2", checkPoints: 1, category: "Test")
+        ]
+        mockTaskService.stubbedTasks = expectedTasks
         
         // When
-        let tasks = interactor.loadTasks()
+        let tasks = await interactor.loadTasks()
+        
+        // Then
+        XCTAssertEqual(tasks.count, 2)
+        XCTAssertEqual(tasks.map { $0.id }, expectedTasks.map { $0.id })
+    }
+    
+    func testLoadTasksReturnsEmptyArrayOnServiceError() async {
+        // Given
+        mockTaskService.shouldThrowError = true
+        
+        // When
+        let tasks = await interactor.loadTasks()
+        
+        // Then
+        XCTAssertTrue(tasks.isEmpty)
+    }
+    
+    func testLoadTasksWithDateFiltersCorrectly() async {
+        // Given
+        let date = Date()
+        let datedTask = DailyTask(id: 1, img: "dated", isCompleted: false, reward: 10, title: "Dated", checkPoints: 3, category: "Test", date: date)
+        mockTaskService.stubbedDateFilteredTasks = [datedTask]
+        
+        // When
+        let tasks = await interactor.loadTasks(at: date)
         
         // Then
         XCTAssertEqual(tasks.count, 1)
-        XCTAssertEqual(tasks.first?.title, "Test Task")
-        XCTAssertTrue(mockDataService.fetchTasksCalled)
+        XCTAssertEqual(tasks.first?.id, 1)
     }
     
     // MARK: - Create Task Tests
     
-    func testCreateTask() {
+    func testCreateTaskReturnsCreatedTask() async {
         // Given
-        let testTask = DailyTask.mockTasks.first!
-        var receivedEntity: DailyTaskEntity?
-        
-        mockDataService.createHook = { entity in
-            receivedEntity = entity
-        }
+        let newTask = DailyTask(id: 3, img: "new", isCompleted: false, reward: 15, title: "New Task", checkPoints: 2, category: "Test")
+        mockTaskService.stubbedCreatedTask = newTask
         
         // When
-        interactor.create(testTask)
+        let result = await interactor.create(newTask)
         
         // Then
-        XCTAssertTrue(mockDataService.createCalled)
-        XCTAssertEqual(receivedEntity?.id, testTask.id)
-        XCTAssertEqual(receivedEntity?.title, testTask.title)
-        XCTAssertEqual(receivedEntity?.reward, Int16(testTask.reward))
+        XCTAssertEqual(result?.id, newTask.id)
+        XCTAssertTrue(mockTaskService.createCalled)
+    }
+    
+    func testCreateTaskReturnsNilOnFailure() async {
+        // Given
+        let newTask = DailyTask(id: 3, img: "new", isCompleted: false, reward: 15, title: "New Task", checkPoints: 2, category: "Test")
+        mockTaskService.shouldThrowError = true
+        
+        // When
+        let result = await interactor.create(newTask)
+        
+        // Then
+        XCTAssertNil(result)
     }
     
     // MARK: - Update Task Tests
     
-    func testUpdateTask() {
+    func testUpdateTaskReturnsUpdatedTask() async {
         // Given
-        let testTask = DailyTask.mockTasks.first!
-        var receivedEntity: DailyTaskEntity?
-        
-        mockDataService.updateHook = { entity in
-            receivedEntity = entity
-        }
+        let taskToUpdate = DailyTask(id: 1, img: "update", isCompleted: false, reward: 10, title: "To Update", checkPoints: 3, category: "Test")
+        mockTaskService.stubbedUpdatedTask = taskToUpdate
         
         // When
-        interactor.update(testTask)
+        let result = await interactor.update(taskToUpdate)
         
         // Then
-        XCTAssertTrue(mockDataService.updateCalled)
-        XCTAssertEqual(receivedEntity?.id, testTask.id)
-        XCTAssertEqual(receivedEntity?.currentProgress, testTask.currentProgress)
-        XCTAssertEqual(receivedEntity?.isCompleted, testTask.isCompleted)
+        XCTAssertEqual(result?.id, taskToUpdate.id)
+        XCTAssertTrue(mockTaskService.updateCalled)
+    }
+    
+    func testUpdateTaskReturnsNilOnFailure() async {
+        // Given
+        let taskToUpdate = DailyTask(id: 1, img: "update", isCompleted: false, reward: 10, title: "To Update", checkPoints: 3, category: "Test")
+        mockTaskService.shouldThrowError = true
+        
+        // When
+        let result = await interactor.update(taskToUpdate)
+        
+        // Then
+        XCTAssertNil(result)
     }
     
     // MARK: - Delete Task Tests
     
-    func testDeleteTask() {
+    func testDeleteTaskCallsService() async {
         // Given
-        let testTask = DailyTask.mockTasks.first!
+        let taskToDelete = DailyTask(id: 1, img: "delete", isCompleted: false, reward: 10, title: "To Delete", checkPoints: 3, category: "Test")
         
         // When
-        interactor.delete(testTask)
+        await interactor.delete(taskToDelete)
         
         // Then
-        XCTAssertTrue(mockDataService.deleteCalled)
-        XCTAssertEqual(mockDataService.deletedTask?.id, testTask.id)
+        XCTAssertTrue(mockTaskService.deleteCalled)
+        XCTAssertEqual(mockTaskService.deletedTaskID, taskToDelete.id)
     }
 }
 
-// MARK: - Mock Task Provider
+// MARK: - Mock Task Service
 
-class MockTaskProvider: TaskProviderProtocol {
-    var fetchTasksCalled = false
-    var stubbedFetchTasksResult: [DailyTaskEntity] = []
+class MockTaskService: TaskProviderProtocol {
+    var shouldThrowError = false
     
+    // For loadTasks()
+    var stubbedTasks: [DailyTask] = []
+    
+    // For loadTasks(at:)
+    var stubbedDateFilteredTasks: [DailyTask] = []
+    
+    // For create/update
     var createCalled = false
-    var createHook: ((DailyTaskEntity) -> Void)?
-    
     var updateCalled = false
-    var updateHook: ((DailyTaskEntity) -> Void)?
+    var stubbedCreatedTask: DailyTask?
+    var stubbedUpdatedTask: DailyTask?
     
+    // For delete
     var deleteCalled = false
-    var deletedTask: DailyTask?
+    var deletedTaskID: Int?
     
-    func fetchTasks() -> [DailyTaskEntity] {
-        fetchTasksCalled = true
-        return stubbedFetchTasksResult
+    func fetchTasks() async throws -> [DailyTask] {
+        if shouldThrowError {
+            throw NSError(domain: "TestError", code: 1, userInfo: nil)
+        }
+        return stubbedTasks
     }
     
-    func create(dailyTask: DailyTask, _ block: @escaping (DailyTaskEntity) -> Void) {
-        createCalled = true
-        let entity = DailyTaskEntity(context: TestTaskCoreDataManagerStack().persistentContainer.viewContext)
-        block(entity)
-        createHook?(entity)
+    func fetchTasks(at date: Date?) async throws -> [DailyTask] {
+        if shouldThrowError {
+            throw NSError(domain: "TestError", code: 1, userInfo: nil)
+        }
+        return stubbedDateFilteredTasks
     }
     
-    func update(dailyTask: DailyTask, _ block: @escaping (DailyTaskEntity) -> Void) {
+    func update(dailyTask: DailyTask) async throws -> DailyTask {
         updateCalled = true
-        let entity = DailyTaskEntity(context: TestTaskCoreDataManagerStack().persistentContainer.viewContext)
-        block(entity)
-        updateHook?(entity)
+        if shouldThrowError {
+            throw NSError(domain: "TestError", code: 1, userInfo: nil)
+        }
+        return stubbedUpdatedTask ?? dailyTask
     }
     
-    func delete(_ dailyTask: DailyTask) {
+    func create(dailyTask: DailyTask) async throws -> DailyTask {
+        createCalled = true
+        if shouldThrowError {
+            throw NSError(domain: "TestError", code: 1, userInfo: nil)
+        }
+        return stubbedCreatedTask ?? dailyTask
+    }
+    
+    func delete(_ id: Int) async throws {
         deleteCalled = true
-        deletedTask = dailyTask
+        deletedTaskID = id
+        if shouldThrowError {
+            throw NSError(domain: "TestError", code: 1, userInfo: nil)
+        }
     }
 }

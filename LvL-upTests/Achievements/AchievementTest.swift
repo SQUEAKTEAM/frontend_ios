@@ -47,12 +47,12 @@ class AchievementTests: XCTestCase {
         let dailyTask = sampleAchievement.convertToDailyTask()
         
         XCTAssertEqual(dailyTask.title, sampleAchievement.title)
-        XCTAssertEqual(dailyTask.currentProgress, Float(sampleAchievement.currentXp))
-        XCTAssertEqual(dailyTask.upperBounds, Float(sampleAchievement.upperBounds))
+        XCTAssertEqual(dailyTask.checkPoint, sampleAchievement.currentXp)
+        XCTAssertEqual(dailyTask.checkPoints, sampleAchievement.upperBounds)
         XCTAssertEqual(dailyTask.reward, sampleAchievement.reward)
         XCTAssertEqual(dailyTask.isCompleted, sampleAchievement.isCompleted)
         XCTAssertEqual(dailyTask.img, "medal.fill")
-        XCTAssertEqual(dailyTask.checkPoints, 1)
+        XCTAssertEqual(dailyTask.checkPoints, 10)
     }
     
     func testConvertCompletedAchievementToDailyTask() {
@@ -60,7 +60,7 @@ class AchievementTests: XCTestCase {
         let dailyTask = completedAchievement.convertToDailyTask()
         
         XCTAssertTrue(dailyTask.isCompleted)
-        XCTAssertEqual(dailyTask.currentProgress, dailyTask.upperBounds)
+        XCTAssertEqual(dailyTask.checkPoint, dailyTask.checkPoints)
     }
     
     // MARK: - UpdateCurrentXp Tests

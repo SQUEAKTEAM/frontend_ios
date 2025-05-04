@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftfulUI
 
 protocol TaskCellProtocol: View {
-    init(task: DailyTask)
+    init(task: DailyTask, isNeedMask: Bool)
 }
 
 struct AchievementCell<Cell: TaskCellProtocol>: View {
@@ -21,10 +21,10 @@ struct AchievementCell<Cell: TaskCellProtocol>: View {
     }
 
     var body: some View {
-        Cell(task: achievement.convertToDailyTask())
+        Cell(task: achievement.convertToDailyTask(), isNeedMask: false)
             .scaleEffect(scale)
             .onAppear {
-                scale = 0
+                scale = 0.5
                 let currentXp = achievement.currentXp
                 achievement = achievement.updateCurrentXp(0)
                 withAnimation(.smooth(duration: 0.3)) {

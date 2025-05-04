@@ -15,12 +15,26 @@ struct TasksView: View {
             MainLvLView(newCurrentExp: $presenter.updateCurrentLvlEx)
             
             List {
-                Section("Дневные задания") {
-                    noComplitedContent
+                if !presenter.getNoCompletedTasks(false).isEmpty {
+                    Section("Задания") {
+                        noComplitedContent(isDaily: false)
+                    }
                 }
-                Section("Выполнено") {
-                    complitedContent
+                
+                if !presenter.getNoCompletedTasks(true).isEmpty {
+                    Section("Дневные задания") {
+                        noComplitedContent(isDaily: true)
+                    }
                 }
+                if !presenter.completedTask.isEmpty {
+                    Section("Выполнено") {
+                        complitedContent
+                    }
+                }
+                Rectangle()
+                    .frame(height: 80)
+                    .foregroundStyle(.clear)
+                    .listRowSeparator(.hidden)
             }
             .listStyle(.plain)
             .scrollIndicators(.hidden)
@@ -38,8 +52,8 @@ struct TasksView: View {
 }
 
 extension TasksView {
-    var noComplitedContent: some View {
-        ForEach(presenter.notCompletedTask) { task in
+    func noComplitedContent(isDaily: Bool) -> some View {
+        ForEach(presenter.getNoCompletedTasks(isDaily)) { task in
             TaskCell(task: task)
                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                     Button(role: .none) {
@@ -62,7 +76,7 @@ extension TasksView {
                     .tint(.red)
                 }
                 .onDrag {
-                    return NSItemProvider(object: task.id.uuidString as NSString)
+                    return NSItemProvider(object: String(task.id) as NSString)
                 }
         }
         .onMove { sourceIndices, destinationIndex in

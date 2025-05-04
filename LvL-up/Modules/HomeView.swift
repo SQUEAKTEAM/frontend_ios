@@ -20,7 +20,7 @@ struct HomeView: View {
                 TasksView()
                     .tabBarItem(tab: .dailyTask, selection: $tabSelection)
                 
-                AllTaskView()
+                ScheduleView()
                     .tabBarItem(tab: .tasks, selection: $tabSelection)
                 
                 StatisticsView()

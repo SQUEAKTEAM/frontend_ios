@@ -11,6 +11,7 @@ import SwiftfulUI
 struct TaskCell: View, TaskCellProtocol {
     
     var task: DailyTask
+    var isNeedMask: Bool = true
     
     var body: some View {
         ZStack {
@@ -39,15 +40,15 @@ struct TaskCell: View, TaskCellProtocol {
                     
                     HStack {
                         CustomProgressBar(
-                            selection: task.currentProgress,
-                            range: 0...task.upperBounds,
+                            selection: Float(task.checkPoint),
+                            range: 0...Float(task.checkPoints),
                             backgroundColor: .secondary,
                             foregroundColor: .green,
                             cornerRadius: 10,
                             height: 10)
                         .mask {
                             HStack(spacing: 1) {
-                                ForEach(0..<task.checkPoints) { _ in
+                                ForEach(0..<(isNeedMask ? task.checkPoints : 1), id: \.id) { _ in
                                     Rectangle()
                                 }
                             }

@@ -20,10 +20,7 @@
 		F844BF502DA70A40003FB214 /* LvL.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF4F2DA70A40003FB214 /* LvL.swift */; };
 		F844BF532DA70E62003FB214 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF522DA70E62003FB214 /* TaskCell.swift */; };
 		F844BF582DA711FE003FB214 /* TasksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF572DA711FE003FB214 /* TasksView.swift */; };
-		F844BF5D2DA80768003FB214 /* SwiftfulUI in Frameworks */ = {isa = PBXBuildFile; productRef = F844BF5C2DA80768003FB214 /* SwiftfulUI */; };
-		F844BF5F2DA8076D003FB214 /* SwiftfulUI in Frameworks */ = {isa = PBXBuildFile; productRef = F844BF5E2DA8076D003FB214 /* SwiftfulUI */; };
 		F844BF612DA87D7D003FB214 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF602DA87D7D003FB214 /* CoreDataManager.swift */; };
-		F844BF642DA87F33003FB214 /* LvLDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF632DA87F33003FB214 /* LvLDataProvider.swift */; };
 		F844BF662DA95B60003FB214 /* MainLvLInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF652DA95B60003FB214 /* MainLvLInteractor.swift */; };
 		F844BF692DA9A1DC003FB214 /* MainLvLPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF682DA9A1DC003FB214 /* MainLvLPresenterTests.swift */; };
 		F844BF6B2DA9A2CE003FB214 /* MainLvLInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF6A2DA9A2CE003FB214 /* MainLvLInteractorTests.swift */; };
@@ -45,7 +42,6 @@
 		F844BF962DAF0FBA003FB214 /* AllTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF952DAF0FBA003FB214 /* AllTaskView.swift */; };
 		F844BF982DAF0FF7003FB214 /* AllTaskPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF972DAF0FF7003FB214 /* AllTaskPresenter.swift */; };
 		F844BF9E2DAF1F0C003FB214 /* AllTaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF9D2DAF1F0C003FB214 /* AllTaskCell.swift */; };
-		F844BFA02DAF1FFA003FB214 /* AllDailyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BF9F2DAF1FF9003FB214 /* AllDailyTask.swift */; };
 		F844BFA42DC2DB43003FB214 /* ChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BFA32DC2DB43003FB214 /* ChartCell.swift */; };
 		F844BFAB2DC2E5E8003FB214 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BFAA2DC2E5E8003FB214 /* PieChartView.swift */; };
 		F844BFAD2DC2E608003FB214 /* PieSliceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F844BFAC2DC2E608003FB214 /* PieSliceView.swift */; };
@@ -68,6 +64,21 @@
 		F8D0313D2DC50A3A00FE44E8 /* AchievementPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D0313C2DC50A3A00FE44E8 /* AchievementPresenterTest.swift */; };
 		F8D0313F2DC50A5000FE44E8 /* AchievementInteractorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D0313E2DC50A5000FE44E8 /* AchievementInteractorTest.swift */; };
 		F8D031412DC50A6100FE44E8 /* AchievementTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031402DC50A6100FE44E8 /* AchievementTest.swift */; };
+		F8D031442DC527C300FE44E8 /* EditTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031432DC527C300FE44E8 /* EditTaskView.swift */; };
+		F8D031462DC52CB500FE44E8 /* AllTaskRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031452DC52CB500FE44E8 /* AllTaskRouter.swift */; };
+		F8D031492DC6A37E00FE44E8 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031482DC6A37E00FE44E8 /* CalendarView.swift */; };
+		F8D0314B2DC6A39100FE44E8 /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D0314A2DC6A39100FE44E8 /* CalendarCell.swift */; };
+		F8D0314D2DC6A5C000FE44E8 /* ScheduleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D0314C2DC6A5C000FE44E8 /* ScheduleView.swift */; };
+		F8D031512DC6C1E800FE44E8 /* SchedulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031502DC6C1E800FE44E8 /* SchedulePresenter.swift */; };
+		F8D031532DC6C53900FE44E8 /* CalendarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031522DC6C53900FE44E8 /* CalendarPresenter.swift */; };
+		F8D031552DC6C5A900FE44E8 /* CalendarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031542DC6C5A900FE44E8 /* CalendarItem.swift */; };
+		F8D031572DC6EDFC00FE44E8 /* EditTaskPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031562DC6EDFB00FE44E8 /* EditTaskPresenter.swift */; };
+		F8D031592DC6F6A300FE44E8 /* CalendarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031582DC6F6A300FE44E8 /* CalendarRouter.swift */; };
+		F8D0315B2DC807B100FE44E8 /* CategoryDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D0315A2DC807B000FE44E8 /* CategoryDataProvider.swift */; };
+		F8D0315D2DC8081F00FE44E8 /* EditInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D0315C2DC8081F00FE44E8 /* EditInteractor.swift */; };
+		F8D0315F2DC80E7500FE44E8 /* LvLDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D0315E2DC80E7500FE44E8 /* LvLDataProvider.swift */; };
+		F8D031622DC814EC00FE44E8 /* CalendarPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031612DC814EC00FE44E8 /* CalendarPresenterTest.swift */; };
+		F8D031652DC8161100FE44E8 /* AllTaskPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031642DC8161100FE44E8 /* AllTaskPresenterTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,7 +115,6 @@
 		F844BF522DA70E62003FB214 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		F844BF572DA711FE003FB214 /* TasksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksView.swift; sourceTree = "<group>"; };
 		F844BF602DA87D7D003FB214 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		F844BF632DA87F33003FB214 /* LvLDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LvLDataProvider.swift; sourceTree = "<group>"; };
 		F844BF652DA95B60003FB214 /* MainLvLInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLvLInteractor.swift; sourceTree = "<group>"; };
 		F844BF682DA9A1DC003FB214 /* MainLvLPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLvLPresenterTests.swift; sourceTree = "<group>"; };
 		F844BF6A2DA9A2CE003FB214 /* MainLvLInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainLvLInteractorTests.swift; sourceTree = "<group>"; };
@@ -127,7 +137,6 @@
 		F844BF972DAF0FF7003FB214 /* AllTaskPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTaskPresenter.swift; sourceTree = "<group>"; };
 		F844BF992DAF1480003FB214 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F844BF9D2DAF1F0C003FB214 /* AllTaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTaskCell.swift; sourceTree = "<group>"; };
-		F844BF9F2DAF1FF9003FB214 /* AllDailyTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllDailyTask.swift; sourceTree = "<group>"; };
 		F844BFA32DC2DB43003FB214 /* ChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCell.swift; sourceTree = "<group>"; };
 		F844BFAA2DC2E5E8003FB214 /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		F844BFAC2DC2E608003FB214 /* PieSliceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieSliceView.swift; sourceTree = "<group>"; };
@@ -150,6 +159,21 @@
 		F8D0313C2DC50A3A00FE44E8 /* AchievementPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementPresenterTest.swift; sourceTree = "<group>"; };
 		F8D0313E2DC50A5000FE44E8 /* AchievementInteractorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementInteractorTest.swift; sourceTree = "<group>"; };
 		F8D031402DC50A6100FE44E8 /* AchievementTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementTest.swift; sourceTree = "<group>"; };
+		F8D031432DC527C300FE44E8 /* EditTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskView.swift; sourceTree = "<group>"; };
+		F8D031452DC52CB500FE44E8 /* AllTaskRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTaskRouter.swift; sourceTree = "<group>"; };
+		F8D031482DC6A37E00FE44E8 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		F8D0314A2DC6A39100FE44E8 /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
+		F8D0314C2DC6A5C000FE44E8 /* ScheduleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleView.swift; sourceTree = "<group>"; };
+		F8D031502DC6C1E800FE44E8 /* SchedulePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePresenter.swift; sourceTree = "<group>"; };
+		F8D031522DC6C53900FE44E8 /* CalendarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPresenter.swift; sourceTree = "<group>"; };
+		F8D031542DC6C5A900FE44E8 /* CalendarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarItem.swift; sourceTree = "<group>"; };
+		F8D031562DC6EDFB00FE44E8 /* EditTaskPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskPresenter.swift; sourceTree = "<group>"; };
+		F8D031582DC6F6A300FE44E8 /* CalendarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarRouter.swift; sourceTree = "<group>"; };
+		F8D0315A2DC807B000FE44E8 /* CategoryDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryDataProvider.swift; sourceTree = "<group>"; };
+		F8D0315C2DC8081F00FE44E8 /* EditInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditInteractor.swift; sourceTree = "<group>"; };
+		F8D0315E2DC80E7500FE44E8 /* LvLDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LvLDataProvider.swift; sourceTree = "<group>"; };
+		F8D031612DC814EC00FE44E8 /* CalendarPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPresenterTest.swift; sourceTree = "<group>"; };
+		F8D031642DC8161100FE44E8 /* AllTaskPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTaskPresenterTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,7 +189,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F844BF5D2DA80768003FB214 /* SwiftfulUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,7 +196,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F844BF5F2DA8076D003FB214 /* SwiftfulUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,6 +250,8 @@
 		F844BF282DA6FF29003FB214 /* LvL-upTests */ = {
 			isa = PBXGroup;
 			children = (
+				F8D031632DC8160000FE44E8 /* AllTasks */,
+				F8D031602DC814BB00FE44E8 /* Calendar */,
 				F8D0313B2DC50A1400FE44E8 /* Achievements */,
 				F8D031242DC4F21800FE44E8 /* Charts */,
 				F844BF7F2DAC2C71003FB214 /* Tasks */,
@@ -262,12 +286,15 @@
 			children = (
 				F844BF8F2DAC647D003FB214 /* HomeView.swift */,
 				F8D031302DC4FAA600FE44E8 /* StatisticsView.swift */,
+				F8D0314F2DC6C1C300FE44E8 /* Schedule */,
+				F8D031472DC6A32900FE44E8 /* Сalendar */,
 				F844BF942DAF0F85003FB214 /* AllTasks */,
 				F844BF862DAC6108003FB214 /* CustomTabBar */,
 				F844BF562DA711DC003FB214 /* Tasks */,
 				F844BF442DA70001003FB214 /* MainLvL */,
 				F844BFA22DC2DB03003FB214 /* Charts */,
 				F8D0312B2DC4F72600FE44E8 /* Achievements */,
+				F8D031422DC527A200FE44E8 /* EditTask */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -311,8 +338,6 @@
 		F844BF622DA87EF8003FB214 /* DataProviders */ = {
 			isa = PBXGroup;
 			children = (
-				F844BF632DA87F33003FB214 /* LvLDataProvider.swift */,
-				F844BF742DAA896B003FB214 /* TaskDataProvider.swift */,
 			);
 			path = DataProviders;
 			sourceTree = "<group>";
@@ -378,7 +403,7 @@
 			children = (
 				F844BF9C2DAF1EF5003FB214 /* View */,
 				F844BF972DAF0FF7003FB214 /* AllTaskPresenter.swift */,
-				F844BF9F2DAF1FF9003FB214 /* AllDailyTask.swift */,
+				F8D031452DC52CB500FE44E8 /* AllTaskRouter.swift */,
 			);
 			path = AllTasks;
 			sourceTree = "<group>";
@@ -429,6 +454,9 @@
 			children = (
 				F844BFBB2DC422FA003FB214 /* ChartsDataProvider.swift */,
 				F8D031392DC500EE00FE44E8 /* AchievementDataProvider.swift */,
+				F844BF742DAA896B003FB214 /* TaskDataProvider.swift */,
+				F8D0315A2DC807B000FE44E8 /* CategoryDataProvider.swift */,
+				F8D0315E2DC80E7500FE44E8 /* LvLDataProvider.swift */,
 			);
 			path = DataProviders;
 			sourceTree = "<group>";
@@ -472,6 +500,61 @@
 			path = Achievements;
 			sourceTree = "<group>";
 		};
+		F8D031422DC527A200FE44E8 /* EditTask */ = {
+			isa = PBXGroup;
+			children = (
+				F8D031432DC527C300FE44E8 /* EditTaskView.swift */,
+				F8D031562DC6EDFB00FE44E8 /* EditTaskPresenter.swift */,
+				F8D0315C2DC8081F00FE44E8 /* EditInteractor.swift */,
+			);
+			path = EditTask;
+			sourceTree = "<group>";
+		};
+		F8D031472DC6A32900FE44E8 /* Сalendar */ = {
+			isa = PBXGroup;
+			children = (
+				F8D0314E2DC6C15600FE44E8 /* View */,
+				F8D031522DC6C53900FE44E8 /* CalendarPresenter.swift */,
+				F8D031582DC6F6A300FE44E8 /* CalendarRouter.swift */,
+				F8D031542DC6C5A900FE44E8 /* CalendarItem.swift */,
+			);
+			path = "Сalendar";
+			sourceTree = "<group>";
+		};
+		F8D0314E2DC6C15600FE44E8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F8D031482DC6A37E00FE44E8 /* CalendarView.swift */,
+				F8D0314A2DC6A39100FE44E8 /* CalendarCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F8D0314F2DC6C1C300FE44E8 /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				F8D0314C2DC6A5C000FE44E8 /* ScheduleView.swift */,
+				F8D031502DC6C1E800FE44E8 /* SchedulePresenter.swift */,
+			);
+			path = Schedule;
+			sourceTree = "<group>";
+		};
+		F8D031602DC814BB00FE44E8 /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				F8D031612DC814EC00FE44E8 /* CalendarPresenterTest.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		F8D031632DC8160000FE44E8 /* AllTasks */ = {
+			isa = PBXGroup;
+			children = (
+				F8D031642DC8161100FE44E8 /* AllTaskPresenterTest.swift */,
+			);
+			path = AllTasks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -510,7 +593,6 @@
 			);
 			name = "LvL-upTests";
 			packageProductDependencies = (
-				F844BF5C2DA80768003FB214 /* SwiftfulUI */,
 			);
 			productName = "LvL-upTests";
 			productReference = F844BF252DA6FF29003FB214 /* LvL-upTests.xctest */;
@@ -531,7 +613,6 @@
 			);
 			name = "LvL-upUITests";
 			packageProductDependencies = (
-				F844BF5E2DA8076D003FB214 /* SwiftfulUI */,
 			);
 			productName = "LvL-upUITests";
 			productReference = F844BF2F2DA6FF29003FB214 /* LvL-upUITests.xctest */;
@@ -615,27 +696,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				F844BFAB2DC2E5E8003FB214 /* PieChartView.swift in Sources */,
+				F8D0314B2DC6A39100FE44E8 /* CalendarCell.swift in Sources */,
 				F844BF1D2DA6FF29003FB214 /* Persistence.swift in Sources */,
 				F844BF752DAA896B003FB214 /* TaskDataProvider.swift in Sources */,
 				F844BF932DAC68AA003FB214 /* Color.swift in Sources */,
 				F844BFBC2DC422FA003FB214 /* ChartsDataProvider.swift in Sources */,
-				F844BF642DA87F33003FB214 /* LvLDataProvider.swift in Sources */,
+				F8D031492DC6A37E00FE44E8 /* CalendarView.swift in Sources */,
+				F8D031512DC6C1E800FE44E8 /* SchedulePresenter.swift in Sources */,
 				F844BF7B2DAA8F50003FB214 /* TaskPresenter.swift in Sources */,
 				F844BF8A2DAC616E003FB214 /* CustomTabBarView.swift in Sources */,
 				F844BF582DA711FE003FB214 /* TasksView.swift in Sources */,
+				F8D0315F2DC80E7500FE44E8 /* LvLDataProvider.swift in Sources */,
 				F844BF962DAF0FBA003FB214 /* AllTaskView.swift in Sources */,
 				F844BF982DAF0FF7003FB214 /* AllTaskPresenter.swift in Sources */,
 				F8D0312D2DC4F74100FE44E8 /* AchievementCell.swift in Sources */,
 				F844BF482DA70179003FB214 /* MainLvLView.swift in Sources */,
 				F844BFBE2DC42329003FB214 /* APIManager.swift in Sources */,
 				F844BF202DA6FF29003FB214 /* LvL_up.xcdatamodeld in Sources */,
+				F8D031462DC52CB500FE44E8 /* AllTaskRouter.swift in Sources */,
 				F844BF772DAA8C76003FB214 /* DailyTask.swift in Sources */,
 				F844BFA42DC2DB43003FB214 /* ChartCell.swift in Sources */,
 				F844BF532DA70E62003FB214 /* TaskCell.swift in Sources */,
 				F844BFB12DC3AD56003FB214 /* LegendView.swift in Sources */,
+				F8D0315B2DC807B100FE44E8 /* CategoryDataProvider.swift in Sources */,
 				F8D0312F2DC4FA0300FE44E8 /* AchievementsView.swift in Sources */,
 				F8D031332DC4FDDE00FE44E8 /* Achievement.swift in Sources */,
-				F844BFA02DAF1FFA003FB214 /* AllDailyTask.swift in Sources */,
+				F8D031572DC6EDFC00FE44E8 /* EditTaskPresenter.swift in Sources */,
+				F8D031442DC527C300FE44E8 /* EditTaskView.swift in Sources */,
 				F844BFAF2DC3A791003FB214 /* ChartsView.swift in Sources */,
 				F844BF4E2DA709A4003FB214 /* MainLvLPresenter.swift in Sources */,
 				F8D0313A2DC500EE00FE44E8 /* AchievementDataProvider.swift in Sources */,
@@ -643,8 +730,12 @@
 				F844BF662DA95B60003FB214 /* MainLvLInteractor.swift in Sources */,
 				F844BFB32DC3B411003FB214 /* Statistics.swift in Sources */,
 				F844BFB82DC42279003FB214 /* ChartsInteractor.swift in Sources */,
+				F8D0315D2DC8081F00FE44E8 /* EditInteractor.swift in Sources */,
+				F8D031552DC6C5A900FE44E8 /* CalendarItem.swift in Sources */,
+				F8D031532DC6C53900FE44E8 /* CalendarPresenter.swift in Sources */,
 				F844BF8C2DAC6190003FB214 /* TabBarItem.swift in Sources */,
 				F844BF902DAC647D003FB214 /* HomeView.swift in Sources */,
+				F8D0314D2DC6A5C000FE44E8 /* ScheduleView.swift in Sources */,
 				F844BF142DA6FF25003FB214 /* LvL_upApp.swift in Sources */,
 				F844BF612DA87D7D003FB214 /* CoreDataManager.swift in Sources */,
 				F844BF502DA70A40003FB214 /* LvL.swift in Sources */,
@@ -655,6 +746,7 @@
 				F8D031312DC4FAA600FE44E8 /* StatisticsView.swift in Sources */,
 				F844BF882DAC6148003FB214 /* CustomTabBarContainerView.swift in Sources */,
 				F8D031362DC500C600FE44E8 /* AchievementPresenter.swift in Sources */,
+				F8D031592DC6F6A300FE44E8 /* CalendarRouter.swift in Sources */,
 				F844BFB62DC42266003FB214 /* ChartsPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -669,6 +761,8 @@
 				F844BF852DAC2CD7003FB214 /* TaskPresenterTests.swift in Sources */,
 				F844BF692DA9A1DC003FB214 /* MainLvLPresenterTests.swift in Sources */,
 				F8D031412DC50A6100FE44E8 /* AchievementTest.swift in Sources */,
+				F8D031622DC814EC00FE44E8 /* CalendarPresenterTest.swift in Sources */,
+				F8D031652DC8161100FE44E8 /* AllTaskPresenterTest.swift in Sources */,
 				F8D0312A2DC4F2A600FE44E8 /* ChartsInteractorTest.swift in Sources */,
 				F844BF812DAC2C99003FB214 /* DailyTaskTests.swift in Sources */,
 				F8D0313F2DC50A5000FE44E8 /* AchievementInteractorTest.swift in Sources */,
@@ -1022,16 +1116,6 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		F844BF4B2DA704AF003FB214 /* SwiftfulUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F844BF492DA70254003FB214 /* XCRemoteSwiftPackageReference "SwiftfulUI" */;
-			productName = SwiftfulUI;
-		};
-		F844BF5C2DA80768003FB214 /* SwiftfulUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F844BF492DA70254003FB214 /* XCRemoteSwiftPackageReference "SwiftfulUI" */;
-			productName = SwiftfulUI;
-		};
-		F844BF5E2DA8076D003FB214 /* SwiftfulUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F844BF492DA70254003FB214 /* XCRemoteSwiftPackageReference "SwiftfulUI" */;
 			productName = SwiftfulUI;
