@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EditTaskView: View {
     @Environment(\.presentationMode) var presentationMode
-    @ObservedObject var task: Taskk
+    @ObservedObject var presenter: EditTaskPresenter
     
     @State private var showingNewCategoryAlert = false
     @State private var newCategoryName = ""
@@ -17,10 +17,13 @@ struct EditTaskView: View {
     @State private var showCustomRewardField = false
     @State private var hasDate: Bool
     
+    var returnNewTask: (DailyTask) -> Void
+    
     // Инициализатор для правильной установки начального значения hasDate
-    init(task: Taskk) {
-        self.task = task
+    init(task: DailyTask, returnNewTask: @escaping (DailyTask) -> Void) {
+        self._presenter = ObservedObject(initialValue: EditTaskPresenter(task: task))
         self._hasDate = State(initialValue: task.date != nil)
+        self.returnNewTask = returnNewTask
     }
     
     // Стандартные значения наград
@@ -38,221 +41,224 @@ struct EditTaskView: View {
     let categories = ["Работа", "Дом", "Спорт", "Учеба", "Другое"]
     
     var body: some View {
-        NavigationView {
-            Form {
-                // Название задачи
-                Section(header: Text("Название")) {
-                    TextField("Введите название", text: $task.title)
+            NavigationView {
+                Form {
+                    titleSection
+                    iconSection
+                    rewardSection
+                    dateSection
+                    checkpointsSection
+                    categorySection
+                    optionsSection
                 }
-                
-                // Иконка задачи
-                Section(header: Text("Иконка")) {
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack {
-                            ForEach(systemIcons, id: \.self) { iconName in
-                                Image(systemName: iconName)
-                                    .font(.system(size: 24))
-                                    .frame(width: 50, height: 50)
-                                    .background(task.img == iconName ? Color.blue.opacity(0.2) : Color.gray.opacity(0.1))
-                                    .cornerRadius(10)
-                                    .onTapGesture {
-                                        task.img = iconName
-                                    }
-                            }
-                        }
-                        .padding(.vertical, 8)
-                    }
-                }
-                
-                // Награда
-                Section(header: Text("Награда")) {
+                .navigationTitle("Редактировать задачу")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar { toolbarContent }
+                .alert("Новая категория", isPresented: $showingNewCategoryAlert) { newCategoryAlert }
+                .onAppear { setupInitialState() }
+            }
+        }
+        
+        // MARK: - Subviews
+        
+        private var titleSection: some View {
+            Section(header: Text("Название")) {
+                TextField("Введите название", text: $presenter.task.title)
+            }
+        }
+        
+        private var iconSection: some View {
+            Section(header: Text("Иконка")) {
+                ScrollView(.horizontal, showsIndicators: false) {
                     HStack {
-                        ForEach(standardRewards, id: \.self) { reward in
-                            Button(action: {
-                                task.reward = reward
-                                showCustomRewardField = false
-                            }) {
-                                Text("\(reward)")
-                                    .padding(8)
-                                    .background(task.reward == reward ? Color.blue : Color.gray.opacity(0.2))
-                                    .foregroundColor(task.reward == reward ? .white : .primary)
-                                    .cornerRadius(8)
-                            }
-                            .buttonStyle(PlainButtonStyle())
+                        ForEach(systemIcons, id: \.self) { iconName in
+                            iconButton(for: iconName)
                         }
                     }
-                    
-                    Button(action: {
-                        showCustomRewardField.toggle()
-                        if !showCustomRewardField {
-                            task.reward = 0
-                        }
-                    }) {
-                        HStack {
-                            Text("Своя награда")
-                            Spacer()
-                            Image(systemName: showCustomRewardField ? "chevron.up" : "chevron.down")
-                        }
-                    }
-                    
-                    if showCustomRewardField {
-                        TextField("Введите сумму", text: $customReward)
-                            .keyboardType(.numberPad)
-                            .onChange(of: customReward) { newValue in
-                                if let value = Int(newValue) {
-                                    task.reward = value
-                                }
-                            }
-                    }
-                }
-                
-                // Дата выполнения
-                Section(header: Text("Дата выполнения")) {
-                    Toggle("Установить дату", isOn: $hasDate)
-                        .onChange(of: hasDate) { newValue in
-                            if newValue {
-                                // Если дата была nil, устанавливаем текущую дату
-                                task.date = task.date ?? Date()
-                            } else {
-                                // Если переключатель выключен, устанавливаем nil
-                                task.date = nil
-                            }
-                        }
-                    
-                    if hasDate, let binding = Binding($task.date) {
-                        DatePicker(
-                            "Выберите дату",
-                            selection: binding,
-                            displayedComponents: [.date, .hourAndMinute]
-                        )
-                        .transition(.opacity)
-                    }
-                }
-                .animation(.easeInOut, value: hasDate)
-                
-                // Остальные секции...
-                // Количество чекпоинтов
-                Section(header: Text("Промежуточные точки")) {
-                    Stepper(value: $task.checkPoints, in: 0...10) {
-                        Text("Чекпоинтов: \(task.checkPoints)")
-                    }
-                }
-                
-                // Категория
-                Section(header: Text("Категория")) {
-                    Picker("Выберите категорию", selection: $task.category) {
-                        ForEach(categories, id: \.self) { category in
-                            Text(category).tag(category)
-                        }
-                    }
-                    .pickerStyle(.menu)
-                    
-                    Button("Создать новую категорию") {
-                        showingNewCategoryAlert = true
-                    }
-                }
-                
-                // Дополнительные опции
-                Section {
-                    Toggle("Повторять каждую неделю", isOn: $task.isRepeat)
-                        .disabled(task.date == nil) // Отключаем если нет даты
-                    Toggle("В архиве", isOn: $task.isArchived)
+                    .padding(.vertical, 8)
                 }
             }
-            .navigationTitle("Редактировать задачу")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Готово") {
-                        presentationMode.wrappedValue.dismiss()
-                    }
+        }
+        
+        private func iconButton(for iconName: String) -> some View {
+            Image(systemName: iconName)
+                .font(.system(size: 24))
+                .frame(width: 50, height: 50)
+                .background(presenter.task.img == iconName ? Color.blue.opacity(0.2) : Color.gray.opacity(0.1))
+                .cornerRadius(10)
+                .onTapGesture { presenter.task.img = iconName }
+        }
+        
+        private var rewardSection: some View {
+            Section(header: Text("Награда")) {
+                standardRewardsView
+                customRewardButton
+                if showCustomRewardField {
+                    customRewardField
                 }
             }
-            .alert("Новая категория", isPresented: $showingNewCategoryAlert) {
+        }
+        
+        private var standardRewardsView: some View {
+            HStack {
+                ForEach(standardRewards, id: \.self) { reward in
+                    rewardButton(for: reward)
+                }
+            }
+        }
+        
+        private func rewardButton(for reward: Int) -> some View {
+            Button(action: {
+                presenter.task.reward = reward
+                showCustomRewardField = false
+            }) {
+                Text("\(reward)")
+                    .padding(8)
+                    .background(presenter.task.reward == reward ? Color.blue : Color.gray.opacity(0.2))
+                    .foregroundColor(presenter.task.reward == reward ? .white : .primary)
+                    .cornerRadius(8)
+            }
+            .buttonStyle(PlainButtonStyle())
+        }
+        
+        private var customRewardButton: some View {
+            Button(action: toggleCustomRewardField) {
+                HStack {
+                    Text("Своя награда")
+                    Spacer()
+                    Image(systemName: showCustomRewardField ? "chevron.up" : "chevron.down")
+                }
+            }
+        }
+        
+        private var customRewardField: some View {
+            TextField("Введите сумму", text: $customReward)
+                .keyboardType(.numberPad)
+                .onChange(of: customReward) { newValue in
+                    if let value = Int(newValue) {
+                        presenter.task.reward = value
+                    }
+                }
+        }
+        
+        private var dateSection: some View {
+            Section(header: Text("Дата выполнения")) {
+                dateToggle
+                if hasDate, let binding = Binding($presenter.task.date) {
+                    datePicker(binding: binding)
+                }
+            }
+            .animation(.easeInOut, value: hasDate)
+        }
+        
+        private var dateToggle: some View {
+            Toggle("Установить дату", isOn: $hasDate)
+                .onChange(of: hasDate) { newValue in
+                    presenter.task.date = newValue ? (presenter.task.date ?? Date()) : nil
+                }
+        }
+        
+        private func datePicker(binding: Binding<Date>) -> some View {
+            DatePicker(
+                "Выберите дату",
+                selection: binding,
+                displayedComponents: [.date]
+            )
+            .transition(.opacity)
+        }
+        
+        private var checkpointsSection: some View {
+            Section(header: Text("Промежуточные точки")) {
+                Stepper(value: $presenter.task.checkPoints, in: 0...10) {
+                    Text("Чекпоинтов: \(presenter.task.checkPoints)")
+                }
+            }
+        }
+        
+        private var categorySection: some View {
+            Section(header: Text("Категория")) {
+                categoryPicker
+                newCategoryButton
+            }
+        }
+        
+        private var categoryPicker: some View {
+            Picker("Выберите категорию", selection: $presenter.task.category) {
+                ForEach(categories, id: \.self) { category in
+                    Text(category).tag(category)
+                }
+            }
+            .pickerStyle(.menu)
+        }
+        
+        private var newCategoryButton: some View {
+            Button("Создать новую категорию") {
+                showingNewCategoryAlert = true
+            }
+        }
+        
+        private var optionsSection: some View {
+            Section {
+                repeatToggle
+                archiveToggle
+            }
+        }
+        
+        private var repeatToggle: some View {
+            Toggle("Повторять каждую неделю", isOn: $presenter.task.isRepeat)
+                .disabled(presenter.task.date == nil)
+        }
+        
+        private var archiveToggle: some View {
+            Toggle("В архиве", isOn: $presenter.task.isArchived)
+        }
+        
+        private var toolbarContent: some ToolbarContent {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Готово") {
+                    returnNewTask(presenter.task)
+                    presentationMode.wrappedValue.dismiss()
+                }
+            }
+        }
+        
+        private var newCategoryAlert: some View {
+            Group {
                 TextField("Название категории", text: $newCategoryName)
                 Button("Добавить") {
                     if !newCategoryName.isEmpty {
-                        task.category = newCategoryName
+                        presenter.task.category = newCategoryName
                         newCategoryName = ""
                     }
                 }
                 Button("Отмена", role: .cancel) {}
             }
-            .onAppear {
-                if !standardRewards.contains(task.reward) {
-                    customReward = "\(task.reward)"
-                    showCustomRewardField = true
-                }
+        }
+        
+        // MARK: - Private Methods
+        
+        private func setupInitialState() {
+            hasDate = presenter.task.date != nil
+            if !standardRewards.contains(presenter.task.reward) {
+                customReward = "\(presenter.task.reward)"
+                showCustomRewardField = true
             }
         }
-    }
+        
+        private func toggleCustomRewardField() {
+            showCustomRewardField.toggle()
+            if !showCustomRewardField {
+                presenter.task.reward = 0
+            }
+        }
 }
 
-// Обновленная структура Task с опциональной датой
-class Taskk: ObservableObject, Identifiable {
-    @Published var id = UUID()
-    @Published var title: String
-    @Published var img: String
-    @Published var reward: Int
-    @Published var isArchived: Bool
-    @Published var checkPoints: Int
-    @Published var isRepeat: Bool
-    @Published var category: String
-    @Published var date: Date? // Теперь опциональная
-    
-    init(title: String, img: String, reward: Int, isArchived: Bool,
-         checkPoints: Int, isRepeat: Bool, category: String, date: Date?) {
-        self.title = title
-        self.img = img
-        self.reward = reward
-        self.isArchived = isArchived
-        self.checkPoints = checkPoints
-        self.isRepeat = isRepeat
-        self.category = category
-        self.date = date
-    }
-    
-    static var new: Taskk {
-        Taskk(
-            title: "",
-            img: "book.fill",
-            reward: 20,
-            isArchived: false,
-            checkPoints: 1,
-            isRepeat: false,
-            category: "",
-            date: nil
-        )
-    }
-}
-
-// Предпросмотр
 struct EditTaskView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            // Задача с датой
-            EditTaskView(task: Taskk(
-                title: "Прочитать книгу",
-                img: "book.fill",
-                reward: 20,
-                isArchived: false,
-                checkPoints: 3,
-                isRepeat: false,
-                category: "Учеба",
-                date: Date()
-            ))
-            
-            // Задача без даты
-            EditTaskView(task: Taskk(
-                title: "Позвонить маме",
-                img: "heart.fill",
-                reward: 10,
-                isArchived: false,
-                checkPoints: 1,
-                isRepeat: false,
-                category: "Дом",
-                date: nil
-            ))
+            EditTaskView(task: DailyTask.mockTasks.first!) { _ in
+                
+            }
         }
     }
 }

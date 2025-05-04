@@ -27,6 +27,9 @@ struct AllTaskView: View {
                         }
                         .tint(.yellow)
                     }
+                    .fullScreenCover(isPresented: $isEditing, content: {
+                        presenter.editTask(task)
+                    })
             }
             Rectangle()
                 .frame(height: 80)
@@ -35,9 +38,7 @@ struct AllTaskView: View {
         }
         .listStyle(.plain)
         .scrollIndicators(.hidden)
-        .fullScreenCover(isPresented: $isEditing, content: {
-            presenter.addNewTask()
-        })
+        
         .ignoresSafeArea(edges: .bottom)
     }
 }

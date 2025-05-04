@@ -74,6 +74,8 @@
 		F8D031512DC6C1E800FE44E8 /* SchedulePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031502DC6C1E800FE44E8 /* SchedulePresenter.swift */; };
 		F8D031532DC6C53900FE44E8 /* CalendarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031522DC6C53900FE44E8 /* CalendarPresenter.swift */; };
 		F8D031552DC6C5A900FE44E8 /* CalendarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031542DC6C5A900FE44E8 /* CalendarItem.swift */; };
+		F8D031572DC6EDFC00FE44E8 /* EditTaskPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031562DC6EDFB00FE44E8 /* EditTaskPresenter.swift */; };
+		F8D031592DC6F6A300FE44E8 /* CalendarRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031582DC6F6A300FE44E8 /* CalendarRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +166,8 @@
 		F8D031502DC6C1E800FE44E8 /* SchedulePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchedulePresenter.swift; sourceTree = "<group>"; };
 		F8D031522DC6C53900FE44E8 /* CalendarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarPresenter.swift; sourceTree = "<group>"; };
 		F8D031542DC6C5A900FE44E8 /* CalendarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarItem.swift; sourceTree = "<group>"; };
+		F8D031562DC6EDFB00FE44E8 /* EditTaskPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTaskPresenter.swift; sourceTree = "<group>"; };
+		F8D031582DC6F6A300FE44E8 /* CalendarRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -492,6 +496,7 @@
 			isa = PBXGroup;
 			children = (
 				F8D031432DC527C300FE44E8 /* EditTaskView.swift */,
+				F8D031562DC6EDFB00FE44E8 /* EditTaskPresenter.swift */,
 			);
 			path = EditTask;
 			sourceTree = "<group>";
@@ -501,6 +506,7 @@
 			children = (
 				F8D0314E2DC6C15600FE44E8 /* View */,
 				F8D031522DC6C53900FE44E8 /* CalendarPresenter.swift */,
+				F8D031582DC6F6A300FE44E8 /* CalendarRouter.swift */,
 				F8D031542DC6C5A900FE44E8 /* CalendarItem.swift */,
 			);
 			path = "Сalendar";
@@ -689,6 +695,7 @@
 				F844BFB12DC3AD56003FB214 /* LegendView.swift in Sources */,
 				F8D0312F2DC4FA0300FE44E8 /* AchievementsView.swift in Sources */,
 				F8D031332DC4FDDE00FE44E8 /* Achievement.swift in Sources */,
+				F8D031572DC6EDFC00FE44E8 /* EditTaskPresenter.swift in Sources */,
 				F844BFA02DAF1FFA003FB214 /* AllDailyTask.swift in Sources */,
 				F8D031442DC527C300FE44E8 /* EditTaskView.swift in Sources */,
 				F844BFAF2DC3A791003FB214 /* ChartsView.swift in Sources */,
@@ -713,6 +720,7 @@
 				F8D031312DC4FAA600FE44E8 /* StatisticsView.swift in Sources */,
 				F844BF882DAC6148003FB214 /* CustomTabBarContainerView.swift in Sources */,
 				F8D031362DC500C600FE44E8 /* AchievementPresenter.swift in Sources */,
+				F8D031592DC6F6A300FE44E8 /* CalendarRouter.swift in Sources */,
 				F844BFB62DC42266003FB214 /* ChartsPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

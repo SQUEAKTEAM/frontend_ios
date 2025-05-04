@@ -21,16 +21,18 @@ final class AllTaskPresenter: ObservableObject {
         self._tasks = tasks
     }
     
-    @MainActor
-    func getData() async {
-        tasks = DailyTask.mockTasks
-    }
-    
-    func addNewTask() -> AnyView {
-        router.navigateToAddTask()
-    }
-    
-    func editTask(_ task: Taskk) -> AnyView {
-        router.navigateToEditTask(for: task)
+    func editTask(_ task: DailyTask) -> AnyView {
+        router.navigateToEditTask(for: task) { [weak self] dailyTask in
+            guard let self = self else { return }
+            
+            Task {
+                guard 
+                    let newTask = await self.interactor.update(dailyTask),
+                    let index = self.tasks.firstIndex(where: { $0.id == newTask.id }) else { return }
+                DispatchQueue.main.async {
+                    self.tasks[index] = dailyTask
+                }
+            }
+        }
     }
 }

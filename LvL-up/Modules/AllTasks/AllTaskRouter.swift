@@ -8,17 +8,11 @@
 import SwiftUI
 
 protocol AllTaskRouterProtocol {
-    func navigateToAddTask() -> AnyView
-    func navigateToEditTask(for task: Taskk) -> AnyView
+    func navigateToEditTask(for task: DailyTask, returnNewTask: @escaping (DailyTask)->Void) -> AnyView
 }
 
 final class AllTaskRouter: AllTaskRouterProtocol {
-    
-    func navigateToAddTask() -> AnyView {
-        AnyView(EditTaskView(task: Taskk.new))
-    }
-    
-    func navigateToEditTask(for task: Taskk) -> AnyView  {
-        AnyView(EditTaskView(task: task))
+    func navigateToEditTask(for task: DailyTask, returnNewTask: @escaping (DailyTask)->Void) -> AnyView  {
+        AnyView(EditTaskView(task: task, returnNewTask: returnNewTask))
     }
 }

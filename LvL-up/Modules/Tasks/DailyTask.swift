@@ -16,15 +16,15 @@ struct DailyTaskSerializer: Codable {
 struct DailyTask: Identifiable, Codable {
     let id: Int
     let checkPoint: Int
-    let img: String
+    var img: String
     let isCompleted: Bool
-    let reward: Int
-    let title: String
-    let checkPoints: Int
-    let isRepeat: Bool
-    let isArchived: Bool
-    let category: String
-    let date: Date?
+    var reward: Int
+    var title: String
+    var checkPoints: Int
+    var isRepeat: Bool
+    var isArchived: Bool
+    var category: String
+    var date: Date?
     
     init(id: Int, img: String, isCompleted: Bool, reward: Int, title: String, checkPoints: Int, checkPoint: Int = 0, isRepeat: Bool = false, isArchived: Bool = false, category: String, date: Date? = nil) {
         self.id = id
@@ -72,6 +72,10 @@ struct DailyTask: Identifiable, Codable {
         let blue = CGFloat(max(100, b)) / 255.0
         
         return Color(UIColor(red: red, green: green, blue: blue, alpha: 1.0))
+    }
+    
+    static var new: DailyTask {
+        DailyTask(id: -1, img: "book.fill", isCompleted: false, reward: 10, title: "", checkPoints: 1, category: "")
     }
 }
 

@@ -11,6 +11,7 @@ struct CalendarView: View {
     @State private var showDatePicker = false
     @Binding var selectedDate: Date?
     @StateObject var presenter = CalendarPresenter()
+    @State private var isEditing = false
     
     var body: some View {
         VStack(spacing: 5) {
@@ -30,7 +31,7 @@ struct CalendarView: View {
                 .foregroundStyle(.yellow)
                 
                 CalendarCell(title: "+", subTitle: "", isSelected: false) {
-                    //presenter.addTask()
+                    isEditing.toggle()
                 }
                 .foregroundStyle(.yellow)
             }
@@ -47,6 +48,14 @@ struct CalendarView: View {
             }
             .padding()
         }
+        .fullScreenCover(isPresented: $isEditing, content: {
+            presenter.addNewTask { date in
+                selectedDate = date
+                guard let date = date else { return }
+                presenter.internalDate = date
+                presenter.getDays()
+            }
+        })
         .sheet(isPresented: $showDatePicker) {
             VStack {
                 DatePicker(

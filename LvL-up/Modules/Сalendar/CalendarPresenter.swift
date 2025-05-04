@@ -5,14 +5,15 @@
 //  Created by MyBook on 04.05.2025.
 //
 
-import Foundation
+import SwiftUI
 
 final class CalendarPresenter: ObservableObject {
     @Published var selectedType: CalendarSelectionType = .unscheduled
-    
     @Published var internalDate: Date = Date()
-    
     @Published var days: [CalendarItem] = []
+    
+    private let router: CalendarRouterProtocol
+    private let interactor: TaskInteractorProtocol
     
     var currentMonth: String {
         let formatter = DateFormatter()
@@ -20,7 +21,9 @@ final class CalendarPresenter: ObservableObject {
         return formatter.string(from: internalDate)
     }
     
-    init() {
+    init(interactor: TaskInteractorProtocol = TaskInteractor(), router: CalendarRouterProtocol = CalendarRouter()) {
+        self.interactor = interactor
+        self.router = router
         getDays()
     }
     
@@ -43,6 +46,19 @@ final class CalendarPresenter: ObservableObject {
             }
             
             return CalendarItem(number: dayNumber, weekDay: weekDay, date: date)
+        }
+    }
+    
+    func addNewTask(returnedDate: @escaping (Date?)->Void) -> AnyView {
+        router.navigateToAddTask { [weak self] dailyTask in
+            guard let self = self else { return }
+            
+            Task {
+                guard let newTask = await self.interactor.create(dailyTask) else { return }
+                DispatchQueue.main.async {
+                    returnedDate(newTask.date)
+                }
+            }
         }
     }
     

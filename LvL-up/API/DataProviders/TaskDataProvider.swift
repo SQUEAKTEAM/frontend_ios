@@ -43,7 +43,6 @@ final class TaskDataProvider: TaskProviderProtocol {
     ///POST: id: Int, checkPoint: Int, img: String, isCompleted: Bool, reward: Int, title: String, checkPoints: Int, isRepeat: Bool, isArchived: Bool,  category: String, date: Date, userId: Int
     func create(dailyTask: DailyTask) async throws -> DailyTask {
 //        let user_id = 1
-//        let newTask = DailyTaskSerializer(task: dailyTask, userId: user_id)
 //        let createdTask: DailyTask = try await APIManager.shared.post("create_task/", body: dailyTask)
         return dailyTask
     }
