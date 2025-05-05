@@ -67,7 +67,7 @@ class CalendarPresenterTests: XCTestCase {
     func testCurrentMonthReturnsCorrectMonth() {
         let testDate = DateComponents(calendar: .current, year: 2023, month: 12, day: 1).date!
         presenter.internalDate = testDate
-        XCTAssertEqual(presenter.currentMonth, "December")
+        XCTAssertEqual(presenter.currentMonth, "Декабрь")
     }
     
     // MARK: - addNewTask Tests

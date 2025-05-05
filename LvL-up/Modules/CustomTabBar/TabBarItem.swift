@@ -22,7 +22,7 @@ enum TabBarItem: Hashable {
     var title: String {
         switch self {
         case .dailyTask: return "Задачи"
-        case .tasks: return "Список задач"
+        case .tasks: return "Расписание"
         case .statistics: return "Статистика"
         }
     }

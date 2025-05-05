@@ -17,8 +17,9 @@ final class CalendarPresenter: ObservableObject {
     
     var currentMonth: String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMMM"
-        return formatter.string(from: internalDate)
+        formatter.locale = Locale(identifier: "ru_RU")
+        formatter.dateFormat = "LLLL"
+        return formatter.string(from: internalDate).capitalized
     }
     
     init(interactor: TaskInteractorProtocol = TaskInteractor(), router: CalendarRouterProtocol = CalendarRouter()) {
