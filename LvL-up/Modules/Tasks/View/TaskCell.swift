@@ -31,7 +31,7 @@ struct TaskCell: View, TaskCellProtocol {
                             .fixedSize(horizontal: false, vertical: true)
                             .lineLimit(nil)
                         Spacer()
-                        Text("\(task.calculateCurrentReward()) xp")
+                        Text("\((isNeedMask ? task.calculateCurrentReward() : String(task.reward))) xp")
                             .foregroundStyle(.black)
                             .font(.title3)
                             .bold()
