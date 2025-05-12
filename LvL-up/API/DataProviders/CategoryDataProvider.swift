@@ -17,7 +17,7 @@ final class CategoryDataProvider: CategoryProviderProtocol {
     ///POST: user_id
     func fetchData() async throws -> [String] {
 //        let user_id = 1
-//        return try await apiManager.fetch("statistics/\(user_id)")
+//        return try await apiManager.fetch("categories/\(user_id)")
         return Array(Set(DailyTask.mockTasks.map({ $0.category })))
     }
 }

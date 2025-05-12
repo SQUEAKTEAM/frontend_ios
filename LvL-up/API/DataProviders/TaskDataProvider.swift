@@ -53,6 +53,6 @@ final class TaskDataProvider: TaskProviderProtocol {
     }
     
     func delete(_ id: Int) async throws {
-//        try await APIManager.shared.delete("tasks/\(id)")
+//        try await APIManager.shared.delete("delete_task/\(id)")
     }
 }

@@ -16,12 +16,12 @@ final class LvLDataProvider: LvLProviderProtocol {
     ///POST: user_id
     func fetchData() async throws -> LvL {
 //        let user_id = 1
-//        return try await apiManager.fetch("statistics/\(user_id)")
+//        return try await apiManager.fetch("lvl/\(user_id)")
         return LvL.mock
     }
     
     func update(lvl: LvL) async throws {
-//        let updatedTask: DailyTask = try await APIManager.shared.put("update_task/\(dailyTask.id)", body: dailyTask)
+//        let updatedTask: DailyTask = try await APIManager.shared.put("update_lvl/\(lvl.id)", body: lvl)
 //        return lvl
     }
 }
