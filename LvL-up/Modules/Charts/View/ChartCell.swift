@@ -43,7 +43,12 @@ extension ChartCell {
             .font(.subheadline)
             .bold()
             
-            PieChartView(contents: contents, value: $value)
+            if contents.total == 0 {
+                Circle()
+                    .foregroundStyle(.secondaryText)
+            } else {
+                PieChartView(contents: contents, value: $value)
+            }
         }
         .padding(.horizontal)
     }

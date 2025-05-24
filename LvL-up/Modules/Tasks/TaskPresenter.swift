@@ -38,7 +38,6 @@ final class TaskPresenter: ObservableObject {
         updateMainLvl(dailyTask: dailyTask, checkPoint: checkPoint)
         
         let task = dailyTask.updateCurrentProgress(checkPoint)
-        
         updateArraysLogic(task: task, isCompleted: isCompleted)
         
         Task {
@@ -48,19 +47,19 @@ final class TaskPresenter: ObservableObject {
     
     func getNoCompletedTasks(_ isDaily: Bool) -> [DailyTask] {
         if isDaily {
-            return notCompletedTask.filter({ $0.date != nil })
+            return notCompletedTask.filter({ $0.date != nil || $0.isRepeat })
         } else {
-            return notCompletedTask.filter({ $0.date == nil })
+            return notCompletedTask.filter({ $0.date == nil && !$0.isRepeat })
         }
     }
     
-    private func update(_ dailyTask: DailyTask) async -> DailyTask? {
+    private func update(_ dailyTask: DailyTask) async {
         await interactor.update(dailyTask)
     }
     
     private func updateMainLvl(dailyTask: DailyTask, checkPoint: Int) {
         if dailyTask.checkPoint < checkPoint {
-            updateCurrentLvlEx = dailyTask.calculateRewardForCheckPoint()
+            updateCurrentLvlEx = dailyTask.calculateRewardForCheckPoint()            
         } else {
             updateCurrentLvlEx = -dailyTask.calculateRewardForCheckPoint()
         }

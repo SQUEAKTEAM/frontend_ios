@@ -119,14 +119,8 @@ struct BottomSheet: ViewModifier {
                     content
                 }
             }
-            .edgesIgnoringSafeArea(.all)
+            .ignoresSafeArea(.container, edges: .all)
         }
-    }
-}
-
-extension View {
-    func presentAsBottomSheet(_ present: Binding<Bool>, maxHeight: CGFloat? = nil, minHeight: CGFloat? = nil, offsetY: CGFloat = .zero, isAllowPresent: Bool = true) -> some View {
-        modifier(BottomSheet(bottomSheetShown: present, maxHeight: maxHeight, minHeight: minHeight, offsetY: offsetY, isAllowPresent: isAllowPresent))
     }
 }
 

@@ -10,12 +10,11 @@ import SwiftUI
 struct ForgotPasswordView: View {
     
     @StateObject var vm = ForgotPasswordViewModel()
-    @State private var isOpenKeyboard = false
     @Binding var isOpen: Bool
     
     var body: some View {
         ForgotPasswordSegment(vm: vm)
-            .presentAsBottomSheet($isOpen, maxHeight: isOpenKeyboard ? 550 : 350)
+            .presentAsBottomSheet($isOpen, maxHeight: 350)
             .onChange(of: vm.state) { state in
                 isOpen = state != .closed
             }
@@ -25,11 +24,6 @@ struct ForgotPasswordView: View {
                 }
                 if !isOpen {
                     vm.close()
-                }
-            }
-            .onKeyboardAppear { bool in
-                withAnimation(.spring) {
-                    isOpenKeyboard = bool
                 }
             }
     }

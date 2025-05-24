@@ -5,44 +5,46 @@
 //  Created by MyBook on 02.07.2024.
 //
 
-import Foundation
+import SwiftUI
 
 protocol SendCodeAllow {
     func sendCodeOn(mail: String) async throws -> Int
 }
 
-class SendCodeOnMailViewModel: ObservableObject {
-    var authService: SendCodeAllow
-    
-    var mail: String
-    
-    @Published var code: Int?
-    @Published var internalCode: String = ""
-    
+class SendCodeOnMailViewModel: ObservableObject, AlertHandling {
     @Published var alertStatus: AlertStatus?
-    @Published var customErrorDescription: String?
+    
+    private let interactor: ForgotPasswordInteractorProtocol
+    
+    @Binding var mail: String
+    @Published var code: Int? {
+        didSet {
+            if code != nil {
+                isOpen = true
+            } else {
+                isOpen = false
+            }
+        }
+    }
+    
+    @Published var isOpen = false {
+        didSet {
+            if isOpen && code == nil {
+                Task {
+                    await sendCode()
+                }
+            }
+        }
+    }
+    
+    @Published var internalCode: String = ""
     
     var completion: ()->Void
         
-    init(mail: String, completion: @escaping ()->Void) {
-        self.authService = AuthManager.instance
-        self.mail = mail
+    init(mail: Binding<String>, interactor: ForgotPasswordInteractorProtocol = ForgotPasswordInteractor(), completion: @escaping ()->Void) {
+        self.interactor = interactor
+        self._mail = mail
         self.completion = completion
-    }
-    
-    enum AlertStatus: String {
-        case noEqualCode     = "Код не совпадает!"
-        case noExistCode     = "Проблемы с приходом кода!"
-        case invalidedCode   = "Проверьте правильность ввода кода!"
-        case custom = ""
-    }
-    
-    func errorText(_ status: AlertStatus?) -> String? {
-        guard let status = status else { return nil }
-        switch status {
-        case .custom: return customErrorDescription
-        default: return status.rawValue
-        }
     }
     
     //MARK: - USER INTENT(S)
@@ -52,12 +54,11 @@ class SendCodeOnMailViewModel: ObservableObject {
     }
     
     
-    func sendCode() async {
+    func sendCode() async {        
         do {
-            code = try await authService.sendCodeOn(mail: mail)
+            code = try await interactor.sendCodeOn(mail: mail)
         } catch {
-            customErrorDescription = error.localizedDescription
-            alertStatus = .custom
+            alertStatus = .error(EquatableError(error: error))
         }
     }
     
@@ -69,7 +70,7 @@ class SendCodeOnMailViewModel: ObservableObject {
         }
         
         guard let internalCode = Int(internalCode) else {
-            alertStatus = .invalidedCode
+            alertStatus = .invalidCode
             return
         }
         
@@ -79,5 +80,17 @@ class SendCodeOnMailViewModel: ObservableObject {
         } else {
             alertStatus = .noEqualCode
         }
+    }
+}
+
+extension Binding {
+    func onChange(_ handler: @escaping (Value) -> Void) -> Binding<Value> {
+        Binding(
+            get: { self.wrappedValue },
+            set: { newValue in
+                self.wrappedValue = newValue
+                handler(newValue)
+            }
+        )
     }
 }

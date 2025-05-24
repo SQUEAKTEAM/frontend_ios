@@ -31,7 +31,7 @@ struct MainLvLView: View {
         .onChange(of: newCurrentExp) { retCurrentExp in
             if retCurrentExp == 0 { return }
             withAnimation(.smooth) {
-                presenter.lvl?.currentExp += retCurrentExp
+                presenter.updateLvLWith(retCurrentExp)
                 newCurrentExp = 0
             }
         }

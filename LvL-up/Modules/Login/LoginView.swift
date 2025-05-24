@@ -15,7 +15,7 @@ struct LoginView: View {
     @State var isShowAlert = false
     
     @State var forgotPasswordPresent = false
-    @State var sendOnMailCodePresent: Int? = nil
+    @State var sendOnMailCodePresent = false
     @State var isRegistration = false
     
     var body: some View {
@@ -47,9 +47,15 @@ struct LoginView: View {
             textFieldsSegment
                 .padding(.horizontal, 20)
             
-            SendCodeOnMailView(code: $sendOnMailCodePresent, mail: presenter.mail) {
-                isPresentHomeView = true
+            
+            SendCodeOnMailView(isOpen: $sendOnMailCodePresent, mail: $presenter.mail) {
+                Task {
+                    if await presenter.register() {
+                        isPresentHomeView = true
+                    }
+                }
             }
+            ForgotPasswordView(isOpen: $forgotPasswordPresent)
             
         }
         .onChange(of: presenter.alertStatus) { status in
@@ -62,10 +68,7 @@ struct LoginView: View {
             }
         }
         .fullScreenCover(isPresented: $isPresentHomeView) {
-            HomeView()
-        }
-        .fullScreenCover(isPresented: $forgotPasswordPresent) {
-            ForgotPasswordView(isOpen: $forgotPasswordPresent)
+            presenter.navigateToHomeScreen()
         }
     }
 }
@@ -83,8 +86,8 @@ extension LoginView {
     var textFieldsSegment: some View {
         VStack(spacing: 0) {
                
-            TextField("Почта", text: $presenter.username)
-                .textFieldStyle(text: $presenter.username)
+            TextField("Почта", text: $presenter.mail)
+                .textFieldStyle(text: $presenter.mail)
             
             SecureField("Пароль", text: $presenter.password1)
                 .textFieldStyle(text: $presenter.password1)
@@ -101,13 +104,13 @@ extension LoginView {
         
         AsyncButton {
             if isRegistration {
-                if presenter.checkCurrectData() {
-                    sendOnMailCodePresent = 100_000
-                }
+//                if presenter.checkCurrectData() {
+                    sendOnMailCodePresent = true
+//                }
             } else {
-                //await presenter.login()
-                
-                isPresentHomeView = true
+                if await presenter.login() {
+                    isPresentHomeView = true
+                }
             }
             
 //            guard let user = presenter.user else { return }

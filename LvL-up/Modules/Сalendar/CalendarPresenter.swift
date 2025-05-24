@@ -55,10 +55,10 @@ final class CalendarPresenter: ObservableObject {
             guard let self = self else { return }
             
             Task { @MainActor in
-                guard let newTask = await self.interactor.create(dailyTask) else { return }
-                DispatchQueue.main.async {
-                    returnedDate(newTask.date)
-                }
+                await self.interactor.create(dailyTask)
+//                DispatchQueue.main.async {
+                    returnedDate(dailyTask.date)
+//                }
             }
         }
     }

@@ -9,68 +9,35 @@ import SwiftUI
 
 struct SendCodeOnMailView: View {
     
-    @StateObject private var vm: SendCodeOnMailViewModel
+    @ObservedObject private var vm: SendCodeOnMailViewModel
     
     @State var isShowAlert = false
-    @State private var isOpenKeyboard = false
-    
-    @Binding var code: Int?
-    @State var isOpen: Bool
-    
-    var completion: () -> Void
-    
-    init(code: Binding<Int?>, mail: String, completion: @escaping () -> Void) {
-        self._vm = StateObject(wrappedValue: SendCodeOnMailViewModel(mail: mail, completion: completion))
-        self._code = code
-        self.isOpen = code.wrappedValue != nil
-        self.completion = completion
+    @Binding var isOpen: Bool
+    init(isOpen: Binding<Bool>, mail: Binding<String>, completion: @escaping () -> Void) {
+        self._isOpen = isOpen
+        self._vm = ObservedObject(wrappedValue: SendCodeOnMailViewModel(mail: mail, completion: completion))
     }
     
     var body: some View {
         VStack(spacing: 0) {
             
-            if code != nil {
+            if vm.isOpen {
                 codeSegment
             }
             
             Spacer()
         }
-        .presentAsBottomSheet($isOpen, maxHeight: isOpenKeyboard ? 550 : 350)
-        .onKeyboardAppear { bool in
-            withAnimation(.spring) {
-                isOpenKeyboard = bool
-            }
-        }
-        .onChange(of: code) { internalCode in
-            if internalCode != nil {
-                isOpen = true
-            } else {
-                isOpen = false
-            }
-        }
-        .onChange(of: isOpen) { isOpen in
-            if !isOpen {
-                code = nil
-            }
-        }
-        .onChange(of: vm.alertStatus) { status in
-            guard let _ = status else { return }
-            isShowAlert = true
-        }
-        .alert(vm.errorText(vm.alertStatus) ?? "", isPresented: $isShowAlert) {
-            Button("OK", role: .cancel) {
-                vm.alertStatus = nil
-            }
-        }
-        .task {
-            await vm.sendCode()
-        }
+        .onChange(of: isOpen, perform: { bool in
+            vm.isOpen = bool
+        })
+        .presentAsBottomSheet($vm.isOpen, maxHeight: 350)
+        .withErrorAlert(alertStatus: $vm.alertStatus)
     }
 }
 
 #Preview {
     ZStack {
-        SendCodeOnMailView(code: .constant(123), mail: "mail", completion: {
+        SendCodeOnMailView(isOpen: .constant(true), mail: .constant("mail"), completion: {
             
         })
     }

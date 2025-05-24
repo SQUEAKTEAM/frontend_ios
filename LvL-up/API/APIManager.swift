@@ -8,9 +8,11 @@
 import Foundation
 
 final class APIManager {
-    static let baseURL = "https://localhost:8000/"
+    static let baseURL = "http://192.168.0.102:5000/"
     static let shared = APIManager()
     private init() {}
+    
+    var authToken: String?
     
     // MARK: - GET Request
     func fetch<T: Decodable>(_ endpoint: String) async throws -> T {
@@ -18,7 +20,12 @@ final class APIManager {
             throw URLError(.badURL)
         }
         
-        let (data, response) = try await URLSession.shared.data(from: url)
+        var request = URLRequest(url: url)
+        if let token = authToken {
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse,
               (200...299).contains(httpResponse.statusCode) else {
@@ -38,7 +45,11 @@ final class APIManager {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let encoder = JSONEncoder()
+        if let token = authToken {
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+        
+        let encoder = JSONEncoder.iso8601WithMilliseconds
         request.httpBody = try encoder.encode(body)
         
         let (data, response) = try await URLSession.shared.data(for: request)
@@ -51,6 +62,40 @@ final class APIManager {
         return try JSONDecoder().decode(T.self, from: data)
     }
     
+    func postText<U: Encodable>(_ endpoint: String, body: U) async throws -> String {
+        guard let url = URL(string: APIManager.baseURL + endpoint) else {
+            throw URLError(.badURL)
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        if let token = authToken {
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+        
+        let encoder = JSONEncoder()
+        let jsonData = try encoder.encode(body)
+        if let jsonString = String(data: jsonData, encoding: .utf8) {
+            print("Отправляемые данные:\n\(jsonString)")
+        }
+        request.httpBody = try encoder.encode(body)
+        
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            throw URLError(.badServerResponse)
+        }
+        
+        guard let responseString = String(data: data, encoding: .utf8) else {
+            throw URLError(.cannotDecodeContentData)
+        }
+        
+        return responseString
+    }
+    
     // MARK: - PUT Request
     func put<T: Decodable, U: Encodable>(_ endpoint: String, body: U) async throws -> T {
         guard let url = URL(string: APIManager.baseURL + endpoint) else {
@@ -61,7 +106,15 @@ final class APIManager {
         request.httpMethod = "PUT"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        let encoder = JSONEncoder()
+        if let token = authToken {
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+        
+        let encoder = JSONEncoder.iso8601WithMilliseconds
+        let jsonData = try encoder.encode(body)
+        if let jsonString = String(data: jsonData, encoding: .utf8) {
+            print("Отправляемые данные:\n\(jsonString)")
+        }
         request.httpBody = try encoder.encode(body)
         
         let (data, response) = try await URLSession.shared.data(for: request)
@@ -83,6 +136,10 @@ final class APIManager {
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
         
+        if let token = authToken {
+            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        }
+        
         let (_, response) = try await URLSession.shared.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse,
@@ -91,3 +148,5 @@ final class APIManager {
         }
     }
 }
+
+struct EmptyResponse: Decodable {}

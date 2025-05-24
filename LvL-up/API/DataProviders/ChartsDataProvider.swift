@@ -16,8 +16,7 @@ final class ChartsDataProvider: ChartsProviderProtocol {
     ///GET:  id: Int, countSuccess: Int, countMiddle: Int, countFailure: Int, title: String
     ///POST: user_id
     func fetchData() async throws -> [Statistics] {
-//        let user_id = 1
-//        return try await apiManager.fetch("statistics/\(user_id)")
-        return Statistics.mockStatistics
+        return try await apiManager.fetch("api/statistics/")
+//        return Statistics.mockStatistics
     }
 }

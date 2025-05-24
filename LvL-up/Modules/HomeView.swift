@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
     @State var tabSelection: TabBarItem = .dailyTask
+    @State var showingStats = false
+    @AppStorage("lastStatsShownDate") private var lastStatsShownDate: String = ""
     
     var body: some View {
         ZStack {
@@ -28,6 +30,26 @@ struct HomeView: View {
             }
             .ignoresSafeArea(.keyboard, edges: .bottom)
             
+            Button("show stats") {
+                showingStats = true
+            }
+        }
+        .sheet(isPresented: $showingStats) {
+            DailyStatsView()
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
+        }
+        .onAppear {
+            checkAndShowStats()
+        }
+    }
+    
+    private func checkAndShowStats() {
+        let currentDate = Date().formatted(date: .complete, time: .omitted)
+        
+        if lastStatsShownDate != currentDate {
+            lastStatsShownDate = currentDate
+            showingStats = true
         }
     }
 }

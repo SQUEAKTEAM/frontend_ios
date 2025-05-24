@@ -6,3 +6,13 @@
 //
 
 import Foundation
+
+protocol AlertHandling: ObservableObject {
+    var alertStatus: AlertStatus? { get set }
+}
+
+extension AlertHandling {
+    func showError(_ status: AlertStatus) {
+        alertStatus = status
+    }
+}

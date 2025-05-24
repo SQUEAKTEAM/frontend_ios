@@ -14,8 +14,10 @@ final class MainLvLPresenter: ObservableObject {
     
     @Published var lvl: LvL? = nil {
         didSet {
-            Task {
-                await update()
+            if oldValue != nil {
+                Task(priority: .low) {
+                    await update()
+                }
             }
         }
     }
@@ -27,9 +29,17 @@ final class MainLvLPresenter: ObservableObject {
     @MainActor
     func getData() async {
         lvl = await interactor.loadLvl()
+        if lvl?.upperBoundExp == 0 {
+            lvl = LvL.new
+        }
     }
     
+    @MainActor
     private func update() async {
         await interactor.update(lvl)
+    }
+    
+    func updateLvLWith(_ exp: Float) {
+        self.lvl?.currentExp += exp
     }
 }

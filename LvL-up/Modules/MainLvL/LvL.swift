@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-struct LvL: Equatable {
+struct LvL: Equatable, Codable {
     var currentLvl: Int
     var currentExp: Float {
         didSet {

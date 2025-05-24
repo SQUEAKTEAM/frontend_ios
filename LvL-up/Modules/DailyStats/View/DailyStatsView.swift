@@ -8,83 +8,59 @@
 import SwiftUI
 
 struct DailyStatsView: View {
-    let failedTasks: Int
-    let halfCompletedTasks: Int
-    let successfulTasks: Int
-    let experience: Int // положительное - получено, отрицательное - потеряно
+    @StateObject private var presenter = DailyStatsPresenter()
     
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        VStack(spacing: 20) {
-            // Заголовок
-            Text("Ежедневная статистика")
-                .font(.title2)
-                .fontWeight(.bold)
-                .padding(.top, 20)
-            
-            // Иконка или аватар
-            Image(systemName: experience >= 0 ? "arrow.up.circle.fill" : "arrow.down.circle.fill")
-                .font(.system(size: 50))
-                .foregroundColor(experience >= 0 ? .green : .red)
-            
-            // Изменение уровня
-            Text(experience >= 0 ? "+\(experience) опыта" : "\(experience) опыта")
-                .font(.title3)
-                .foregroundColor(experience >= 0 ? .green : .red)
-            
-            // Статистика задач
-            VStack(spacing: 15) {
-                StatRow(label: "Провалено:", value: "\(failedTasks)", color: .red)
-                StatRow(label: "Почти выполнено:", value: "\(halfCompletedTasks)", color: .yellow)
-                StatRow(label: "Успешно:", value: "\(successfulTasks)", color: .green)
+        if let stats = presenter.stats {
+            VStack(spacing: 20) {
+                Text("Ежедневная статистика")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .padding(.top, 20)
+                
+                Image(systemName: stats.reward >= 0 ? "arrow.up.circle.fill" : "arrow.down.circle.fill")
+                    .font(.system(size: 50))
+                    .foregroundColor(stats.reward >= 0 ? .green : .red)
+                
+                Text(stats.reward >= 0 ? "+\(stats.reward.convertToString()) опыта" : "\(stats.reward.convertToString()) опыта")
+                    .font(.title3)
+                    .foregroundColor(stats.reward >= 0 ? .green : .red)
+                
+                VStack(spacing: 15) {
+                    DailyStatRow(label: "Провалено:", value: stats.countFailure, color: .red)
+                    DailyStatRow(label: "Почти выполнено:", value: stats.countMiddle, color: .yellow)
+                    DailyStatRow(label: "Успешно:", value: stats.countSuccess, color: .green)
+                }
+                .padding(.horizontal)
+                
+                Button(action: {
+                    dismiss()
+                }) {
+                    Text("Закрыть")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .padding()
             }
-            .padding(.horizontal)
-            
-            // Кнопка закрытия
-            Button(action: {
-                dismiss()
-            }) {
-                Text("Закрыть")
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-            }
-            .padding()
-        }
-        .padding(.vertical)
-        .background(Color(.systemBackground))
-        .cornerRadius(20)
-        .shadow(radius: 5)
-    }
-}
-
-// Компонент для строки статистики
-struct StatRow: View {
-    let label: String
-    let value: String
-    let color: Color
-    
-    var body: some View {
-        HStack {
-            Text(label)
-                .foregroundColor(.secondary)
-            Spacer()
-            Text(value)
-                .fontWeight(.medium)
-                .foregroundColor(color)
+            .padding(.vertical)
+            .background(Color(.systemBackground))
+            .cornerRadius(20)
+            .shadow(radius: 5)
+        } else {
+            ProgressView()
+                .task {
+                    await presenter.getData()
+                }
         }
     }
 }
 
 // Для предпросмотра
 #Preview {
-    DailyStatsView(
-        failedTasks: 3,
-        halfCompletedTasks: 2,
-        successfulTasks: 5,
-        experience: 1
-    )
+    DailyStatsView()
 }

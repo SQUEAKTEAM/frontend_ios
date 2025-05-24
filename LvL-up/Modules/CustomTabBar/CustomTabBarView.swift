@@ -17,7 +17,7 @@ struct CustomTabBarView: View {
     var body: some View {
         tabBarVersion
             .onChange(of: selection) { value in
-                withAnimation(.easeInOut) {
+                withAnimation(.default) {
                     localSelection = value
                 }
             }
@@ -77,7 +77,9 @@ extension CustomTabBarView {
     }
     
     private func switchToTab(tab: TabBarItem) {
-        selection = tab
+        withAnimation(.default) {
+            selection = tab
+        }
     }
     
 }

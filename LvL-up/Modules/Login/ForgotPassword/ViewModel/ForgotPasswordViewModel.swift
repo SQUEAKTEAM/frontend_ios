@@ -13,7 +13,7 @@ protocol ResetPasswordAllow {
 }
 
 class ForgotPasswordViewModel: ObservableObject {
-    var authService: ResetPasswordAllow
+    private let interactor: ForgotPasswordInteractorProtocol
     
     @Published var mail: String = ""
     
@@ -28,8 +28,8 @@ class ForgotPasswordViewModel: ObservableObject {
     
     @Published var state: State = .mail
     
-    init(state: State = .mail) {
-        self.authService = AuthManager.instance
+    init(state: State = .mail, interactor: ForgotPasswordInteractorProtocol = ForgotPasswordInteractor()) {
+        self.interactor = interactor
         self.state = state
     }
     
@@ -85,7 +85,7 @@ class ForgotPasswordViewModel: ObservableObject {
     
     func sendCode() async {
         do {
-            code = try await authService.sendCodeOn(mail: mail)
+            code = try await interactor.sendCodeOn(mail: mail)
             changeState()
         } catch {
             customErrorDescription = error.localizedDescription
@@ -118,7 +118,7 @@ class ForgotPasswordViewModel: ObservableObject {
     func resetButtonAction() async {
         if checkInDataResetButton() {
             do {
-                if try await authService.resetPassword(mail: mail, password: password1) {
+                if try await interactor.resetPassword(mail: mail, password: password1) {
                     changeState()
                 }
             } catch {

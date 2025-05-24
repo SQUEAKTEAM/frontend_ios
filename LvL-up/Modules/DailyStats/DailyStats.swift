@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct DailyStats: Codable {
+    let countSuccess: Int
+    let countMiddle: Int
+    let countFailure: Int
+    let reward: Float
+}

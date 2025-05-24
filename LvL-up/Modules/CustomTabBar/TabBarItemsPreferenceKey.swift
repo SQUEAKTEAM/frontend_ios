@@ -18,28 +18,21 @@ struct TabBarItemsPreferenceKey: PreferenceKey {
     
 }
 
-struct TabBarItemViewModifer: ViewModifier {
-    
-    let tab: TabBarItem
-    @Binding var selection: TabBarItem
-    
-    func body(content: Content) -> some View {
-        content
-            .opacity(selection == tab ? 1.0 : 0.0)
-            .preference(key: TabBarItemsPreferenceKey.self, value: [tab])
-    }
-    
-}
-
 struct TabBarItemViewModiferWithOnAppear: ViewModifier {
     
     let tab: TabBarItem
     @Binding var selection: TabBarItem
     
     @ViewBuilder func body(content: Content) -> some View {
-        content
-            .opacity(selection == tab ? 1 : 0)
-            .preference(key: TabBarItemsPreferenceKey.self, value: [tab])
+        if selection == tab {
+            content
+                .preference(key: TabBarItemsPreferenceKey.self, value: [tab])
+                .transition(.move(edge: .bottom))
+        } else {
+            Text("")
+                .preference(key: TabBarItemsPreferenceKey.self, value: [tab])
+        }
+            
     }
     
 }

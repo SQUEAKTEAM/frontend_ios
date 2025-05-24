@@ -57,7 +57,7 @@ extension TasksView {
             TaskCell(task: task)
                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                     Button(role: .none) {
-                        withAnimation(.spring) {
+                        withAnimation(.spring) {                            
                             presenter.updateCurrentProgress(to: task, checkPoint: task.checkPoint + 1)
                         }
                     } label: {

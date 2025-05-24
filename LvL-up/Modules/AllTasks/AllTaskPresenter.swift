@@ -50,12 +50,12 @@ final class AllTaskPresenter: ObservableObject {
             guard let self = self else { return }
             
             Task { @MainActor in
+                await self.interactor.update(dailyTask)
                 guard
-                    let newTask = await self.interactor.update(dailyTask),
-                    let index = self.tasks.firstIndex(where: { $0.id == newTask.id }) else { return }
-                DispatchQueue.main.async {
+                    let index = self.tasks.firstIndex(where: { $0.id == dailyTask.id }) else { return }
+//                DispatchQueue.main.async {
                     self.tasks[index] = dailyTask
-                }
+//                }
             }
         }
     }

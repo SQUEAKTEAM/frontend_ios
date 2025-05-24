@@ -26,6 +26,20 @@ struct DailyTask: Identifiable, Codable {
     var category: String
     var date: Date?
     
+    enum CodingKeys: String, CodingKey {
+        case id
+        case checkPoint
+        case img
+        case isCompleted
+        case reward
+        case title
+        case checkPoints
+        case isRepeat
+        case isArchived
+        case category = "categoryTitle"
+        case date
+    }
+    
     init(id: Int, img: String, isCompleted: Bool, reward: Int, title: String, checkPoints: Int, checkPoint: Int = 0, isRepeat: Bool = false, isArchived: Bool = false, category: String, date: Date? = nil) {
         self.id = id
         self.img = img
@@ -48,11 +62,7 @@ struct DailyTask: Identifiable, Codable {
     func calculateCurrentReward() -> String {
         let result = Float(self.reward) / Float(self.checkPoints) * Float(self.checkPoints - self.checkPoint)
         
-        if result.truncatingRemainder(dividingBy: 1) == 0 {
-            return String(format: "%.0f", result)
-        } else {
-            return String(format: "%.2f", result)
-        }
+        return result.convertToString()
     }
     
     func calculateRewardForCheckPoint() -> Float {
@@ -76,6 +86,60 @@ struct DailyTask: Identifiable, Codable {
     
     static var new: DailyTask {
         DailyTask(id: -1, img: "book.fill", isCompleted: false, reward: 10, title: "", checkPoints: 1, category: "")
+    }
+    
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        // Кодируем обязательные поля
+        try container.encode(id, forKey: .id)
+        try container.encode(checkPoint, forKey: .checkPoint)
+        try container.encode(img, forKey: .img)
+        try container.encode(isCompleted, forKey: .isCompleted)
+        try container.encode(reward, forKey: .reward)
+        try container.encode(title, forKey: .title)
+        try container.encode(checkPoints, forKey: .checkPoints)
+        try container.encode(isRepeat, forKey: .isRepeat)
+        try container.encode(isArchived, forKey: .isArchived)
+        try container.encode(category, forKey: .category)
+        
+        // Кодируем дату всегда как ISO8601 строку
+        if let date = date {
+            let formatter = ISO8601DateFormatter()
+            formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+            let dateString = formatter.string(from: date)
+            try container.encode(dateString, forKey: .date)
+        }
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        // Декодируем обязательные поля
+        id = try container.decode(Int.self, forKey: .id)
+        checkPoint = try container.decode(Int.self, forKey: .checkPoint)
+        img = try container.decode(String.self, forKey: .img)
+        isCompleted = try container.decode(Bool.self, forKey: .isCompleted)
+        reward = try container.decode(Int.self, forKey: .reward)
+        title = try container.decode(String.self, forKey: .title)
+        checkPoints = try container.decode(Int.self, forKey: .checkPoints)
+        isRepeat = try container.decode(Bool.self, forKey: .isRepeat)
+        isArchived = try container.decode(Bool.self, forKey: .isArchived)
+        category = try container.decode(String.self, forKey: .category)
+        
+        // Гибкое декодирование даты (число timestamp или строка ISO8601)
+        if let timestamp = try? container.decode(Double.self, forKey: .date) {
+            // Обработка Unix timestamp (число)
+            date = Date(timeIntervalSince1970: timestamp)
+        } else if let dateString = try? container.decode(String.self, forKey: .date) {
+            // Обработка строки ISO8601
+            let formatter = ISO8601DateFormatter()
+            formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+            date = formatter.date(from: dateString)
+        } else {
+            // Если поле отсутствует или null
+            date = nil
+        }
     }
 }
 
@@ -200,5 +264,13 @@ extension DailyTask {
                 date: Date().addingTimeInterval(-172800) // 2 дня назад
             )
         ]
+    }
+}
+
+extension JSONEncoder {
+    static var iso8601WithMilliseconds: JSONEncoder {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601 // Используем стандартный ISO8601
+        return encoder
     }
 }
