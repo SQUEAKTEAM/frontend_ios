@@ -48,6 +48,9 @@ struct LvL: Equatable, Codable {
     }
     
     private mutating func calculateReverseData() {
+        if currentLvl <= 1 {
+            return
+        }
         currentLvl -= 1
         upperBoundExp = Float(currentLvl * 10)
         currentExp = currentExp + upperBoundExp

@@ -76,10 +76,6 @@ final class APIManager {
         }
         
         let encoder = JSONEncoder()
-        let jsonData = try encoder.encode(body)
-        if let jsonString = String(data: jsonData, encoding: .utf8) {
-            print("Отправляемые данные:\n\(jsonString)")
-        }
         request.httpBody = try encoder.encode(body)
         
         let (data, response) = try await URLSession.shared.data(for: request)
@@ -111,10 +107,6 @@ final class APIManager {
         }
         
         let encoder = JSONEncoder.iso8601WithMilliseconds
-        let jsonData = try encoder.encode(body)
-        if let jsonString = String(data: jsonData, encoding: .utf8) {
-            print("Отправляемые данные:\n\(jsonString)")
-        }
         request.httpBody = try encoder.encode(body)
         
         let (data, response) = try await URLSession.shared.data(for: request)

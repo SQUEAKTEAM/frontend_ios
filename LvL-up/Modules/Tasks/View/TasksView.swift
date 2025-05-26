@@ -6,9 +6,11 @@
 //
 
 import SwiftUI
+import ConfettiSwiftUI
 
 struct TasksView: View {
     @StateObject var presenter = TaskPresenter()
+    @State private var trigger: Bool = false
     
     var body: some View {
         VStack {
@@ -35,6 +37,7 @@ struct TasksView: View {
                     .frame(height: 80)
                     .foregroundStyle(.clear)
                     .listRowSeparator(.hidden)
+                    .listRowBackground(Color.background)
             }
             .listStyle(.plain)
             .scrollIndicators(.hidden)
@@ -43,6 +46,7 @@ struct TasksView: View {
         .task {
             await presenter.getData()
         }
+        .confettiCannon(trigger: $trigger, num: 20, confettis: [.text("⭐️")], confettiSize: 20, openingAngle: Angle(degrees: 0), closingAngle: Angle(degrees: 360), radius: 200)
         .ignoresSafeArea(edges: .bottom)
     }
 }
@@ -57,7 +61,8 @@ extension TasksView {
             TaskCell(task: task)
                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                     Button(role: .none) {
-                        withAnimation(.spring) {                            
+                        withAnimation(.spring(duration: 1)) {
+                            trigger.toggle()
                             presenter.updateCurrentProgress(to: task, checkPoint: task.checkPoint + 1)
                         }
                     } label: {

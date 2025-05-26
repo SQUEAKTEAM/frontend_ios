@@ -30,6 +30,8 @@ struct AchievementsView: View {
                 Rectangle()
                     .frame(height: 80)
                     .foregroundStyle(.clear)
+                    .listRowSeparator(.hidden)
+                    .listRowBackground(Color.background)
             }
         }
         .task {

@@ -18,6 +18,7 @@ struct AllTaskCell: View {
             HStack {
                 Image(systemName: task.img)
                     .resizable()
+                    .scaledToFit()
                     .foregroundStyle(.black)
                     .frame(width: 40, height: 40)
                 Spacer()
@@ -31,17 +32,19 @@ struct AllTaskCell: View {
                             .bold()
                             .italic()
                     }
-                    HStack(alignment: .bottom) {
-                        Text("Категория:")
-                            .font(.caption)
-                            .italic()
-                        Text(task.category)
-                            .foregroundStyle(task.getColor())
-                            .bold()
-                            .italic()
-                        Spacer()
+                    if !task.category.isEmpty {
+                        HStack(alignment: .bottom) {
+                            Text("Категория:")
+                                .font(.caption)
+                                .italic()
+                            Text(task.category)
+                                .foregroundStyle(task.getColor())
+                                .bold()
+                                .italic()
+                            Spacer()
+                        }
+                        .padding(.leading, 5)
                     }
-                    .padding(.leading, 5)
                 }
             }
             .foregroundStyle(.black)
@@ -49,6 +52,7 @@ struct AllTaskCell: View {
         }
         .frame(height: 80)
         .foregroundStyle(.primary)
+        .listRowBackground(Color.background)
     }
 }
 

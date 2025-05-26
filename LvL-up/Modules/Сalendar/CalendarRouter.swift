@@ -14,6 +14,6 @@ protocol CalendarRouterProtocol {
 final class CalendarRouter: CalendarRouterProtocol {
     
     func navigateToAddTask(returnNewTask: @escaping (DailyTask)->Void) -> AnyView {
-        AnyView(EditTaskView(task: DailyTask.new, returnNewTask: returnNewTask))
+        AnyView(EditTaskView(task: DailyTask.new, isEdit: false, returnNewTask: returnNewTask))
     }
 }

@@ -112,6 +112,8 @@
 		F8D031B12DDDC45E00FE44E8 /* ForgotPasswordDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031B02DDDC45D00FE44E8 /* ForgotPasswordDataProvider.swift */; };
 		F8D031B32DDDC6A400FE44E8 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031B22DDDC6A400FE44E8 /* LoginRouter.swift */; };
 		F8D031B62DDDC90200FE44E8 /* DailyStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031B52DDDC90200FE44E8 /* DailyStatsView.swift */; };
+		F8F5022C2DE320AB00F56AAC /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F5022B2DE320AB00F56AAC /* HapticManager.swift */; };
+		F8F5022F2DE323C200F56AAC /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = F8F5022E2DE323C200F56AAC /* ConfettiSwiftUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -239,6 +241,7 @@
 		F8D031B02DDDC45D00FE44E8 /* ForgotPasswordDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordDataProvider.swift; sourceTree = "<group>"; };
 		F8D031B22DDDC6A400FE44E8 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		F8D031B52DDDC90200FE44E8 /* DailyStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyStatsView.swift; sourceTree = "<group>"; };
+		F8F5022B2DE320AB00F56AAC /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +249,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8F5022F2DE323C200F56AAC /* ConfettiSwiftUI in Frameworks */,
 				F844BF4C2DA704AF003FB214 /* SwiftfulUI in Frameworks */,
 				F8D0319A2DD2586000FE44E8 /* Lottie in Frameworks */,
 			);
@@ -294,6 +298,7 @@
 			children = (
 				F844BF992DAF1480003FB214 /* Info.plist */,
 				F844BF912DAC6898003FB214 /* Extensions */,
+				F8F5022A2DE3208900F56AAC /* Haptic */,
 				F844BF592DA712BA003FB214 /* Components */,
 				F844BFB92DC422C7003FB214 /* API */,
 				F844BF422DA6FF45003FB214 /* CoreData */,
@@ -791,6 +796,14 @@
 			path = DailyStats;
 			sourceTree = "<group>";
 		};
+		F8F5022A2DE3208900F56AAC /* Haptic */ = {
+			isa = PBXGroup;
+			children = (
+				F8F5022B2DE320AB00F56AAC /* HapticManager.swift */,
+			);
+			path = Haptic;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -810,6 +823,7 @@
 			packageProductDependencies = (
 				F844BF4B2DA704AF003FB214 /* SwiftfulUI */,
 				F8D031992DD2586000FE44E8 /* Lottie */,
+				F8F5022E2DE323C200F56AAC /* ConfettiSwiftUI */,
 			);
 			productName = "LvL-up";
 			productReference = F844BF102DA6FF24003FB214 /* LvL-up.app */;
@@ -890,6 +904,7 @@
 			packageReferences = (
 				F844BF492DA70254003FB214 /* XCRemoteSwiftPackageReference "SwiftfulUI" */,
 				F8D031982DD2586000FE44E8 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				F8F5022D2DE323B100F56AAC /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
 			);
 			productRefGroup = F844BF112DA6FF24003FB214 /* Products */;
 			projectDirPath = "";
@@ -979,6 +994,7 @@
 				F844BFAF2DC3A791003FB214 /* ChartsView.swift in Sources */,
 				F8D031B12DDDC45E00FE44E8 /* ForgotPasswordDataProvider.swift in Sources */,
 				F844BF4E2DA709A4003FB214 /* MainLvLPresenter.swift in Sources */,
+				F8F5022C2DE320AB00F56AAC /* HapticManager.swift in Sources */,
 				F8D031782DD24E0500FE44E8 /* FPView.swift in Sources */,
 				F8D0313A2DC500EE00FE44E8 /* AchievementDataProvider.swift in Sources */,
 				F8D031AF2DDDC3BB00FE44E8 /* ForgotPasswordInteractor.swift in Sources */,
@@ -1388,6 +1404,14 @@
 				version = 4.4.3;
 			};
 		};
+		F8F5022D2DE323B100F56AAC /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/simibac/ConfettiSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1400,6 +1424,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F8D031982DD2586000FE44E8 /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		F8F5022E2DE323C200F56AAC /* ConfettiSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F8F5022D2DE323B100F56AAC /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */;
+			productName = ConfettiSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 

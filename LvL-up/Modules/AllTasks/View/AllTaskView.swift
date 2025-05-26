@@ -28,6 +28,7 @@ struct AllTaskView: View {
                 .frame(height: 80)
                 .foregroundStyle(.clear)
                 .listRowSeparator(.hidden)
+                .listRowBackground(Color.background)
         }
         .fullScreenCover(item: $editingTask, content: { dailyTask in
             presenter.editTask(dailyTask)

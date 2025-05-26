@@ -7,11 +7,12 @@
 
 import SwiftUI
 import SwiftfulUI
+import ConfettiSwiftUI
 
 struct MainLvLView: View {
     @StateObject var presenter = MainLvLPresenter()
     @Binding var newCurrentExp: Float
-
+    
     var body: some View {
         ZStack {
             if let lvl = presenter.lvl {
@@ -48,6 +49,7 @@ extension MainLvLView {
             .font(.largeTitle)
             .bold()
             .animation(nil, value: presenter.lvl?.currentExp)
+            .confettiCannon(trigger: $presenter.triggerConfetti, num: 100, openingAngle: Angle(degrees: 0), closingAngle: Angle(degrees: 360), radius: 200)
     }
     
     func progressBar(currentExp: Float, upperBoundExp: Float) -> some View {
@@ -59,20 +61,11 @@ extension MainLvLView {
                 foregroundColor: .green,
                 cornerRadius: 10,
                 height: 20)
+            
             Text("\(Int(currentExp))/\(Int(upperBoundExp))")
                 .bold()
                 .padding(.top)
                 .animation(nil, value: presenter.lvl?.currentExp)
-        }
-    }
-    
-    func testButton() -> some View {
-        Button {
-            withAnimation(.smooth) {
-                presenter.lvl?.currentExp += 1
-            }
-        } label: {
-            Text("1 exp")
         }
     }
 }

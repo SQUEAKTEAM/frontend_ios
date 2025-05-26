@@ -76,10 +76,9 @@ class TaskInteractorTests: XCTestCase {
         mockTaskService.stubbedCreatedTask = newTask
         
         // When
-        let result = await interactor.create(newTask)
+        await interactor.create(newTask)
         
         // Then
-        XCTAssertEqual(result?.id, newTask.id)
         XCTAssertTrue(mockTaskService.createCalled)
     }
     
@@ -103,10 +102,9 @@ class TaskInteractorTests: XCTestCase {
         mockTaskService.stubbedUpdatedTask = taskToUpdate
         
         // When
-        let result = await interactor.update(taskToUpdate)
+        await interactor.update(taskToUpdate)
         
         // Then
-        XCTAssertEqual(result?.id, taskToUpdate.id)
         XCTAssertTrue(mockTaskService.updateCalled)
     }
     
@@ -172,20 +170,18 @@ class MockTaskService: TaskProviderProtocol {
         return stubbedDateFilteredTasks
     }
     
-    func update(dailyTask: DailyTask) async throws -> DailyTask {
+    func update(dailyTask: DailyTask) async throws {
         updateCalled = true
         if shouldThrowError {
             throw NSError(domain: "TestError", code: 1, userInfo: nil)
         }
-        return stubbedUpdatedTask ?? dailyTask
     }
     
-    func create(dailyTask: DailyTask) async throws -> DailyTask {
+    func create(dailyTask: DailyTask) async throws {
         createCalled = true
         if shouldThrowError {
             throw NSError(domain: "TestError", code: 1, userInfo: nil)
         }
-        return stubbedCreatedTask ?? dailyTask
     }
     
     func delete(_ id: Int) async throws {

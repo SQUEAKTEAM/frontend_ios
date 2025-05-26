@@ -27,7 +27,7 @@ struct TabBarItemViewModiferWithOnAppear: ViewModifier {
         if selection == tab {
             content
                 .preference(key: TabBarItemsPreferenceKey.self, value: [tab])
-                .transition(.move(edge: .bottom))
+                .transition(.move(edge: .bottom).combined(with: .opacity))
         } else {
             Text("")
                 .preference(key: TabBarItemsPreferenceKey.self, value: [tab])

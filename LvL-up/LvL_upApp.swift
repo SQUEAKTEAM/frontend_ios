@@ -9,8 +9,7 @@ import SwiftUI
 
 @main
 struct LvL_upApp: App {
-//    let persistenceController = PersistenceController.shared
-    
+//    let persistenceController = PersistenceController.shared    
     var body: some Scene {
         WindowGroup {
             LoginView()

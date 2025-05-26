@@ -20,6 +20,7 @@ struct TaskCell: View, TaskCellProtocol {
             HStack {
                 Image(systemName: task.img)
                     .resizable()
+                    .scaledToFit()
                     .foregroundStyle(.black)
                     .frame(width: 40, height: 40)
                 Spacer()
@@ -59,6 +60,7 @@ struct TaskCell: View, TaskCellProtocol {
             .padding()
         }
         .foregroundStyle(.primary)
+        .listRowBackground(Color.background)
     }
 }
 

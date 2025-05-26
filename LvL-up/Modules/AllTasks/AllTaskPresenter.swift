@@ -33,7 +33,7 @@ final class AllTaskPresenter: ObservableObject {
         guard let index = tasks.firstIndex(where: { $0.id == task.id }) else { return }
         tasks[index].isArchived = !tasks[index].isArchived
         Task {
-            await interactor.update(task)
+            await interactor.update(tasks[index])
         }
     }
     

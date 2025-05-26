@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EditTaskView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     @ObservedObject var presenter: EditTaskPresenter
     
     @State private var showingNewCategoryAlert = false
@@ -16,25 +16,80 @@ struct EditTaskView: View {
     @State private var customReward: String = ""
     @State private var showCustomRewardField = false
     @State private var hasDate: Bool
+    @FocusState private var rewardFocus
+    let isEdit: Bool
     
     var returnNewTask: (DailyTask) -> Void
     
-    // Инициализатор для правильной установки начального значения hasDate
-    init(task: DailyTask, returnNewTask: @escaping (DailyTask) -> Void) {
+    init(task: DailyTask, isEdit: Bool, returnNewTask: @escaping (DailyTask) -> Void) {
+        self.isEdit = isEdit
         self._presenter = ObservedObject(initialValue: EditTaskPresenter(task: task))
         self._hasDate = State(initialValue: task.date != nil)
         self.returnNewTask = returnNewTask
     }
     
-    // Стандартные значения наград
-    let standardRewards = [10, 20, 50, 100]
+    let standardRewards = [5, 10, 15, 20, 50, 75, 100]
     
-    // Доступные системные иконки
     let systemIcons = [
-        "book.fill", "graduationcap.fill", "briefcase.fill",
-        "house.fill", "heart.fill", "flame.fill",
-        "leaf.fill", "cart.fill", "gamecontroller.fill",
-        "pawprint.fill", "airplane", "car.fill"
+        // Общие
+        "checkmark.circle.fill", "list.bullet", "text.badge.checkmark", "note.text",
+        
+        // Работа
+        "briefcase.fill", "desktopcomputer", "laptopcomputer", "printer.fill",
+        "doc.fill", "doc.text.fill", "folder.fill", "paperclip",
+        
+        // Учеба
+        "book.fill", "book.closed.fill", "graduationcap.fill", "studentdesk",
+        "pencil.tip", "highlighter", "pencil.and.ruler.fill", "scissors",
+        
+        // Дом
+        "house.fill", "sofa.fill", "bed.double.fill", "lightbulb.fill",
+        "washer.fill", "toilet.fill", "shower.fill", "key.fill",
+        
+        // Здоровье и спорт
+        "heart.fill", "heart.text.square.fill", "cross.case.fill", "pills.fill",
+        "figure.walk", "figure.run", "dumbbell.fill", "sportscourt.fill",
+        
+        // Еда
+        "fork.knife", "takeoutbag.and.cup.and.straw.fill", "wineglass.fill",
+        "birthday.cake.fill", "frying.pan.fill", "refrigerator.fill",
+        
+        // Покупки
+        "cart.fill", "bag.fill", "creditcard.fill", "giftcard.fill",
+        "tag.fill", "dollarsign.circle.fill", "cart.badge.plus",
+        
+        // Транспорт
+        "car.fill", "bus.fill", "tram.fill", "bicycle", "scooter",
+        "airplane", "fuelpump.fill", "steeringwheel",
+        
+        // Природа
+        "leaf.fill", "tree.fill", "drop.fill", "flame.fill",
+        "moon.fill", "sun.max.fill", "cloud.fill", "snowflake",
+        
+        // Животные
+        "pawprint.fill", "teddybear.fill", "fish.fill", "bird.fill",
+        "lizard.fill", "ant.fill", "hare.fill", "tortoise.fill",
+        
+        // Развлечения
+        "gamecontroller.fill", "film.fill", "music.note", "tv.fill",
+        "headphones", "paintbrush.fill", "theatermasks.fill", "photo.fill",
+        
+        // Путешествия
+        "map.fill", "globe", "suitcase.fill", "beach.umbrella.fill",
+        "binoculars.fill", "camera.fill", "mappin.and.ellipse",
+        
+        // Техника
+        "iphone", "ipad", "applewatch",
+        "battery.100", "wifi", "antenna.radiowaves.left.and.right",
+        
+        // Время и дата
+        "clock.fill", "alarm.fill", "stopwatch.fill", "timer",
+        "calendar", "clock.badge.checkmark", "hourglass",
+        
+        // Другое
+        "trash.fill", "gearshape.fill", "questionmark.circle.fill",
+        "exclamationmark.triangle.fill", "plus.circle.fill", "minus.circle.fill",
+        "xmark.circle.fill"
     ]
     
     var body: some View {
@@ -48,11 +103,12 @@ struct EditTaskView: View {
                 categorySection
                 optionsSection
             }
-            .navigationTitle("Редактировать задачу")
+            .navigationTitle(isEdit ? "Редактировать задачу" : "Создать задачу")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar { toolbarContent }
             .alert("Новая категория", isPresented: $showingNewCategoryAlert) { newCategoryAlert }
             .onAppear { setupInitialState() }
+            .scrollIndicators(.hidden)
         }
         .task {
             await presenter.getCategories()
@@ -70,7 +126,7 @@ struct EditTaskView: View {
     private var iconSection: some View {
         Section(header: Text("Иконка")) {
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
+                LazyHGrid(rows: Array(repeating: GridItem(.flexible()), count: 3), spacing: 5) {
                     ForEach(systemIcons, id: \.self) { iconName in
                         iconButton(for: iconName)
                     }
@@ -111,6 +167,7 @@ struct EditTaskView: View {
         Button(action: {
             presenter.task.reward = reward
             showCustomRewardField = false
+            customReward = ""
         }) {
             Text("\(reward)")
                 .padding(8)
@@ -133,10 +190,16 @@ struct EditTaskView: View {
     
     private var customRewardField: some View {
         TextField("Введите сумму", text: $customReward)
+            .focused($rewardFocus)
             .keyboardType(.numberPad)
             .onChange(of: customReward) { newValue in
                 if let value = Int(newValue) {
                     presenter.task.reward = value
+                }
+            }
+            .onTapGesture {
+                if rewardFocus {
+                    rewardFocus = false
                 }
             }
     }
@@ -169,8 +232,8 @@ struct EditTaskView: View {
     
     private var checkpointsSection: some View {
         Section(header: Text("Промежуточные точки")) {
-            Stepper(value: $presenter.task.checkPoints, in: 0...10) {
-                Text("Чекпоинтов: \(presenter.task.checkPoints)")
+            Stepper(value: $presenter.task.checkPoints, in: 0...20) {
+                Text("Количество: \(presenter.task.checkPoints)")
             }
         }
     }
@@ -216,10 +279,18 @@ struct EditTaskView: View {
     }
     
     private var toolbarContent: some ToolbarContent {
-        ToolbarItem(placement: .navigationBarTrailing) {
-            Button("Готово") {
-                returnNewTask(presenter.task)
-                presentationMode.wrappedValue.dismiss()
+        Group {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button("Отмена") {
+                    dismiss()
+                }
+            }
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button("Готово") {
+                    returnNewTask(presenter.task)
+                    dismiss()
+                }
             }
         }
     }
@@ -230,6 +301,9 @@ struct EditTaskView: View {
             Button("Добавить") {
                 if !newCategoryName.isEmpty {
                     presenter.task.category = newCategoryName
+                    if !presenter.categories.contains(where: { $0 == newCategoryName}) {
+                        presenter.categories.append(newCategoryName)
+                    }
                     newCategoryName = ""
                 }
             }
@@ -249,8 +323,11 @@ struct EditTaskView: View {
     
     private func toggleCustomRewardField() {
         showCustomRewardField.toggle()
-        if !showCustomRewardField {
-            presenter.task.reward = 0
+        if !showCustomRewardField && !standardRewards.contains(where: { $0 == presenter.task.reward }){
+            presenter.task.reward = standardRewards.first ?? 0
+        } else if !customReward.isEmpty {
+            guard let reward = Int(customReward) else { return }
+            presenter.task.reward = reward
         }
     }
 }
@@ -258,7 +335,7 @@ struct EditTaskView: View {
 struct EditTaskView_Previews: PreviewProvider {
     static var previews: some View {
         Group {
-            EditTaskView(task: DailyTask.mockTasks.first!) { _ in
+            EditTaskView(task: DailyTask.mockTasks.first!, isEdit: true) { _ in
                 
             }
         }

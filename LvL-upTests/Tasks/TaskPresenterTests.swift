@@ -115,14 +115,12 @@ class MockTaskInteractor: TaskInteractorProtocol {
         return stubbedLoadTasksResult + stubbedLoadTasksNoDateResult
     }
     
-    func update(_ dailyTask: DailyTask) async -> DailyTask? {
+    func update(_ dailyTask: DailyTask) async {
         updatedTask = dailyTask
-        return dailyTask
     }
     
-    func create(_ dailyTask: DailyTask) async -> DailyTask? {
+    func create(_ dailyTask: DailyTask) async {
         createdTask = dailyTask
-        return dailyTask
     }
     
     func delete(_ dailyTask: DailyTask) async {

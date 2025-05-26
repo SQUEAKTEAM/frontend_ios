@@ -15,12 +15,17 @@ final class MainLvLPresenter: ObservableObject {
     @Published var lvl: LvL? = nil {
         didSet {
             if oldValue != nil {
+                if lvl?.currentLvl ?? 0 > oldValue?.currentLvl ?? 0 {
+                    triggerConfetti.toggle()
+                }
                 Task(priority: .low) {
                     await update()
                 }
             }
         }
     }
+    
+    @Published var triggerConfetti = false
     
     init(interactor: MainLvLInteractorProtocol = MainLvLInteractor()) {
         self.interactor = interactor

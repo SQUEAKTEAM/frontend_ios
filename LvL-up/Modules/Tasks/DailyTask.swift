@@ -20,7 +20,15 @@ struct DailyTask: Identifiable, Codable {
     let isCompleted: Bool
     var reward: Int
     var title: String
-    var checkPoints: Int
+    var checkPoints: Int {
+        didSet {
+            if checkPoint > checkPoints {
+                self = updateCurrentProgress(checkPoints)
+            } else {
+                self = updateCurrentProgress(checkPoint)
+            }
+        }
+    }
     var isRepeat: Bool
     var isArchived: Bool
     var category: String

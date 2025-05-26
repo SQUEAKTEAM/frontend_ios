@@ -25,8 +25,9 @@ final class TaskPresenter: ObservableObject {
         completedTask = dailyTasks.filter { $0.isCompleted }
         notCompletedTask = dailyTasks.filter { !$0.isCompleted }
         
-        let tasks = await interactor.loadTasks(at: nil)
-        notCompletedTask = notCompletedTask + tasks
+        let tasks = await interactor.loadTasks(at: nil).filter({ !$0.isArchived })
+        completedTask = tasks.filter { $0.isCompleted }
+        notCompletedTask = notCompletedTask + tasks.filter { !$0.isCompleted }
     }
     
     func updateCurrentProgress(to dailyTask: DailyTask, checkPoint: Int) {

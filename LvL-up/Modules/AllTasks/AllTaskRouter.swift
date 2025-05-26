@@ -13,6 +13,6 @@ protocol AllTaskRouterProtocol {
 
 final class AllTaskRouter: AllTaskRouterProtocol {
     func navigateToEditTask(for task: DailyTask, returnNewTask: @escaping (DailyTask)->Void) -> AnyView  {
-        AnyView(EditTaskView(task: task, returnNewTask: returnNewTask))
+        AnyView(EditTaskView(task: task, isEdit: true, returnNewTask: returnNewTask))
     }
 }
