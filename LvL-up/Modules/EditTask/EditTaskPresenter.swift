@@ -9,7 +9,7 @@ import Foundation
 
 final class EditTaskPresenter: ObservableObject {
     @Published var task: DailyTask
-    @Published var categories: [String] = []
+    @Published var categories: [Category] = []
     
     private let interactor: EditInteractorProtocol
     
@@ -21,5 +21,13 @@ final class EditTaskPresenter: ObservableObject {
     @MainActor
     func getCategories() async {
         categories = await interactor.loadCategory()
+        if task.category.id == 0 && !categories.isEmpty {
+            task.category = categories.first!
+        }
+    }
+    
+    func createCategory(title: String) async {
+        await interactor.create(category: title)
+        await getCategories()
     }
 }

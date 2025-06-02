@@ -28,15 +28,15 @@ final class TaskDataProvider: TaskProviderProtocol {
         
         return try await apiManager.fetch("api/tasks/\(dateString)/")
         
-        //        guard let date = date else {
-        //            return DailyTask.mockTasks.filter { $0.date == nil }
-        //        }
-        //
-        //        let calendar = Calendar.current
-        //        return DailyTask.mockTasks.filter { task in
-        //            guard let taskDate = task.date else { return false }
-        //            return calendar.isDate(taskDate, inSameDayAs: date)
-        //        }
+//                guard let date = date else {
+//                    return DailyTask.mockTasks.filter { $0.date == nil }
+//                }
+        
+//                let calendar = Calendar.current
+//                return DailyTask.mockTasks.filter { task in
+//                    guard let taskDate = task.date else { return false }
+//                    return calendar.isDate(taskDate, inSameDayAs: date)
+//                }
     }
 
     ///POST: id: Int, checkPoint: Int, img: String, isCompleted: Bool, reward: Int, title: String, checkPoints: Int, isRepeat: Bool, isArchived: Bool,  category: String, date: Date, userId: Int

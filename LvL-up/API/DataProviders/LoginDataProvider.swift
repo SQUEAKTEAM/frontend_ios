@@ -16,18 +16,21 @@ final class LoginDataProvider: LoginProviderProtocol {
     }
     
     func login(mail: String, password: String) async -> Bool {
-        let token = try? await apiManager.postText("api/login/", body: UserDto(email: mail, password: password))
+        let tokens: TokenDto? = try? await apiManager.post("api/auth/login/", body: UserDto(email: mail, password: password))
         
-        apiManager.authToken = token
+        guard let tokens = tokens else { return false }
         
-        return token != nil
+        apiManager.accessToken = tokens.accessToken
+        apiManager.refreshToken = tokens.refreshToken
+        
+        return true
         //try? await Task.sleep(nanoseconds: 2_000_000_000)
         //return nil
     }
     
     func register(mail: String, password: String) async -> Bool {
         do {
-            let _: EmptyResponse = try await apiManager.post("api/register/", body: UserDto(email: mail, password: password))
+            let _: EmptyResponse = try await apiManager.post("api/auth/register/", body: UserDto(email: mail, password: password))
             return true // Возвращаем true, если запрос выполнен успешно
         } catch {
             return false

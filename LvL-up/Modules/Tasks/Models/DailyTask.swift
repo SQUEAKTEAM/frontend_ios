@@ -31,7 +31,7 @@ struct DailyTask: Identifiable, Codable {
     }
     var isRepeat: Bool
     var isArchived: Bool
-    var category: String
+    var category: Category
     var date: Date?
     
     enum CodingKeys: String, CodingKey {
@@ -44,11 +44,11 @@ struct DailyTask: Identifiable, Codable {
         case checkPoints
         case isRepeat
         case isArchived
-        case category = "categoryTitle"
+        case category
         case date
     }
     
-    init(id: Int, img: String, isCompleted: Bool, reward: Int, title: String, checkPoints: Int, checkPoint: Int = 0, isRepeat: Bool = false, isArchived: Bool = false, category: String, date: Date? = nil) {
+    init(id: Int, img: String, isCompleted: Bool, reward: Int, title: String, checkPoints: Int, checkPoint: Int = 0, isRepeat: Bool = false, isArchived: Bool = false, category: Category, date: Date? = nil) {
         self.id = id
         self.img = img
         self.isCompleted = isCompleted
@@ -93,7 +93,7 @@ struct DailyTask: Identifiable, Codable {
     }
     
     static var new: DailyTask {
-        DailyTask(id: -1, img: "book.fill", isCompleted: false, reward: 10, title: "", checkPoints: 1, category: "")
+        DailyTask(id: -1, img: "book.fill", isCompleted: false, reward: 10, title: "", checkPoints: 1, category: Category(id: 0, title: ""))
     }
     
     func encode(to encoder: Encoder) throws {
@@ -133,21 +133,10 @@ struct DailyTask: Identifiable, Codable {
         checkPoints = try container.decode(Int.self, forKey: .checkPoints)
         isRepeat = try container.decode(Bool.self, forKey: .isRepeat)
         isArchived = try container.decode(Bool.self, forKey: .isArchived)
-        category = try container.decode(String.self, forKey: .category)
+        category = try container.decode(Category.self, forKey: .category)
         
         // Гибкое декодирование даты (число timestamp или строка ISO8601)
-        if let timestamp = try? container.decode(Double.self, forKey: .date) {
-            // Обработка Unix timestamp (число)
-            date = Date(timeIntervalSince1970: timestamp)
-        } else if let dateString = try? container.decode(String.self, forKey: .date) {
-            // Обработка строки ISO8601
-            let formatter = ISO8601DateFormatter()
-            formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-            date = formatter.date(from: dateString)
-        } else {
-            // Если поле отсутствует или null
-            date = nil
-        }
+        date = try container.decodeDateIfPresent(forKey: .date)
     }
 }
 
@@ -164,7 +153,7 @@ extension DailyTask {
                 checkPoint: 3,
                 isRepeat: true,
                 isArchived: false,
-                category: "Спорт",
+                category: Category(id: 1, title: "Спорт"),
                 date: Date().addingTimeInterval(86400) // Завтра
             ),
             DailyTask(
@@ -177,7 +166,7 @@ extension DailyTask {
                 checkPoint: 2,
                 isRepeat: false,
                 isArchived: false,
-                category: "Образование",
+                category: Category(id: 2, title: "Образование"),
                 date: nil // Без конкретной даты
             ),
             DailyTask(
@@ -190,7 +179,7 @@ extension DailyTask {
                 checkPoint: 1,
                 isRepeat: true,
                 isArchived: false,
-                category: "Здоровье",
+                category: Category(id: 3, title: "Здоровье"),
                 date: Date() // Сегодня
             ),
             DailyTask(
@@ -203,7 +192,7 @@ extension DailyTask {
                 checkPoint: 0,
                 isRepeat: false,
                 isArchived: false,
-                category: "Здоровье",
+                category: Category(id: 3, title: "Здоровье"),
                 date: nil
             ),
             DailyTask(
@@ -216,7 +205,7 @@ extension DailyTask {
                 checkPoint: 3,
                 isRepeat: true,
                 isArchived: false,
-                category: "Фитнес",
+                category: Category(id: 4, title: "Фитнес"),
                 date: Date().addingTimeInterval(172800) // Послезавтра
             ),
             DailyTask(
@@ -229,7 +218,7 @@ extension DailyTask {
                 checkPoint: 5,
                 isRepeat: false,
                 isArchived: false,
-                category: "Работа",
+                category: Category(id: 5, title: "Работа"),
                 date: Date().addingTimeInterval(604800) // Через неделю
             ),
             DailyTask(
@@ -242,7 +231,7 @@ extension DailyTask {
                 checkPoint: 1,
                 isRepeat: true,
                 isArchived: true,
-                category: "Дом",
+                category: Category(id: 6, title: "Дом"),
                 date: Date().addingTimeInterval(-86400) // Вчера (просрочено)
             ),
             DailyTask(
@@ -255,7 +244,7 @@ extension DailyTask {
                 checkPoint: 0,
                 isRepeat: false,
                 isArchived: false,
-                category: "Ментальное здоровье",
+                category: Category(id: 7, title: "Ментальное здоровье"),
                 date: nil
             ),
             DailyTask(
@@ -268,17 +257,10 @@ extension DailyTask {
                 checkPoint: 2,
                 isRepeat: false,
                 isArchived: true,
-                category: "Авто",
+                category: Category(id: 7, title: "Авто"),
                 date: Date().addingTimeInterval(-172800) // 2 дня назад
             )
         ]
     }
 }
 
-extension JSONEncoder {
-    static var iso8601WithMilliseconds: JSONEncoder {
-        let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .iso8601 // Используем стандартный ISO8601
-        return encoder
-    }
-}

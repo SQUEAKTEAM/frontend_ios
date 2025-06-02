@@ -15,12 +15,31 @@ final class ForgotPasswordDataProvider: ForgotPasswordProviderProtocol {
     }
     
     func resetPassword(mail: String, password: String) async throws -> Bool {
-        try? await Task.sleep(nanoseconds: 2_000_000_000)
+        let _: String = try await apiManager.postText("api/password/reset/", body: UserResetPasswordDto(email: mail, password: password))
         return true
     }
     
     func sendCodeOn(mail: String) async throws -> Int {
-        try? await Task.sleep(nanoseconds: 2_000_000_000)
-        return 100_000
+        let strCode: CodeDto = try await apiManager.post("api/send-code/", body: EmailDto(email: mail))
+        guard let code = Int(strCode.verificationCode) else { throw URLError(.badURL) }
+        return code
     }
+}
+
+struct UserResetPasswordDto: Codable {
+    let email: String
+    let password: String
+    
+    enum CodingKeys: String, CodingKey {
+        case email = "Email"
+        case password = "NewPassword"
+    }
+}
+
+struct CodeDto: Codable {
+    let verificationCode: String
+}
+
+struct EmailDto: Codable {
+    let email: String
 }

@@ -46,7 +46,7 @@ class LoginPresenter: ObservableObject {
     
     // MARK: - User Intents
     func login() async -> Bool {
-        if await !interactor.login(mail: "string", password: "string") {
+        if await !interactor.login(mail: mail, password: password1) {
             customErrorDescription = "Неверный логин или пароль"
             alertStatus = .custom
             return false
@@ -58,6 +58,9 @@ class LoginPresenter: ObservableObject {
         if await !interactor.register(mail: mail, password: password1) {
             customErrorDescription = "Неверный логин или пароль"
             alertStatus = .custom
+            return false
+        }
+        if await !login() {
             return false
         }
         return true

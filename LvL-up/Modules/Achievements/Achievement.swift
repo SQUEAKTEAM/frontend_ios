@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Achievement: Identifiable {
+struct Achievement: Identifiable, Codable {
     let id: Int
     let title: String
     let currentXp: Int
@@ -16,7 +16,7 @@ struct Achievement: Identifiable {
     let isCompleted: Bool
     
     func convertToDailyTask() -> DailyTask {
-        DailyTask(id: id, img: "medal.fill", isCompleted: isCompleted, reward: reward, title: title, checkPoints: upperBounds, checkPoint: currentXp, category: "")
+        DailyTask(id: id, img: "medal.fill", isCompleted: isCompleted, reward: reward, title: title, checkPoints: upperBounds, checkPoint: currentXp, category: Category(id: 0, title: ""))
     }
     
     func updateCurrentXp(_ currentXp: Int) -> Achievement {

@@ -247,8 +247,8 @@ struct EditTaskView: View {
     
     private var categoryPicker: some View {
         Picker("Выберите категорию", selection: $presenter.task.category) {
-            ForEach(presenter.categories, id: \.self) { category in
-                Text(category).tag(category)
+            ForEach(presenter.categories) { category in
+                Text(category.title).tag(category)
             }
         }
         .pickerStyle(.menu)
@@ -300,10 +300,14 @@ struct EditTaskView: View {
             TextField("Название категории", text: $newCategoryName)
             Button("Добавить") {
                 if !newCategoryName.isEmpty {
-                    presenter.task.category = newCategoryName
-                    if !presenter.categories.contains(where: { $0 == newCategoryName}) {
-                        presenter.categories.append(newCategoryName)
+                    if !presenter.categories.contains(where: { $0.title == newCategoryName}) {
+                        //presenter.categories.append(newCategoryName)
+                        Task {
+                            await presenter.createCategory(title: newCategoryName)
+                        }
                     }
+                    guard let category = presenter.categories.first(where: { $0.title == newCategoryName }) else { return }
+                    presenter.task.category = category
                     newCategoryName = ""
                 }
             }

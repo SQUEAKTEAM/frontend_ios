@@ -15,8 +15,16 @@ final class CategoryDataProvider: CategoryProviderProtocol {
     }
     ///GET:  id: Int, countSuccess: Int, countMiddle: Int, countFailure: Int, title: String
     ///POST: user_id
-    func fetchData() async throws -> [String] {
+    func fetchData() async throws -> [Category] {
         return try await apiManager.fetch("api/categories/")
 //        return Array(Set(DailyTask.mockTasks.map({ $0.category })))
     }
+    
+    func create(category: String) async throws {
+        let _: EmptyResponse = try await apiManager.post("api/category/", body: CategoryDTO(title: category))
+    }
+}
+
+struct CategoryDTO: Codable {
+    let title: String
 }

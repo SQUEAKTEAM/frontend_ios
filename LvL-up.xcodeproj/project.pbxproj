@@ -114,6 +114,9 @@
 		F8D031B62DDDC90200FE44E8 /* DailyStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D031B52DDDC90200FE44E8 /* DailyStatsView.swift */; };
 		F8F5022C2DE320AB00F56AAC /* HapticManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F5022B2DE320AB00F56AAC /* HapticManager.swift */; };
 		F8F5022F2DE323C200F56AAC /* ConfettiSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = F8F5022E2DE323C200F56AAC /* ConfettiSwiftUI */; };
+		F8F502312DEC8BAD00F56AAC /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F502302DEC8BAD00F56AAC /* Category.swift */; };
+		F8F502352DECA33F00F56AAC /* JSONEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F502342DECA33F00F56AAC /* JSONEncoder.swift */; };
+		F8F502372DECA36B00F56AAC /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8F502362DECA36B00F56AAC /* JSONDecoder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -242,6 +245,9 @@
 		F8D031B22DDDC6A400FE44E8 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		F8D031B52DDDC90200FE44E8 /* DailyStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyStatsView.swift; sourceTree = "<group>"; };
 		F8F5022B2DE320AB00F56AAC /* HapticManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticManager.swift; sourceTree = "<group>"; };
+		F8F502302DEC8BAD00F56AAC /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		F8F502342DECA33F00F56AAC /* JSONEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONEncoder.swift; sourceTree = "<group>"; };
+		F8F502362DECA36B00F56AAC /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -397,7 +403,7 @@
 				F844BF7E2DAC2939003FB214 /* View */,
 				F844BF7A2DAA8F50003FB214 /* TaskPresenter.swift */,
 				F844BF782DAA8D02003FB214 /* TaskInteractor.swift */,
-				F844BF762DAA8C76003FB214 /* DailyTask.swift */,
+				F8F502332DEC92D200F56AAC /* Models */,
 			);
 			path = Tasks;
 			sourceTree = "<group>";
@@ -469,6 +475,8 @@
 			children = (
 				F844BF922DAC68AA003FB214 /* Color.swift */,
 				F869F9352DDF4494007E3F1E /* Float.swift */,
+				F8F502342DECA33F00F56AAC /* JSONEncoder.swift */,
+				F8F502362DECA36B00F56AAC /* JSONDecoder.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -804,6 +812,15 @@
 			path = Haptic;
 			sourceTree = "<group>";
 		};
+		F8F502332DEC92D200F56AAC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F844BF762DAA8C76003FB214 /* DailyTask.swift */,
+				F8F502302DEC8BAD00F56AAC /* Category.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -965,6 +982,7 @@
 				F8D0315F2DC80E7500FE44E8 /* LvLDataProvider.swift in Sources */,
 				F844BF962DAF0FBA003FB214 /* AllTaskView.swift in Sources */,
 				F844BF982DAF0FF7003FB214 /* AllTaskPresenter.swift in Sources */,
+				F8F502352DECA33F00F56AAC /* JSONEncoder.swift in Sources */,
 				F8D031792DD24E0500FE44E8 /* CodeTextFields.swift in Sources */,
 				F8D0312D2DC4F74100FE44E8 /* AchievementCell.swift in Sources */,
 				F844BF482DA70179003FB214 /* MainLvLView.swift in Sources */,
@@ -1008,6 +1026,7 @@
 				F8D031532DC6C53900FE44E8 /* CalendarPresenter.swift in Sources */,
 				F8D031772DD24E0500FE44E8 /* ResetPasswordAnimationView.swift in Sources */,
 				F844BF8C2DAC6190003FB214 /* TabBarItem.swift in Sources */,
+				F8F502372DECA36B00F56AAC /* JSONDecoder.swift in Sources */,
 				F8D0318B2DD2503200FE44E8 /* LoginPresenter.swift in Sources */,
 				F844BF902DAC647D003FB214 /* HomeView.swift in Sources */,
 				F869F9322DDF4095007E3F1E /* DailyStatsInteractor.swift in Sources */,
@@ -1034,6 +1053,7 @@
 				F8D031B62DDDC90200FE44E8 /* DailyStatsView.swift in Sources */,
 				F8D031852DD24F3500FE44E8 /* SendCodeOnMailView.swift in Sources */,
 				F869F9342DDF41AF007E3F1E /* DailyStatsProvider.swift in Sources */,
+				F8F502312DEC8BAD00F56AAC /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

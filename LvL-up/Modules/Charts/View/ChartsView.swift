@@ -12,12 +12,16 @@ struct ChartsView: View {
     
     var body: some View {
         VStack {
-            charts
-            
-            LegendView(slices:
-                        [LegendItem(name: "Выполнено", color: .green),
-                         LegendItem(name: "Почти выполнено", color: .yellow),
-                         LegendItem(name: "Провалено", color: .red)])
+            if !presenter.statistics.isEmpty {
+                charts
+                
+                LegendView(slices:
+                            [LegendItem(name: "Выполнено", color: .green),
+                             LegendItem(name: "Почти выполнено", color: .yellow),
+                             LegendItem(name: "Провалено", color: .red)])
+            } else {
+                EmptyView()
+            }
         }
         .task {
             await presenter.getData()

@@ -16,8 +16,7 @@ final class AchievementDataProvider: AchievementProviderProtocol {
     ///GET:  id: Int, title: String, currentXp: Int, upperBounds: Int, reward: Int, isCompleted: Bool
     ///POST: user_id
     func fetchData() async throws -> [Achievement] {
-//        let user_id = 1
-//        return try await apiManager.fetch("achievements/\(user_id)")
-        return Achievement.mockAchievements
+        return try await apiManager.fetch("api/achievements/")
+//        return Achievement.mockAchievements
     }
 }

@@ -32,12 +32,12 @@ struct AllTaskCell: View {
                             .bold()
                             .italic()
                     }
-                    if !task.category.isEmpty {
+                    if !task.category.title.isEmpty {
                         HStack(alignment: .bottom) {
                             Text("Категория:")
                                 .font(.caption)
                                 .italic()
-                            Text(task.category)
+                            Text(task.category.title)
                                 .foregroundStyle(task.getColor())
                                 .bold()
                                 .italic()

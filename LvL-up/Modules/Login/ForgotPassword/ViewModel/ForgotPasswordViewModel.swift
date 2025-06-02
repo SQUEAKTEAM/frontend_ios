@@ -82,7 +82,7 @@ class ForgotPasswordViewModel: ObservableObject {
         state = .closed
     }
     
-    
+    @MainActor
     func sendCode() async {
         do {
             code = try await interactor.sendCodeOn(mail: mail)

@@ -17,7 +17,7 @@ final class LvLDataProvider: LvLProviderProtocol {
     func fetchData() async throws -> LvL {
         let lvl: LvL = try await apiManager.fetch("api/lvl/")
         return lvl
-        //return LvL.mock
+//        return LvL.mock
     }
     
     func update(lvl: LvL) async throws {

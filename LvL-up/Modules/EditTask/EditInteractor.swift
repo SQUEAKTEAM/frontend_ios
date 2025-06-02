@@ -8,11 +8,13 @@
 import Foundation
 
 protocol CategoryProviderProtocol {
-    func fetchData() async throws -> [String]
+    func fetchData() async throws -> [Category]
+    func create(category: String) async throws
 }
 
 protocol EditInteractorProtocol {
-    func loadCategory() async -> [String]
+    func loadCategory() async -> [Category]
+    func create(category: String) async
 }
 
 final class EditInteractor: EditInteractorProtocol {
@@ -23,7 +25,11 @@ final class EditInteractor: EditInteractorProtocol {
         self.dataService = dataService
     }
     
-    func loadCategory() async -> [String] {
+    func loadCategory() async -> [Category] {
         return (try? await dataService.fetchData()) ?? []
+    }
+    
+    func create(category: String) async {
+        try? await dataService.create(category: category)
     }
 }
